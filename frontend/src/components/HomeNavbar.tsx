@@ -18,9 +18,9 @@ export const HomeNavbar: React.FC<HomeNavbarProps> = ({
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Platform', href: '#platform' },
-    { name: 'Solutions', href: '#solutions' },
+    { name: 'Simulation', href: '#intelligence' },
     { name: 'Features', href: '#features' },
-    { name: 'Intelligence', href: '#intelligence' },
+    { name: 'Live Graphs', href: '#graphs' },
     { name: 'Resources', href: '#resources' },
   ];
 

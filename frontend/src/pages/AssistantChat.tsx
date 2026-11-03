@@ -13,7 +13,12 @@ import {
 import { GlassCard } from '../components/GlassCard';
 import { api } from '../services/api';
 
-export const AssistantChat: React.FC = () => {
+interface AssistantChatProps {
+  initialQuery?: string | null;
+  onQueryHandled?: () => void;
+}
+
+export const AssistantChat: React.FC<AssistantChatProps> = ({ initialQuery, onQueryHandled }) => {
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,6 +33,13 @@ export const AssistantChat: React.FC = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
+
+  useEffect(() => {
+    if (initialQuery && initialQuery.trim()) {
+      handleSend(initialQuery);
+      if (onQueryHandled) onQueryHandled();
+    }
+  }, [initialQuery]);
 
   const handleSend = async (queryText?: string) => {
     const text = queryText || input;

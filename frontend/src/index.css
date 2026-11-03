@@ -9,49 +9,115 @@
 body {
   margin: 0;
   background-color: #F8FAFC;
-  color: #000000;
+  color: #17171F;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 /* =====================================================================
-   GLOBAL DARK BLACK TYPOGRAPHY ENFORCEMENT
-   Ensures all titles, paragraphs, labels, table data & cards are deep black
+   ARTHIQ SHARP TYPOGRAPHY & TEXT COLOR SYSTEM
+   Light Backgrounds:
+   - Primary headings: #17171F
+   - Secondary headings: #292936
+   - Body text: #41414D
+   - Supporting text: #626270
+   - Navigation text: #252532
+   - Muted labels: #727280
+
+   Dark Backgrounds:
+   - Primary headings: #FFFFFF
+   - Secondary headings: #E5E5EB
+   - Body text: #C6C6D0
+   - Supporting text: #A1A1AE
    ===================================================================== */
-h1, h2, h3, h4, h5, h6 {
-  color: #000000;
+h1 {
+  color: #17171F;
+  font-weight: 800;
 }
 
-p, span.text-description, label {
-  color: #0A0A0C;
+h2, h3 {
+  color: #292936;
+  font-weight: 700;
 }
 
-/* Override all faint / light gray utility classes to pure dark black */
-.text-\[\#71717A\],
-.text-\[\#15151B\],
-.text-neutral-muted,
-.text-neutral-offwhite,
-.text-slate-400,
-.text-slate-500,
-.text-slate-600,
-.text-gray-400,
-.text-gray-500,
-.text-gray-600,
-.text-zinc-400,
-.text-zinc-500,
-.text-zinc-600 {
-  color: #000000 !important;
+h4, h5, h6 {
+  color: #292936;
+  font-weight: 600;
 }
 
-/* Ensure headings and values inside dashboard cards are solid black */
+p, .text-body {
+  color: #41414D;
+}
+
+.text-supporting {
+  color: #626270;
+}
+
+.text-muted-label {
+  color: #727280;
+}
+
+nav a, .nav-item {
+  color: #252532;
+  font-weight: 600;
+}
+
+/* Dark Section Overrides */
+.dark-section,
+.dark-card,
+.dark-surface {
+  background-color: #0E1017;
+  color: #C6C6D0;
+}
+
+.dark-section h1,
+.dark-card h1,
+.dark-surface h1 {
+  color: #FFFFFF !important;
+}
+
+.dark-section h2,
+.dark-section h3,
+.dark-card h2,
+.dark-card h3,
+.dark-surface h2,
+.dark-surface h3 {
+  color: #E5E5EB !important;
+}
+
+.dark-section p,
+.dark-card p,
+.dark-surface p {
+  color: #C6C6D0 !important;
+}
+
+.dark-section .text-supporting,
+.dark-card .text-supporting,
+.dark-surface .text-supporting,
+.dark-section span.text-subtle {
+  color: #A1A1AE !important;
+}
+
+/* Financial Card Surfaces */
 .glass-panel,
-.dark-glass-surface,
 .light-card {
   background: #FFFFFF !important;
   border: 1px solid #E2E8F0 !important;
-  color: #000000 !important;
+  color: #17171F !important;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+.glass-panel h1, .glass-panel h2, .glass-panel h3 {
+  color: #17171F !important;
+}
+
+.glass-panel p {
+  color: #41414D !important;
+}
+
+.glass-panel span.label {
+  color: #727280 !important;
 }
 
 .glass-panel h1,

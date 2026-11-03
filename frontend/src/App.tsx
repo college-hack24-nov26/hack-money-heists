@@ -13,11 +13,24 @@ import { ProcurementOptimization } from './pages/ProcurementOptimization';
 import { ClientManagement } from './pages/ClientManagement';
 import { AssistantChat } from './pages/AssistantChat';
 import { ReportsSettings } from './pages/ReportsSettings';
+import { DynamicGraphEngine } from './components/DynamicGraphEngine';
 
 export const App: React.FC = () => {
   // Default to the redesigned homepage
   const [viewMode, setViewMode] = useState<'landing' | 'dashboard'>('landing');
   const [currentView, setCurrentView] = useState<string>('overview');
+  const [assistantInitialQuery, setAssistantInitialQuery] = useState<string | null>(null);
+
+  const handleAskQuestionFromShowcase = (question: string) => {
+    setAssistantInitialQuery(question);
+    setViewMode('dashboard');
+    setCurrentView('assistant');
+  };
+
+  const handleLaunchModuleFromShowcase = (moduleId: string) => {
+    setViewMode('dashboard');
+    setCurrentView(moduleId);
+  };
 
   if (viewMode === 'landing') {
     return (
@@ -26,6 +39,8 @@ export const App: React.FC = () => {
           setViewMode('dashboard');
           setCurrentView('overview');
         }}
+        onAskQuestion={handleAskQuestionFromShowcase}
+        onLaunchModule={handleLaunchModuleFromShowcase}
       />
     );
   }
@@ -51,7 +66,14 @@ export const App: React.FC = () => {
       case 'clients':
         return <ClientManagement />;
       case 'assistant':
-        return <AssistantChat />;
+        return (
+          <AssistantChat
+            initialQuery={assistantInitialQuery}
+            onQueryHandled={() => setAssistantInitialQuery(null)}
+          />
+        );
+      case 'graphs':
+        return <DynamicGraphEngine />;
       case 'reports':
         return <ReportsSettings />;
       default:

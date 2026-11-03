@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   LayoutDashboard,
+  Activity,
   Receipt,
   FileCheck2,
   TrendingUp,
@@ -25,6 +26,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
       id: 'overview',
       label: 'Overview',
       icon: LayoutDashboard,
+  Activity,
       badge: null
     },
     {

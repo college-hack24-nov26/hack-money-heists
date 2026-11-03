@@ -24,12 +24,16 @@ import { HomeNavbar } from '../components/HomeNavbar';
 import { Hero } from '../components/ui/hero-1';
 import { Button } from '../components/ui/button';
 import { ArthiqLogo } from '../components/ArthiqLogo';
+import { InteractiveModuleShowcase } from '../components/InteractiveModuleShowcase';
+import { DynamicGraphEngine } from '../components/DynamicGraphEngine';
 
 interface LandingPageProps {
   onLaunchDashboard: () => void;
+  onAskQuestion?: (question: string) => void;
+  onLaunchModule?: (moduleId: string) => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard, onAskQuestion, onLaunchModule }) => {
   const [calcMonthlySpend, setCalcMonthlySpend] = useState<number>(1500000);
   const [previewHorizon, setPreviewHorizon] = useState<number>(30);
   const estimatedAnnualSavings = Math.round(calcMonthlySpend * 0.082 * 12);
