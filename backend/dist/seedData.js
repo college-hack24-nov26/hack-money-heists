@@ -319,7 +319,7 @@ exports.SEED_INVOICES = [
         id: "inv-005",
         invoice_number: "INV-SUS-7701",
         vendor_name: "NovaTech Solutions",
-        gstin: "99INVALIDGST99Z9",
+        gstin: "99INVALIDGST99Z",
         bank_account: "99881122334455",
         bank_ifsc: "SBIN0000099",
         invoice_date: "2026-10-26",

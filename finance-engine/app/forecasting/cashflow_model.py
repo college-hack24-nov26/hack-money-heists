@@ -89,7 +89,7 @@ def forecast_cashflow(history_data, current_balance=1850000.0, horizon_days=30, 
         bal_upper = simulated_balance + (std_inflow + std_outflow) * unc_factor * 1.5
         bal_lower = max(0.0, simulated_balance - (std_inflow + std_outflow) * unc_factor * 1.5)
 
-        is_deficit = simulated_balance < safety_threshold
+        is_deficit = bool(simulated_balance < safety_threshold)
         if is_deficit:
             deficit_days.append({
                 "date": target_date.strftime("%Y-%m-%d"),
@@ -140,12 +140,12 @@ def forecast_cashflow(history_data, current_balance=1850000.0, horizon_days=30, 
 
     return {
         "status": "success",
-        "horizon_days": horizon_days,
-        "current_balance": round(current_balance, 2),
-        "safety_threshold": round(safety_threshold, 2),
-        "runway_days": runway_days,
-        "is_cash_flow_positive": net_daily_burn == 0,
-        "daily_burn_rate": round(net_daily_burn, 2),
+        "horizon_days": int(horizon_days),
+        "current_balance": round(float(current_balance), 2),
+        "safety_threshold": round(float(safety_threshold), 2),
+        "runway_days": float(runway_days),
+        "is_cash_flow_positive": bool(net_daily_burn == 0),
+        "daily_burn_rate": round(float(net_daily_burn), 2),
         "historical": history_data[-30:],
         "forecast": forecast_records,
         "deficit_occurrences": deficit_days,

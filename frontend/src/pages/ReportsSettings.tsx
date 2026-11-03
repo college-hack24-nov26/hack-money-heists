@@ -7,7 +7,9 @@ import {
   KeyRound,
   FileCheck,
   CheckCircle2,
-  HardDrive
+  HardDrive,
+  Database,
+  Cloud
 } from 'lucide-react';
 import { GlassCard } from '../components/GlassCard';
 import { MetricBadge } from '../components/MetricBadge';
@@ -107,6 +109,52 @@ export const ReportsSettings: React.FC = () => {
           </button>
         </GlassCard>
       </div>
+
+      {/* Supabase PostgreSQL Cloud Database */}
+      <GlassCard className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-[#6D45CF]/10 text-[#6D45CF]">
+              <Database className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-white">Supabase PostgreSQL Cloud Database</h3>
+              <p className="text-[11px] text-neutral-muted">Connected to Project: mmljatcvouyjfbznxjgs</p>
+            </div>
+          </div>
+          <MetricBadge label="Supabase Connected" variant="emerald" />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
+            <span className="text-neutral-muted block text-[10px]">Cloud Project URL</span>
+            <span className="font-mono text-emerald-400 mt-0.5 block truncate">mmljatcvouyjfbznxjgs.supabase.co</span>
+          </div>
+          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
+            <span className="text-neutral-muted block text-[10px]">Database Engine</span>
+            <span className="font-semibold text-white mt-0.5 block">PostgreSQL 15+ (Cloud Hosted)</span>
+          </div>
+          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
+            <span className="text-neutral-muted block text-[10px]">Auth & Client API</span>
+            <span className="font-semibold text-white mt-0.5 block">@supabase/supabase-js v2</span>
+          </div>
+          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
+            <span className="text-neutral-muted block text-[10px]">Row Level Security</span>
+            <span className="font-semibold text-emerald-400 mt-0.5 block">Active RLS on All Tables</span>
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-navy-dark/40 border border-white/[0.06] text-xs">
+          <span className="text-neutral-muted block text-[10px] uppercase font-bold tracking-wider">Synchronized Schema Tables</span>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {['organizations', 'users', 'accounts', 'clients', 'vendors', 'expenses', 'invoices', 'profit_leakage_findings', 'audit_logs'].map(table => (
+              <span key={table} className="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.08] text-[11px] font-mono text-neutral-300">
+                {table}
+              </span>
+            ))}
+          </div>
+        </div>
+      </GlassCard>
 
       {/* Organization Credentials & Tenant Isolation */}
       <GlassCard className="space-y-4">

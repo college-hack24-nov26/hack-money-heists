@@ -9,6 +9,7 @@
     "dev": "node --loader ts-node/esm src/server.ts || npx ts-node src/server.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -23,4 +24,3 @@
     "typescript": "^5.7.3"
   }
 }
-

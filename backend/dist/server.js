@@ -11,6 +11,7 @@ const fs_1 = __importDefault(require("fs"));
 const seedData_1 = require("./seedData");
 const financeEngineClient_1 = require("./services/financeEngineClient");
 const aiToolsService_1 = require("./services/aiToolsService");
+const supabaseService_1 = require("./services/supabaseService");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
 // Middleware
@@ -129,7 +130,7 @@ app.get('/api/expenses', (req, res) => {
         expenses
     });
 });
-app.post('/api/expenses', (req, res) => {
+app.post('/api/expenses', async (req, res) => {
     const { vendor, category, description, amount, paymentMethod, referenceNo } = req.body;
     const newExp = {
         id: `EXP-${Date.now().toString().slice(-4)}`,
@@ -143,6 +144,7 @@ app.post('/api/expenses', (req, res) => {
         referenceNo: referenceNo || `REF-${Math.floor(Math.random() * 90000 + 10000)}`
     };
     expenses.unshift(newExp);
+    await supabaseService_1.supabaseService.insertExpense(newExp);
     res.status(201).json({ status: 'success', expense: newExp });
 });
 app.get('/api/expenses/analysis', async (req, res) => {
@@ -193,6 +195,7 @@ app.post('/api/invoices/upload', upload.single('file'), async (req, res) => {
         status: analysis.risk_score >= 50 ? 'FLAGGED' : 'VERIFIED'
     };
     invoices.unshift(newInvoice);
+    await supabaseService_1.supabaseService.insertInvoice(newInvoice);
     res.status(201).json({ status: 'success', invoice: newInvoice });
 });
 app.post('/api/invoices/:id/analyze', async (req, res) => {
@@ -207,13 +210,14 @@ app.post('/api/invoices/:id/analyze', async (req, res) => {
     invoice.recommended_verification_steps = analysis.recommended_verification_steps;
     res.json({ status: 'success', invoice });
 });
-app.post('/api/invoices/:id/verify', (req, res) => {
+app.post('/api/invoices/:id/verify', async (req, res) => {
     const invoice = invoices.find(i => i.id === req.params.id);
     if (!invoice)
         return res.status(404).json({ error: 'Invoice not found' });
     invoice.status = 'VERIFIED';
     invoice.risk_score = Math.min(15, invoice.risk_score);
     invoice.risk_classification = 'Low Risk';
+    await supabaseService_1.supabaseService.updateInvoiceStatus(invoice.id, 'VERIFIED', invoice.risk_score, 'Low Risk');
     res.json({ status: 'success', message: 'Invoice verified by Finance Officer', invoice });
 });
 // ---------------------------------------------------------------------
@@ -288,7 +292,7 @@ app.get('/api/analytics/statements', (req, res) => {
 app.get('/api/clients', (req, res) => {
     res.json({ total: clients.length, clients });
 });
-app.post('/api/clients', (req, res) => {
+app.post('/api/clients', async (req, res) => {
     const { name, companyName, gstin, email, phone, creditLimit } = req.body;
     const newClient = {
         id: `cli-${Date.now()}`,
@@ -305,7 +309,35 @@ app.post('/api/clients', (req, res) => {
         contractStatus: "Active"
     };
     clients.unshift(newClient);
+    await supabaseService_1.supabaseService.insertClient(newClient);
     res.status(201).json({ status: 'success', client: newClient });
+});
+// ---------------------------------------------------------------------
+// DATABASE & SUPABASE SYNC STATUS
+// ---------------------------------------------------------------------
+app.get('/api/database/status', async (req, res) => {
+    const isHealthy = await supabaseService_1.supabaseService.testConnection();
+    res.json({
+        status: 'success',
+        provider: 'Supabase Cloud (PostgreSQL)',
+        projectRef: 'mmljatcvouyjfbznxjgs',
+        projectUrl: 'https://mmljatcvouyjfbznxjgs.supabase.co',
+        isAvailable: supabaseService_1.supabaseService.isAvailable(),
+        connected: isHealthy,
+        clientConfigured: true,
+        tables: [
+            'organizations',
+            'users',
+            'accounts',
+            'clients',
+            'vendors',
+            'expenses',
+            'invoices',
+            'profit_leakage_findings',
+            'audit_logs'
+        ],
+        timestamp: new Date().toISOString()
+    });
 });
 // ---------------------------------------------------------------------
 // 9. PROCUREMENT & VENDORS

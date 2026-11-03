@@ -18,6 +18,7 @@ import {
 } from './seedData';
 import { financeEngineClient } from './services/financeEngineClient';
 import { aiAssistantService } from './services/aiToolsService';
+import { supabaseService } from './services/supabaseService';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -148,7 +149,7 @@ app.get('/api/expenses', (req: Request, res: Response) => {
   });
 });
 
-app.post('/api/expenses', (req: Request, res: Response) => {
+app.post('/api/expenses', async (req: Request, res: Response) => {
   const { vendor, category, description, amount, paymentMethod, referenceNo } = req.body;
   const newExp: Expense = {
     id: `EXP-${Date.now().toString().slice(-4)}`,
@@ -162,6 +163,7 @@ app.post('/api/expenses', (req: Request, res: Response) => {
     referenceNo: referenceNo || `REF-${Math.floor(Math.random() * 90000 + 10000)}`
   };
   expenses.unshift(newExp);
+  await supabaseService.insertExpense(newExp);
   res.status(201).json({ status: 'success', expense: newExp });
 });
 
@@ -219,6 +221,7 @@ app.post('/api/invoices/upload', upload.single('file'), async (req: Request, res
   };
 
   invoices.unshift(newInvoice);
+  await supabaseService.insertInvoice(newInvoice);
   res.status(201).json({ status: 'success', invoice: newInvoice });
 });
 
@@ -234,12 +237,13 @@ app.post('/api/invoices/:id/analyze', async (req: Request, res: Response) => {
   res.json({ status: 'success', invoice });
 });
 
-app.post('/api/invoices/:id/verify', (req: Request, res: Response) => {
+app.post('/api/invoices/:id/verify', async (req: Request, res: Response) => {
   const invoice = invoices.find(i => i.id === req.params.id);
   if (!invoice) return res.status(404).json({ error: 'Invoice not found' });
   invoice.status = 'VERIFIED';
   invoice.risk_score = Math.min(15, invoice.risk_score);
   invoice.risk_classification = 'Low Risk';
+  await supabaseService.updateInvoiceStatus(invoice.id, 'VERIFIED', invoice.risk_score, 'Low Risk');
   res.json({ status: 'success', message: 'Invoice verified by Finance Officer', invoice });
 });
 
@@ -327,7 +331,7 @@ app.get('/api/clients', (req: Request, res: Response) => {
   res.json({ total: clients.length, clients });
 });
 
-app.post('/api/clients', (req: Request, res: Response) => {
+app.post('/api/clients', async (req: Request, res: Response) => {
   const { name, companyName, gstin, email, phone, creditLimit } = req.body;
   const newClient: Client = {
     id: `cli-${Date.now()}`,
@@ -344,7 +348,36 @@ app.post('/api/clients', (req: Request, res: Response) => {
     contractStatus: "Active"
   };
   clients.unshift(newClient);
+  await supabaseService.insertClient(newClient);
   res.status(201).json({ status: 'success', client: newClient });
+});
+
+// ---------------------------------------------------------------------
+// DATABASE & SUPABASE SYNC STATUS
+// ---------------------------------------------------------------------
+app.get('/api/database/status', async (req: Request, res: Response) => {
+  const isHealthy = await supabaseService.testConnection();
+  res.json({
+    status: 'success',
+    provider: 'Supabase Cloud (PostgreSQL)',
+    projectRef: 'mmljatcvouyjfbznxjgs',
+    projectUrl: 'https://mmljatcvouyjfbznxjgs.supabase.co',
+    isAvailable: supabaseService.isAvailable(),
+    connected: isHealthy,
+    clientConfigured: true,
+    tables: [
+      'organizations',
+      'users',
+      'accounts',
+      'clients',
+      'vendors',
+      'expenses',
+      'invoices',
+      'profit_leakage_findings',
+      'audit_logs'
+    ],
+    timestamp: new Date().toISOString()
+  });
 });
 
 // ---------------------------------------------------------------------
