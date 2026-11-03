@@ -16,7 +16,7 @@ export const MetricBadge: React.FC<MetricBadgeProps> = ({
     amber: 'bg-amber-50 text-[#E5A33D] border-amber-200/80',
     coral: 'bg-rose-50 text-[#E46D72] border-rose-200/80',
     blue: 'bg-[#EDE7FF] text-[#6D45CF] border-[#DDD3FA]',
-    neutral: 'bg-[#F7F7FA] text-[#71717A] border-[#E5E5EB]'
+    neutral: 'bg-[#F7F7FA] text-black border-[#E5E5EB]'
   };
 
   let resolvedVariant = variant;

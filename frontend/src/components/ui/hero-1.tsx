@@ -67,12 +67,12 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Hero Title */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-extrabold text-[#15151B] tracking-[-0.035em] leading-[1.08] font-['Plus_Jakarta_Sans',sans-serif] animate-fade-up max-w-4xl">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-extrabold text-black tracking-[-0.035em] leading-[1.08] font-['Plus_Jakarta_Sans',sans-serif] animate-fade-up max-w-4xl">
           {title}
         </h1>
 
         {/* Hero Subtitle */}
-        <p className="mt-6 text-base sm:text-lg md:text-xl text-[#71717A] max-w-2xl mx-auto leading-relaxed font-normal animate-fade-up delay-100">
+        <p className="mt-6 text-base sm:text-lg md:text-xl text-black max-w-2xl mx-auto leading-relaxed font-semibold animate-fade-up delay-100">
           {subtitle}
         </p>
 
@@ -92,7 +92,7 @@ export const Hero: React.FC<HeroProps> = ({
             size="lg"
             variant="outline"
             onClick={onSecondaryCtaClick}
-            className="w-full sm:w-auto text-sm font-semibold h-12 px-7 gap-2 bg-white text-[#15151B] border-[#E5E5EB] hover:bg-[#F7F7FA] shadow-xs"
+            className="w-full sm:w-auto text-sm font-bold h-12 px-7 gap-2 bg-white text-black border-neutral-300 hover:bg-[#F7F7FA] shadow-xs"
           >
             <span>{secondaryCtaText}</span>
           </Button>
@@ -103,16 +103,16 @@ export const Hero: React.FC<HeroProps> = ({
       {showFloatingTelemetry && (
         <div className="hidden lg:block pointer-events-none select-none" aria-hidden="true">
           {/* Card 1: Revenue Growth Indicator (Top Left) */}
-          <div className="absolute top-[22%] left-[4%] xl:left-[8%] p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E5E5EB] shadow-card animate-float-subtle">
+          <div className="absolute top-[22%] left-[4%] xl:left-[8%] p-3.5 rounded-2xl bg-white border border-[#E5E5EB] shadow-card animate-float-subtle">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl bg-emerald-50 text-[#16A879] flex items-center justify-center">
                 <TrendingUp className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <span className="text-[10px] uppercase font-semibold text-[#71717A] tracking-wider block">
+                <span className="text-[10px] uppercase font-bold text-black tracking-wider block">
                   QoQ Revenue Growth
                 </span>
-                <span className="text-sm font-bold text-[#15151B] font-mono">
+                <span className="text-sm font-extrabold text-black font-mono">
                   +10.0% (₹45.00L)
                 </span>
               </div>
@@ -120,16 +120,16 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           {/* Card 2: Financial Health Score (Top Right) */}
-          <div className="absolute top-[20%] right-[4%] xl:right-[8%] p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E5E5EB] shadow-card animate-float-reverse">
+          <div className="absolute top-[20%] right-[4%] xl:right-[8%] p-3.5 rounded-2xl bg-white border border-[#E5E5EB] shadow-card animate-float-reverse">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl bg-violet-50 text-[#6D45CF] flex items-center justify-center">
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <span className="text-[10px] uppercase font-semibold text-[#71717A] tracking-wider block">
+                <span className="text-[10px] uppercase font-bold text-black tracking-wider block">
                   Financial Health
                 </span>
-                <span className="text-sm font-bold text-[#6D45CF] font-mono">
+                <span className="text-sm font-extrabold text-[#6D45CF] font-mono">
                   84 / 100 Strong
                 </span>
               </div>
@@ -137,16 +137,16 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           {/* Card 3: Profit Leakage Detected (Bottom Left) */}
-          <div className="absolute bottom-[18%] left-[5%] xl:left-[10%] p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-rose-200/80 shadow-card animate-float-reverse">
+          <div className="absolute bottom-[18%] left-[5%] xl:left-[10%] p-3.5 rounded-2xl bg-white border border-rose-200/80 shadow-card animate-float-reverse">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl bg-rose-50 text-[#E46D72] flex items-center justify-center">
                 <AlertOctagon className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <span className="text-[10px] uppercase font-semibold text-[#E46D72] tracking-wider block">
+                <span className="text-[10px] uppercase font-bold text-[#E46D72] tracking-wider block">
                   Profit Leakage Alert
                 </span>
-                <span className="text-sm font-bold text-[#15151B] font-mono">
+                <span className="text-sm font-extrabold text-black font-mono">
                   ₹85,200 Recoverable
                 </span>
               </div>
@@ -154,16 +154,16 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           {/* Card 4: 90-Day Cash Flow Runway (Bottom Right) */}
-          <div className="absolute bottom-[16%] right-[5%] xl:right-[9%] p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E5E5EB] shadow-card animate-float-subtle">
+          <div className="absolute bottom-[16%] right-[5%] xl:right-[9%] p-3.5 rounded-2xl bg-white border border-[#E5E5EB] shadow-card animate-float-subtle">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl bg-indigo-50 text-[#6D45CF] flex items-center justify-center">
                 <CheckCircle2 className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <span className="text-[10px] uppercase font-semibold text-[#71717A] tracking-wider block">
+                <span className="text-[10px] uppercase font-bold text-black tracking-wider block">
                   30-90D Cash Runway
                 </span>
-                <span className="text-sm font-bold text-[#16A879] font-mono">
+                <span className="text-sm font-extrabold text-[#16A879] font-mono">
                   14.2 Mo Positive
                 </span>
               </div>

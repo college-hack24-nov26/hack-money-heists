@@ -78,12 +78,12 @@ export const ExpenseAnalyzer: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl glass-panel">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+            <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
               Smart Expense Analyzer
             </h1>
             <MetricBadge label="ML Outlier & Pattern Engine" variant="blue" />
           </div>
-          <p className="text-xs text-neutral-muted mt-1">
+          <p className="text-xs text-black mt-1">
             Machine learning anomaly detection, recurring subscription audit, duplicate disbursement checks, and automated category classification.
           </p>
         </div>
@@ -101,8 +101,8 @@ export const ExpenseAnalyzer: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {Object.entries(categories).map(([cat, amt]: [string, any]) => (
           <GlassCard key={cat} className="p-4">
-            <span className="text-[11px] text-neutral-muted font-medium block">{cat}</span>
-            <span className="text-base font-bold text-white mt-1 block">
+            <span className="text-[11px] text-black font-medium block">{cat}</span>
+            <span className="text-base font-bold text-black mt-1 block">
               ₹{Number(amt).toLocaleString('en-IN')}
             </span>
             <span className="text-[10px] text-accent-cyan mt-1 block">
@@ -116,33 +116,33 @@ export const ExpenseAnalyzer: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* ML Outlier Anomalies */}
         <GlassCard>
-          <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+          <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-400" />
-              <h3 className="text-sm font-semibold text-white">Statistical Outliers (Z-Score & IQR)</h3>
+              <h3 className="text-sm font-semibold text-black">Statistical Outliers (Z-Score & IQR)</h3>
             </div>
             <span className="text-xs text-amber-400 font-medium">3 Spikes Flagged</span>
           </div>
 
           <div className="space-y-3 mt-4 text-xs">
-            <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-amber-500/20">
+            <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-amber-500/20">
               <div className="flex justify-between items-center">
-                <span className="font-semibold text-white">Apex Logistics & Packaging</span>
+                <span className="font-semibold text-black">Apex Logistics & Packaging</span>
                 <MetricBadge label="Z-Score: +2.8σ" variant="amber" />
               </div>
-              <p className="text-neutral-offwhite font-bold mt-1">₹54,200.00</p>
-              <p className="text-[11px] text-neutral-muted mt-1 leading-snug">
+              <p className="text-black font-bold mt-1">₹54,200.00</p>
+              <p className="text-[11px] text-black mt-1 leading-snug">
                 Procurement charge is 2.8 standard deviations above company moving average. Unit pricing rose 23% without purchase volume justification.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-amber-500/20">
+            <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-amber-500/20">
               <div className="flex justify-between items-center">
-                <span className="font-semibold text-white">SysMatrix Technologies</span>
+                <span className="font-semibold text-black">SysMatrix Technologies</span>
                 <MetricBadge label="Identical Duplicate" variant="coral" />
               </div>
-              <p className="text-neutral-offwhite font-bold mt-1">₹12,000.00</p>
-              <p className="text-[11px] text-neutral-muted mt-1 leading-snug">
+              <p className="text-black font-bold mt-1">₹12,000.00</p>
+              <p className="text-[11px] text-black mt-1 leading-snug">
                 Two identical charges of ₹12,000 billed on Oct 12 and Oct 14 for identical developer workstation PO.
               </p>
             </div>
@@ -151,12 +151,12 @@ export const ExpenseAnalyzer: React.FC = () => {
 
         {/* Recurring Subscriptions Tracker */}
         <GlassCard>
-          <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+          <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
             <div className="flex items-center gap-2">
               <Repeat className="w-4 h-4 text-accent-cyan" />
-              <h3 className="text-sm font-semibold text-white">Recurring SaaS Subscriptions Tracker</h3>
+              <h3 className="text-sm font-semibold text-black">Recurring SaaS Subscriptions Tracker</h3>
             </div>
-            <span className="text-xs text-neutral-muted">Annualized: ₹8.26L</span>
+            <span className="text-xs text-black">Annualized: ₹8.26L</span>
           </div>
 
           <div className="divide-y divide-white/[0.04] mt-2 text-xs">
@@ -169,12 +169,12 @@ export const ExpenseAnalyzer: React.FC = () => {
               <div key={idx} className="py-2.5 flex items-center justify-between">
                 <div>
                   <span className="font-medium text-white">{sub.vendor}</span>
-                  <p className={`text-[11px] ${sub.flag ? 'text-rose-400 font-medium' : 'text-neutral-muted'}`}>
+                  <p className={`text-[11px] ${sub.flag ? 'text-rose-400 font-medium' : 'text-black'}`}>
                     {sub.type}
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="font-bold text-neutral-offwhite">{sub.cost}</span>
+                  <span className="font-bold text-black">{sub.cost}</span>
                   {sub.flag && (
                     <span className="block text-[10px] text-rose-400">Leakage Flag</span>
                   )}
@@ -187,18 +187,18 @@ export const ExpenseAnalyzer: React.FC = () => {
 
       {/* Full Expense Transaction Ledger */}
       <GlassCard>
-        <div className="flex items-center justify-between pb-4 border-b border-white/[0.06]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
           <div>
-            <h3 className="text-sm font-semibold text-white">Comprehensive Operating Expense Ledger</h3>
-            <p className="text-xs text-neutral-muted">Logged transactions with payment method and reference audit IDs</p>
+            <h3 className="text-sm font-semibold text-black">Comprehensive Operating Expense Ledger</h3>
+            <p className="text-xs text-black">Logged transactions with payment method and reference audit IDs</p>
           </div>
-          <span className="text-xs text-neutral-muted">{expenses.length} Records</span>
+          <span className="text-xs text-black">{expenses.length} Records</span>
         </div>
 
         <div className="overflow-x-auto mt-3">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="text-neutral-muted border-b border-white/[0.06]">
+              <tr className="text-black border-b border-[#E2E8F0]">
                 <th className="pb-3 font-medium">Ref / ID</th>
                 <th className="pb-3 font-medium">Date</th>
                 <th className="pb-3 font-medium">Vendor</th>
@@ -213,16 +213,16 @@ export const ExpenseAnalyzer: React.FC = () => {
               {expenses.map((exp) => (
                 <tr key={exp.id} className="hover:bg-white/[0.02] transition-colors">
                   <td className="py-3 font-mono text-accent-cyan">{exp.id}</td>
-                  <td className="py-3 text-neutral-muted">{exp.date}</td>
-                  <td className="py-3 font-medium text-white">{exp.vendor}</td>
+                  <td className="py-3 text-black">{exp.date}</td>
+                  <td className="py-3 font-medium text-black">{exp.vendor}</td>
                   <td className="py-3">
-                    <span className="px-2 py-0.5 rounded text-[10px] bg-white/5 border border-white/10 text-neutral-offwhite">
+                    <span className="px-2 py-0.5 rounded text-[10px] bg-white/5 border border-[#E2E8F0] text-black">
                       {exp.category}
                     </span>
                   </td>
-                  <td className="py-3 text-neutral-muted max-w-xs truncate">{exp.description}</td>
-                  <td className="py-3 text-neutral-muted">{exp.paymentMethod || 'Bank Transfer'}</td>
-                  <td className="py-3 text-right font-bold text-neutral-offwhite">
+                  <td className="py-3 text-black max-w-xs truncate">{exp.description}</td>
+                  <td className="py-3 text-black">{exp.paymentMethod || 'Bank Transfer'}</td>
+                  <td className="py-3 text-right font-bold text-black">
                     ₹{Number(exp.amount).toLocaleString('en-IN')}
                   </td>
                   <td className="py-3 text-center">
@@ -238,14 +238,14 @@ export const ExpenseAnalyzer: React.FC = () => {
       {/* Add Expense Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl glass-panel p-6 border border-white/10 shadow-2xl animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-              <h3 className="text-base font-bold text-white font-['Plus_Jakarta_Sans']">
+          <div className="w-full max-w-md rounded-2xl glass-panel p-6 border border-[#E2E8F0] shadow-2xl animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
+              <h3 className="text-base font-bold text-black font-['Plus_Jakarta_Sans']">
                 Record New Operating Expense
               </h3>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="p-1 rounded-lg hover:bg-white/10 text-neutral-muted hover:text-white"
+                className="p-1 rounded-lg hover:bg-white/10 text-black hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -253,24 +253,24 @@ export const ExpenseAnalyzer: React.FC = () => {
 
             <form onSubmit={handleAddExpense} className="space-y-4 mt-4 text-xs">
               <div>
-                <label className="block text-neutral-muted mb-1">Vendor / Beneficiary</label>
+                <label className="block text-black mb-1">Vendor / Beneficiary</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. AWS Cloud, Adobe Systems"
                   value={vendor}
                   onChange={(e) => setVendor(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-neutral-muted mb-1">Category</label>
+                  <label className="block text-black mb-1">Category</label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                   >
                     <option value="Operating">Operating</option>
                     <option value="Employee">Employee (Payroll)</option>
@@ -282,35 +282,35 @@ export const ExpenseAnalyzer: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-neutral-muted mb-1">Amount (INR ₹)</label>
+                  <label className="block text-black mb-1">Amount (INR ₹)</label>
                   <input
                     type="number"
                     required
                     placeholder="25000"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-neutral-muted mb-1">Description</label>
+                <label className="block text-black mb-1">Description</label>
                 <input
                   type="text"
                   placeholder="Monthly licensing or deliverable"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                 />
               </div>
 
               <div>
-                <label className="block text-neutral-muted mb-1">Payment Method</label>
+                <label className="block text-black mb-1">Payment Method</label>
                 <select
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                 >
                   <option value="Corporate Credit Card">Corporate Credit Card</option>
                   <option value="NEFT / Bank Transfer">NEFT / Bank Transfer</option>
@@ -319,11 +319,11 @@ export const ExpenseAnalyzer: React.FC = () => {
                 </select>
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-white/[0.08]">
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-offwhite font-medium"
+                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-black font-medium"
                 >
                   Cancel
                 </button>

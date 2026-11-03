@@ -46,12 +46,12 @@ export const ReportsSettings: React.FC = () => {
       {/* Top Banner */}
       <div className="p-6 rounded-2xl glass-panel">
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+          <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
             Reports & Tenant Organization Settings
           </h1>
           <MetricBadge label="Enterprise Multi-Tenant" variant="blue" />
         </div>
-        <p className="text-xs text-neutral-muted mt-1 max-w-xl">
+        <p className="text-xs text-black mt-1 max-w-xl">
           Automated export of statutory financial packages, general ledger data, audit logs, and organization-level encryption controls.
         </p>
       </div>
@@ -62,8 +62,8 @@ export const ReportsSettings: React.FC = () => {
           <div className="p-2.5 rounded-xl bg-accent-blue/10 text-accent-blue w-fit">
             <FileSpreadsheet className="w-5 h-5" />
           </div>
-          <h3 className="text-sm font-bold text-white">Full Financial Statement Model</h3>
-          <p className="text-xs text-neutral-muted">
+          <h3 className="text-sm font-bold text-black">Full Financial Statement Model</h3>
+          <p className="text-xs text-black">
             Comprehensive P&L, Balance Sheet, Cash Flow, and 15+ Financial Ratios ready for banking & board presentations.
           </p>
           <button
@@ -79,8 +79,8 @@ export const ReportsSettings: React.FC = () => {
           <div className="p-2.5 rounded-xl bg-rose-500/10 text-rose-400 w-fit">
             <FileCheck className="w-5 h-5" />
           </div>
-          <h3 className="text-sm font-bold text-white">Profit Leakage & Audit Dossier</h3>
-          <p className="text-xs text-neutral-muted">
+          <h3 className="text-sm font-bold text-black">Profit Leakage & Audit Dossier</h3>
+          <p className="text-xs text-black">
             Detailed schedule of all 5 detected leakages, price creeps, duplicate payments, and verified savings recommendations.
           </p>
           <button
@@ -96,8 +96,8 @@ export const ReportsSettings: React.FC = () => {
           <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 w-fit">
             <HardDrive className="w-5 h-5" />
           </div>
-          <h3 className="text-sm font-bold text-white">Accounts Payable & Invoice Register</h3>
-          <p className="text-xs text-neutral-muted">
+          <h3 className="text-sm font-bold text-black">Accounts Payable & Invoice Register</h3>
+          <p className="text-xs text-black">
             Complete vendor invoice log with forensic risk classifications, GSTIN checksum statuses, and payment vouchers.
           </p>
           <button
@@ -118,37 +118,37 @@ export const ReportsSettings: React.FC = () => {
               <Database className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white">Supabase PostgreSQL Cloud Database</h3>
-              <p className="text-[11px] text-neutral-muted">Connected to Project: mmljatcvouyjfbznxjgs</p>
+              <h3 className="text-sm font-semibold text-black">Supabase PostgreSQL Cloud Database</h3>
+              <p className="text-[11px] text-black">Connected to Project: mmljatcvouyjfbznxjgs</p>
             </div>
           </div>
           <MetricBadge label="Supabase Connected" variant="emerald" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Cloud Project URL</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Cloud Project URL</span>
             <span className="font-mono text-emerald-400 mt-0.5 block truncate">mmljatcvouyjfbznxjgs.supabase.co</span>
           </div>
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Database Engine</span>
-            <span className="font-semibold text-white mt-0.5 block">PostgreSQL 15+ (Cloud Hosted)</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Database Engine</span>
+            <span className="font-semibold text-black mt-0.5 block">PostgreSQL 15+ (Cloud Hosted)</span>
           </div>
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Auth & Client API</span>
-            <span className="font-semibold text-white mt-0.5 block">@supabase/supabase-js v2</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Auth & Client API</span>
+            <span className="font-semibold text-black mt-0.5 block">@supabase/supabase-js v2</span>
           </div>
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Row Level Security</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Row Level Security</span>
             <span className="font-semibold text-emerald-400 mt-0.5 block">Active RLS on All Tables</span>
           </div>
         </div>
 
-        <div className="p-3.5 rounded-xl bg-navy-dark/40 border border-white/[0.06] text-xs">
-          <span className="text-neutral-muted block text-[10px] uppercase font-bold tracking-wider">Synchronized Schema Tables</span>
+        <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-xs">
+          <span className="text-black block text-[10px] uppercase font-bold tracking-wider">Synchronized Schema Tables</span>
           <div className="flex flex-wrap gap-2 mt-2">
             {['organizations', 'users', 'accounts', 'clients', 'vendors', 'expenses', 'invoices', 'profit_leakage_findings', 'audit_logs'].map(table => (
-              <span key={table} className="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.08] text-[11px] font-mono text-neutral-300">
+              <span key={table} className="px-2.5 py-1 rounded-md bg-white/[0.05] border border-[#E2E8F0] text-[11px] font-mono text-black">
                 {table}
               </span>
             ))}
@@ -158,32 +158,32 @@ export const ReportsSettings: React.FC = () => {
 
       {/* Organization Credentials & Tenant Isolation */}
       <GlassCard className="space-y-4">
-        <h3 className="text-sm font-semibold text-white">Organization Profile & Security Boundary</h3>
+        <h3 className="text-sm font-semibold text-black">Organization Profile & Security Boundary</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Entity Name</span>
-            <span className="font-semibold text-white mt-0.5 block">Apex Technologies Pvt Ltd</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Entity Name</span>
+            <span className="font-semibold text-black mt-0.5 block">Apex Technologies Pvt Ltd</span>
           </div>
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Registered GSTIN</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Registered GSTIN</span>
             <span className="font-mono text-white mt-0.5 block">27AAPFU0939F1ZV</span>
           </div>
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Statutory PAN</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Statutory PAN</span>
             <span className="font-mono text-white mt-0.5 block">AAPFU0939F</span>
           </div>
-          <div className="p-3.5 rounded-xl bg-navy-dark/60 border border-white/[0.05]">
-            <span className="text-neutral-muted block text-[10px]">Liquidity Safety Floor</span>
+          <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+            <span className="text-black block text-[10px]">Liquidity Safety Floor</span>
             <span className="font-bold text-emerald-400 mt-0.5 block">₹5,00,000.00</span>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-navy-dark/40 border border-white/[0.06] text-xs flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-xs flex items-center justify-between">
           <div className="flex items-center gap-3">
             <ShieldCheck className="w-5 h-5 text-emerald-400" />
             <div>
-              <p className="font-semibold text-white">Tenant-Level Database Row Isolation</p>
-              <p className="text-[11px] text-neutral-muted">
+              <p className="font-semibold text-black">Tenant-Level Database Row Isolation</p>
+              <p className="text-[11px] text-black">
                 Multi-tenant cryptography active. No cross-tenant access is permitted across client records.
               </p>
             </div>

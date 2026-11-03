@@ -58,14 +58,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
         <div className="absolute right-0 top-0 w-80 h-full bg-gradient-to-l from-violet-100/40 via-purple-50/20 to-transparent pointer-events-none" />
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#15151B] tracking-tight font-['Plus_Jakarta_Sans']">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-black tracking-tight font-['Plus_Jakarta_Sans']">
               Executive Financial Workspace
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-[#16A879] border border-emerald-200">
               Live Ledger Synced
             </span>
           </div>
-          <p className="text-xs text-[#71717A] mt-1.5 max-w-xl">
+          <p className="text-xs text-black mt-1.5 max-w-xl">
             {data?.organization || "Apex Technologies Pvt Ltd"} (GSTIN: {data?.gstin || "27AAPFU0939F1ZV"}).
             ARTHIQ is continuously analyzing your cash velocity, invoices, and expense patterns.
           </p>
@@ -83,7 +83,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
           <Button
             variant="outline"
             onClick={() => onNavigate('leakage')}
-            className="text-xs font-semibold h-10 px-4 gap-1.5 text-[#15151B] border-[#E5E5EB]"
+            className="text-xs font-semibold h-10 px-4 gap-1.5 text-black border-[#E5E5EB]"
           >
             <AlertOctagon className="w-3.5 h-3.5 text-[#E46D72]" />
             <span>Review Leakages (₹85.2K)</span>
@@ -95,14 +95,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         {/* Gross Revenue */}
         <GlassCard hoverEffect onClick={() => onNavigate('analytics')}>
-          <div className="flex items-center justify-between text-[#71717A] text-xs">
+          <div className="flex items-center justify-between text-black text-xs">
             <span>Gross Revenue</span>
             <span className="p-1.5 rounded-lg bg-indigo-50 text-[#6D45CF]">
               <TrendingUp className="w-3.5 h-3.5" />
             </span>
           </div>
           <div className="mt-3">
-            <span className="text-xl font-bold text-[#15151B] font-mono">
+            <span className="text-xl font-bold text-black font-mono">
               ₹{(kpis.totalRevenue / 100000).toFixed(2)}L
             </span>
             <div className="flex items-center gap-1 text-[11px] text-[#16A879] mt-1 font-semibold">
@@ -114,14 +114,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
 
         {/* Total Expenses */}
         <GlassCard hoverEffect onClick={() => onNavigate('expenses')}>
-          <div className="flex items-center justify-between text-[#71717A] text-xs">
+          <div className="flex items-center justify-between text-black text-xs">
             <span>Operating Burn</span>
             <span className="p-1.5 rounded-lg bg-amber-50 text-[#E5A33D]">
               <Receipt className="w-3.5 h-3.5" />
             </span>
           </div>
           <div className="mt-3">
-            <span className="text-xl font-bold text-[#15151B] font-mono">
+            <span className="text-xl font-bold text-black font-mono">
               ₹{(kpis.totalExpenses / 100000).toFixed(2)}L
             </span>
             <div className="flex items-center gap-1 text-[11px] text-[#E5A33D] mt-1 font-semibold">
@@ -133,14 +133,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
 
         {/* Net Profit */}
         <GlassCard hoverEffect onClick={() => onNavigate('analytics')}>
-          <div className="flex items-center justify-between text-[#71717A] text-xs">
+          <div className="flex items-center justify-between text-black text-xs">
             <span>Net Profit (PAT)</span>
             <span className="p-1.5 rounded-lg bg-emerald-50 text-[#16A879]">
               <CheckCircle2 className="w-3.5 h-3.5" />
             </span>
           </div>
           <div className="mt-3">
-            <span className="text-xl font-bold text-[#15151B] font-mono">
+            <span className="text-xl font-bold text-black font-mono">
               ₹{(kpis.netProfit / 100000).toFixed(2)}L
             </span>
             <div className="text-[11px] text-[#16A879] mt-1 font-semibold">
@@ -151,7 +151,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
 
         {/* Available Cash */}
         <GlassCard hoverEffect onClick={() => onNavigate('cashflow')}>
-          <div className="flex items-center justify-between text-[#71717A] text-xs">
+          <div className="flex items-center justify-between text-black text-xs">
             <span>Available Liquid Cash</span>
             <span className="p-1.5 rounded-lg bg-violet-50 text-[#6D45CF]">
               <Wallet className="w-3.5 h-3.5" />
@@ -161,7 +161,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
             <span className="text-xl font-bold text-[#6D45CF] font-mono">
               ₹{(kpis.availableCash / 100000).toFixed(2)}L
             </span>
-            <div className="text-[11px] text-[#71717A] mt-1">
+            <div className="text-[11px] text-black mt-1">
               <span>Target: ₹5.00L safety</span>
             </div>
           </div>
@@ -169,7 +169,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
 
         {/* Cash Runway */}
         <GlassCard hoverEffect onClick={() => onNavigate('cashflow')}>
-          <div className="flex items-center justify-between text-[#71717A] text-xs">
+          <div className="flex items-center justify-between text-black text-xs">
             <span>Cash Runway</span>
             <span className="p-1.5 rounded-lg bg-indigo-50 text-[#6D45CF]">
               <TrendingUp className="w-3.5 h-3.5" />
@@ -187,7 +187,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
 
         {/* Health Score */}
         <GlassCard hoverEffect onClick={() => onNavigate('risks')}>
-          <div className="flex items-center justify-between text-[#71717A] text-xs">
+          <div className="flex items-center justify-between text-black text-xs">
             <span>Financial Health</span>
             <span className="p-1.5 rounded-lg bg-emerald-50 text-[#16A879]">
               <ShieldCheck className="w-3.5 h-3.5" />
@@ -197,7 +197,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
             <span className="text-xl font-bold text-[#16A879] font-mono">
               {kpis.financialHealthScore}/100
             </span>
-            <div className="text-[11px] text-[#71717A] mt-1">
+            <div className="text-[11px] text-black mt-1">
               <span>Status: {kpis.healthStatus}</span>
             </div>
           </div>
@@ -212,12 +212,12 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-[#15151B]">
+              <h3 className="text-sm font-bold text-black">
                 ARTHIQ Profit Leakage Detector (PLD) Alert
               </h3>
               <MetricBadge label="₹85,200 Identified" variant="coral" />
             </div>
-            <p className="text-xs text-[#71717A] mt-1 leading-relaxed">
+            <p className="text-xs text-black mt-1 leading-relaxed">
               We identified 5 cost leakages across redundant software licenses (₹18.5K/mo), unannounced vendor price creep from Apex Logistics (+23%), and double settlement on developer workstations. Total annualized recoverable savings: <strong className="text-[#16A879]">₹8,88,400</strong>.
             </p>
           </div>
@@ -237,10 +237,10 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Selective Dark Glass Panel for High-End Financial Telemetry */}
         <GlassCard variant="dark" className="lg:col-span-2">
-          <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+          <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
             <div>
-              <h3 className="text-sm font-semibold text-white">Cash Velocity & Inflow vs Outflow</h3>
-              <p className="text-xs text-neutral-400 mt-0.5">Historical 30-day liquidity trends (INR ₹)</p>
+              <h3 className="text-sm font-semibold text-black">Cash Velocity & Inflow vs Outflow</h3>
+              <p className="text-xs text-black mt-0.5">Historical 30-day liquidity trends (INR ₹)</p>
             </div>
             <div className="flex items-center gap-4 text-xs">
               <span className="flex items-center gap-1.5 text-violet-400">
@@ -297,7 +297,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
                 strokeDasharray="2 2"
               />
             </svg>
-            <div className="flex justify-between text-[10px] text-neutral-400 mt-2">
+            <div className="flex justify-between text-[10px] text-black mt-2">
               <span>Day 1 (Oct 1)</span>
               <span>Day 8</span>
               <span>Day 15</span>
@@ -311,15 +311,15 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
         <GlassCard>
           <div className="flex items-center justify-between pb-3 border-b border-[#E5E5EB]">
             <div>
-              <h3 className="text-sm font-bold text-[#15151B]">Risk Exposure Radar</h3>
-              <p className="text-xs text-[#71717A]">Multi-factor SME stress test</p>
+              <h3 className="text-sm font-bold text-black">Risk Exposure Radar</h3>
+              <p className="text-xs text-black">Multi-factor SME stress test</p>
             </div>
             <MetricBadge label="Low Risk" variant="emerald" />
           </div>
 
           <div className="space-y-3.5 mt-4 text-xs">
             <div>
-              <div className="flex justify-between text-[#71717A] mb-1">
+              <div className="flex justify-between text-black mb-1">
                 <span>Liquidity Risk</span>
                 <span className="text-[#16A879] font-bold">18% (Safe)</span>
               </div>
@@ -329,7 +329,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
             </div>
 
             <div>
-              <div className="flex justify-between text-[#71717A] mb-1">
+              <div className="flex justify-between text-black mb-1">
                 <span>Profitability Margin Risk</span>
                 <span className="text-[#16A879] font-bold">22% (Safe)</span>
               </div>
@@ -339,7 +339,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
             </div>
 
             <div>
-              <div className="flex justify-between text-[#71717A] mb-1">
+              <div className="flex justify-between text-black mb-1">
                 <span>Vendor Concentration Risk</span>
                 <span className="text-[#E5A33D] font-bold">42% (Moderate)</span>
               </div>
@@ -349,7 +349,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
             </div>
 
             <div>
-              <div className="flex justify-between text-[#71717A] mb-1">
+              <div className="flex justify-between text-black mb-1">
                 <span>Debtor Overdue Default Risk</span>
                 <span className="text-[#E5A33D] font-bold">35% (Watch)</span>
               </div>
@@ -359,7 +359,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
             </div>
 
             <div>
-              <div className="flex justify-between text-[#71717A] mb-1">
+              <div className="flex justify-between text-black mb-1">
                 <span>Invoice Fraud Flag Ratio</span>
                 <span className="text-[#E46D72] font-bold">16% (3 Invoices)</span>
               </div>
@@ -386,7 +386,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
           <div className="flex items-center justify-between pb-3 border-b border-[#E5E5EB]">
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-[#E46D72]" />
-              <h3 className="text-sm font-bold text-[#15151B]">Suspicious Invoices Under Forensic Hold</h3>
+              <h3 className="text-sm font-bold text-black">Suspicious Invoices Under Forensic Hold</h3>
             </div>
             <button
               onClick={() => onNavigate('invoices')}
@@ -405,12 +405,12 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
                 className="p-3.5 rounded-xl bg-[#F7F7FA] border border-[#E5E5EB] hover:border-rose-300 transition-colors cursor-pointer text-xs"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-[#15151B]">#{inv.invoice_number}</span>
+                  <span className="font-bold text-black">#{inv.invoice_number}</span>
                   <MetricBadge label={inv.risk_classification} variant="coral" />
                 </div>
-                <div className="flex items-center justify-between text-[#71717A] mt-1.5">
+                <div className="flex items-center justify-between text-black mt-1.5">
                   <span>{inv.vendor_name}</span>
-                  <span className="font-bold text-[#15151B]">₹{inv.total_amount?.toLocaleString('en-IN')}</span>
+                  <span className="font-bold text-black">₹{inv.total_amount?.toLocaleString('en-IN')}</span>
                 </div>
                 <p className="text-[11px] text-[#E46D72] mt-1 font-medium">
                   {inv.anomalies_detected?.[0] || "Forensic anomaly flagged"}
@@ -424,8 +424,8 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
         <GlassCard>
           <div className="flex items-center justify-between pb-3 border-b border-[#E5E5EB]">
             <div>
-              <h3 className="text-sm font-bold text-[#15151B]">Recent Operating Transactions</h3>
-              <p className="text-xs text-[#71717A]">Verified disbursements and settlements</p>
+              <h3 className="text-sm font-bold text-black">Recent Operating Transactions</h3>
+              <p className="text-xs text-black">Verified disbursements and settlements</p>
             </div>
             <button
               onClick={() => onNavigate('expenses')}
@@ -440,12 +440,12 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
             {data?.recentTransactions?.map((tx: any) => (
               <div key={tx.id} className="py-2.5 flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-[#15151B]">{tx.vendor}</p>
-                  <p className="text-[11px] text-[#71717A]">{tx.description}</p>
+                  <p className="font-semibold text-black">{tx.vendor}</p>
+                  <p className="text-[11px] text-black">{tx.description}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-[#15151B]">-₹{tx.amount?.toLocaleString('en-IN')}</p>
-                  <span className="text-[10px] text-[#71717A]">{tx.date}</span>
+                  <p className="font-bold text-black">-₹{tx.amount?.toLocaleString('en-IN')}</p>
+                  <span className="text-[10px] text-black">{tx.date}</span>
                 </div>
               </div>
             ))}

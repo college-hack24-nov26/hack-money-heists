@@ -90,9 +90,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
   ];
 
   return (
-    <aside className="w-64 flex-shrink-0 min-h-[calc(100vh-65px)] bg-white border-r border-[#E5E5EB] flex flex-col justify-between p-4 text-[#15151B]">
+    <aside className="w-64 flex-shrink-0 min-h-[calc(100vh-65px)] bg-white border-r border-[#E5E5EB] flex flex-col justify-between p-4 text-black">
       <div className="space-y-1">
-        <div className="px-3 py-2 text-[11px] font-bold tracking-wider text-[#71717A] uppercase">
+        <div className="px-3 py-2 text-[11px] font-extrabold tracking-wider text-black uppercase">
           Financial Workspace
         </div>
         {navItems.map((item) => {
@@ -102,16 +102,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all group ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all group ${
                 isActive
                   ? 'bg-[#EDE7FF] text-[#6D45CF] shadow-xs'
-                  : 'text-[#71717A] hover:text-[#15151B] hover:bg-[#F7F7FA]'
+                  : 'text-black hover:text-[#6D45CF] hover:bg-[#F7F7FA]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <Icon
                   className={`w-4 h-4 transition-colors ${
-                    isActive ? 'text-[#6D45CF]' : 'text-[#71717A] group-hover:text-[#15151B]'
+                    isActive ? 'text-[#6D45CF]' : 'text-black group-hover:text-[#6D45CF]'
                   }`}
                 />
                 <span className="tracking-tight">{item.label}</span>
@@ -125,7 +125,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
                       ? 'bg-emerald-100 text-[#16A879]'
                       : isActive
                       ? 'bg-[#DDD3FA] text-[#6D45CF]'
-                      : 'bg-[#ECECF1] text-[#71717A]'
+                      : 'bg-neutral-200 text-black'
                   }`}
                 >
                   {item.badge}
@@ -140,16 +140,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
       <div className="pt-4 border-t border-[#E5E5EB]">
         <div
           onClick={() => onNavigate('assistant')}
-          className="p-3.5 rounded-2xl bg-[#F7F7FA] border border-[#E5E5EB] cursor-pointer hover:border-[#6D45CF]/40 transition-all group"
+          className="p-3.5 rounded-2xl bg-[#F7F7FA] border border-neutral-300 cursor-pointer hover:border-[#6D45CF]/60 transition-all group"
         >
           <div className="flex items-center gap-2 text-[#6D45CF] text-xs font-bold">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Need Financial Advice?</span>
           </div>
-          <p className="text-[11px] text-[#71717A] mt-1 leading-snug">
+          <p className="text-[11px] text-black mt-1 leading-snug font-semibold">
             "Where is my business losing unnecessary money?"
           </p>
-          <span className="text-[10px] text-[#6D45CF] font-bold mt-2 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+          <span className="text-[10px] text-[#6D45CF] font-extrabold mt-2 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
             Ask ARTHIQ AI →
           </span>
         </div>

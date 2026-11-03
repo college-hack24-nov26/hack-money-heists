@@ -49,18 +49,18 @@ export const CashFlowPredictor: React.FC = () => {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-6 rounded-2xl glass-panel">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+            <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
               SME Cash Flow Intelligence & Predictive Runway
             </h1>
             <MetricBadge label="Holt Linear + Day-of-Week Model" variant="blue" />
           </div>
-          <p className="text-xs text-neutral-muted mt-1 max-w-2xl">
+          <p className="text-xs text-black mt-1 max-w-2xl">
             Statistical forecasting across 7, 30, 60, and 90-day horizons. Empirical 95% bootstrap confidence bands, safety threshold breach monitors, and working capital burn analytics.
           </p>
         </div>
 
         {/* Horizon Picker */}
-        <div className="flex items-center gap-2 bg-navy/80 p-1.5 rounded-xl border border-white/[0.08] text-xs">
+        <div className="flex items-center gap-2 bg-navy/80 p-1.5 rounded-xl border border-[#E2E8F0] text-xs">
           {[7, 30, 60, 90].map((d) => (
             <button
               key={d}
@@ -68,7 +68,7 @@ export const CashFlowPredictor: React.FC = () => {
               className={`px-3.5 py-1.5 rounded-lg font-semibold transition-all ${
                 horizon === d
                   ? 'bg-accent-blue text-white shadow-glow'
-                  : 'text-neutral-muted hover:text-white'
+                  : 'text-black hover:bg-neutral-200'
               }`}
             >
               {d} Days
@@ -80,31 +80,31 @@ export const CashFlowPredictor: React.FC = () => {
       {/* KPI Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <GlassCard>
-          <span className="text-xs text-neutral-muted">Current Liquid Balance</span>
-          <div className="text-xl font-bold text-white mt-1">
+          <span className="text-xs text-black">Current Liquid Balance</span>
+          <div className="text-xl font-bold text-black mt-1">
             ₹{currentBal.toLocaleString('en-IN')}
           </div>
           <span className="text-[11px] text-emerald-400 mt-1 block">Live Bank Feeds Synced</span>
         </GlassCard>
 
         <GlassCard>
-          <span className="text-xs text-neutral-muted">Forecast Horizon</span>
+          <span className="text-xs text-black">Forecast Horizon</span>
           <div className="text-xl font-bold text-accent-cyan mt-1">
             {horizon} Days Ahead
           </div>
-          <span className="text-[11px] text-neutral-muted mt-1 block">95% Confidence Interval</span>
+          <span className="text-[11px] text-black mt-1 block">95% Confidence Interval</span>
         </GlassCard>
 
         <GlassCard>
-          <span className="text-xs text-neutral-muted">Safety Reserve Ceiling</span>
-          <div className="text-xl font-bold text-white mt-1">
+          <span className="text-xs text-black">Safety Reserve Ceiling</span>
+          <div className="text-xl font-bold text-black mt-1">
             ₹{safetyThreshold.toLocaleString('en-IN')}
           </div>
-          <span className="text-[11px] text-neutral-muted mt-1 block">Configured Safety Floor</span>
+          <span className="text-[11px] text-black mt-1 block">Configured Safety Floor</span>
         </GlassCard>
 
         <GlassCard>
-          <span className="text-xs text-neutral-muted">Estimated Cash Runway</span>
+          <span className="text-xs text-black">Estimated Cash Runway</span>
           <div className="text-xl font-bold text-emerald-400 mt-1">
             {runway > 120 ? '14+ Months' : `${runway} Days`}
           </div>
@@ -136,15 +136,15 @@ export const CashFlowPredictor: React.FC = () => {
 
       {/* Main Predictive Chart Panel */}
       <GlassCard>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8F0]">
           <div>
-            <h3 className="text-sm font-semibold text-white">Projected Cash Balance Trajectory</h3>
-            <p className="text-xs text-neutral-muted">Model projections with upper and lower 95% uncertainty envelope</p>
+            <h3 className="text-sm font-semibold text-black">Projected Cash Balance Trajectory</h3>
+            <p className="text-xs text-black">Model projections with upper and lower 95% uncertainty envelope</p>
           </div>
 
           {/* Safety Threshold Adjuster */}
           <div className="flex items-center gap-3 text-xs">
-            <span className="text-neutral-muted">Safety Target:</span>
+            <span className="text-black">Safety Target:</span>
             <input
               type="range"
               min="200000"
@@ -203,7 +203,7 @@ export const CashFlowPredictor: React.FC = () => {
           </svg>
         </div>
 
-        <div className="flex items-center justify-between text-xs text-neutral-muted mt-4 pt-3 border-t border-white/[0.04]">
+        <div className="flex items-center justify-between text-xs text-black mt-4 pt-3 border-t border-white/[0.04]">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-accent-blue">
               <span className="w-2.5 h-2.5 rounded-full bg-accent-blue" />
@@ -224,15 +224,15 @@ export const CashFlowPredictor: React.FC = () => {
 
       {/* Forecast Ledger Table */}
       <GlassCard>
-        <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-          <h3 className="text-sm font-semibold text-white">Daily Projected Inflows, Outflows & Balances</h3>
-          <span className="text-xs text-neutral-muted">Next {Math.min(10, forecast.length)} Day Sample</span>
+        <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
+          <h3 className="text-sm font-semibold text-black">Daily Projected Inflows, Outflows & Balances</h3>
+          <span className="text-xs text-black">Next {Math.min(10, forecast.length)} Day Sample</span>
         </div>
 
         <div className="overflow-x-auto mt-3">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="text-neutral-muted border-b border-white/[0.06]">
+              <tr className="text-black border-b border-[#E2E8F0]">
                 <th className="pb-3 font-medium">Date</th>
                 <th className="pb-3 font-medium text-right">Predicted Inflow</th>
                 <th className="pb-3 font-medium text-right">Predicted Outflow</th>
@@ -244,14 +244,14 @@ export const CashFlowPredictor: React.FC = () => {
             <tbody className="divide-y divide-white/[0.04]">
               {forecast.slice(0, 10).map((row: any, idx: number) => (
                 <tr key={idx} className="hover:bg-white/[0.02]">
-                  <td className="py-2.5 text-neutral-offwhite font-mono">{row.date}</td>
+                  <td className="py-2.5 text-black font-mono">{row.date}</td>
                   <td className="py-2.5 text-right text-emerald-400">
                     +₹{row.predicted_inflow?.toLocaleString('en-IN')}
                   </td>
                   <td className="py-2.5 text-right text-rose-400">
                     -₹{row.predicted_outflow?.toLocaleString('en-IN')}
                   </td>
-                  <td className="py-2.5 text-right font-medium text-white">
+                  <td className="py-2.5 text-right font-medium text-black">
                     ₹{row.predicted_net?.toLocaleString('en-IN')}
                   </td>
                   <td className="py-2.5 text-right font-bold text-accent-cyan">

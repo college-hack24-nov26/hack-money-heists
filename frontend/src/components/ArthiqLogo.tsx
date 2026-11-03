@@ -96,7 +96,7 @@ export const ArthiqLogo: React.FC<ArthiqLogoProps> = ({
         <div className="flex items-center gap-2">
           <span
             className={`font-['Plus_Jakarta_Sans',sans-serif] font-extrabold tracking-[-0.035em] leading-none ${textSizeClass} ${
-              isDark ? 'text-white' : 'text-[#15151B]'
+              isDark ? 'text-white' : 'text-black'
             }`}
           >
             ARTHIQ

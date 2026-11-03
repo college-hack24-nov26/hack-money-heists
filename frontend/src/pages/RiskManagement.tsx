@@ -73,22 +73,22 @@ export const RiskManagement: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl glass-panel">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+            <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
               Financial Risk Management & Early Warning System
             </h1>
             <MetricBadge label="Autonomous Risk Radar" variant="emerald" />
           </div>
-          <p className="text-xs text-neutral-muted mt-1 max-w-xl">
+          <p className="text-xs text-black mt-1 max-w-xl">
             Proactive monitoring of liquidity stress, credit defaults, vendor dependency risks, and statutory tax compliance.
           </p>
         </div>
 
         {/* Health Score Pill */}
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-navy-dark border border-white/[0.08]">
+        <div className="flex items-center gap-3 p-3 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
           <ShieldCheck className="w-6 h-6 text-emerald-400" />
           <div>
-            <span className="text-[10px] text-neutral-muted block uppercase tracking-wider">Health Score</span>
-            <span className="text-xl font-extrabold text-white font-mono">{healthScore} / 100</span>
+            <span className="text-[10px] text-black block uppercase tracking-wider">Health Score</span>
+            <span className="text-xl font-extrabold text-black font-mono">{healthScore} / 100</span>
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@ export const RiskManagement: React.FC = () => {
         {riskFactors.map((rf, idx) => (
           <GlassCard key={idx} className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-xs font-semibold text-white">{rf.title}</h3>
+              <h3 className="text-xs font-semibold text-black">{rf.title}</h3>
               <MetricBadge label={rf.status} />
             </div>
 
@@ -114,10 +114,10 @@ export const RiskManagement: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-xs text-neutral-muted leading-relaxed">{rf.desc}</p>
+            <p className="text-xs text-black leading-relaxed">{rf.desc}</p>
 
-            <div className="pt-2 border-t border-white/[0.05] text-[11px] text-accent-cyan flex items-start gap-1.5">
-              <span className="font-semibold text-white">Mitigation:</span>
+            <div className="pt-2 border-t border-[#E2E8F0] text-[11px] text-accent-cyan flex items-start gap-1.5">
+              <span className="font-semibold text-black">Mitigation:</span>
               <span>{rf.action}</span>
             </div>
           </GlassCard>
@@ -126,7 +126,7 @@ export const RiskManagement: React.FC = () => {
 
       {/* Active Early Warning Triggers */}
       <GlassCard className="p-6">
-        <h3 className="text-sm font-semibold text-white mb-4">Live Proactive Warning Triggers</h3>
+        <h3 className="text-sm font-semibold text-black mb-4">Live Proactive Warning Triggers</h3>
         <div className="space-y-3 text-xs">
           <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 flex items-start gap-3">
             <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />

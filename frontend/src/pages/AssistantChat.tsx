@@ -75,13 +75,13 @@ export const AssistantChat: React.FC = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-sm font-bold text-white font-['Plus_Jakarta_Sans'] flex items-center gap-2">
+            <h1 className="text-sm font-bold text-black font-['Plus_Jakarta_Sans'] flex items-center gap-2">
               <span>ARTHIQ AI Financial Intelligence Assistant</span>
               <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
                 Connected to Apex General Ledger
               </span>
             </h1>
-            <p className="text-[11px] text-neutral-muted">
+            <p className="text-[11px] text-black">
               Autonomous financial analysis, tool execution, fraud forensics, and verifiable math.
             </p>
           </div>
@@ -111,12 +111,12 @@ export const AssistantChat: React.FC = () => {
                 className={`p-4 rounded-2xl text-xs space-y-2 border ${
                   isUser
                     ? 'bg-accent-blue text-white border-accent-blue/30 rounded-tr-none'
-                    : 'glass-panel text-neutral-offwhite border-white/[0.08] rounded-tl-none'
+                    : 'glass-panel text-black border-[#E2E8F0] rounded-tl-none'
                 }`}
               >
                 {/* Tool Calling Badges */}
                 {msg.toolsUsed && msg.toolsUsed.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-1.5 pb-2 mb-2 border-b border-white/[0.08]">
+                  <div className="flex flex-wrap items-center gap-1.5 pb-2 mb-2 border-b border-[#E2E8F0]">
                     <span className="text-[10px] text-accent-cyan flex items-center gap-1">
                       <Cpu className="w-3 h-3" />
                       Tools Executed:
@@ -124,7 +124,7 @@ export const AssistantChat: React.FC = () => {
                     {msg.toolsUsed.map((tool: string, i: number) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 rounded font-mono text-[10px] bg-white/5 border border-white/10 text-neutral-muted"
+                        className="px-2 py-0.5 rounded font-mono text-[10px] bg-white/5 border border-[#E2E8F0] text-black"
                       >
                         {tool}
                       </span>
@@ -146,7 +146,7 @@ export const AssistantChat: React.FC = () => {
             <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-accent-cyan to-accent-blue text-midnight flex items-center justify-center flex-shrink-0">
               <Bot className="w-4 h-4" />
             </div>
-            <div className="p-4 rounded-2xl glass-panel text-xs text-neutral-muted border border-white/[0.08] flex items-center gap-2">
+            <div className="p-4 rounded-2xl glass-panel text-xs text-black border border-[#E2E8F0] flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse" />
               <span>Querying general ledger & running financial tools...</span>
             </div>
@@ -162,7 +162,7 @@ export const AssistantChat: React.FC = () => {
           <button
             key={idx}
             onClick={() => handleSend(p)}
-            className="flex-shrink-0 px-3 py-1.5 rounded-xl text-xs bg-navy/60 hover:bg-navy border border-white/[0.06] hover:border-accent-blue/40 text-neutral-muted hover:text-white transition-all"
+            className="flex-shrink-0 px-3 py-1.5 rounded-xl text-xs bg-white hover:bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#6D45CF]/40 text-black font-bold transition-all shadow-xs"
           >
             {p}
           </button>
@@ -176,19 +176,19 @@ export const AssistantChat: React.FC = () => {
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-center gap-2 p-2 rounded-2xl glass-panel border border-white/[0.08]"
+          className="flex items-center gap-2 p-2 rounded-2xl glass-panel border border-[#E2E8F0]"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask ARTHIQ about profit leakages, cash flow, vendor price creep, or ratios..."
-            className="flex-1 px-4 py-2 bg-transparent text-xs text-white placeholder-neutral-muted focus:outline-none"
+            className="flex-1 px-4 py-2 bg-transparent text-xs text-black placeholder-neutral-600 font-bold focus:outline-none"
           />
           <button
             type="submit"
             disabled={!input.trim() || loading}
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-accent-blue to-accent-cyan text-midnight hover:opacity-90 transition-opacity disabled:opacity-40 flex items-center gap-1.5 shadow-glow"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#6D45CF] hover:bg-[#5B37B5] text-white shadow-[0_4px_14px_rgba(109,69,207,0.25)] flex items-center gap-1.5"
           >
             <span>Ask</span>
             <Send className="w-3.5 h-3.5" />

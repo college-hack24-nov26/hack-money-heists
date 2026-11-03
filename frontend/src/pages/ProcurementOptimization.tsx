@@ -25,12 +25,12 @@ export const ProcurementOptimization: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl glass-panel">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+            <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
               Procurement Cost Optimization & Vendor Benchmarking
             </h1>
             <MetricBadge label="Price Fluctuation Engine" variant="amber" />
           </div>
-          <p className="text-xs text-neutral-muted mt-1 max-w-xl">
+          <p className="text-xs text-black mt-1 max-w-xl">
             Track vendor price fluctuations, detect duplicate purchase orders, benchmark supplier tier rates, and eliminate procurement leakage.
           </p>
         </div>
@@ -41,11 +41,11 @@ export const ProcurementOptimization: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 text-rose-400" />
-            <h3 className="text-sm font-semibold text-white">Critical Procurement Price Creep Alert</h3>
+            <h3 className="text-sm font-semibold text-black">Critical Procurement Price Creep Alert</h3>
           </div>
           <MetricBadge label="+23% Rate Hike" variant="coral" />
         </div>
-        <p className="text-xs text-neutral-muted leading-relaxed">
+        <p className="text-xs text-black leading-relaxed">
           <strong className="text-white">Apex Logistics & Packaging</strong> raised shipment unit pricing from ₹320 to ₹394 over the past two billing cycles. Our models show no corresponding increase in purchase volume, weight, or delivery speed. Annualized cost leakage: <strong className="text-rose-400">₹4,10,400</strong>.
         </p>
         <div className="pt-2 flex items-center gap-3">
@@ -57,15 +57,15 @@ export const ProcurementOptimization: React.FC = () => {
 
       {/* Vendor Spending & Comparison Matrix */}
       <GlassCard>
-        <div className="flex items-center justify-between pb-4 border-b border-white/[0.06]">
-          <h3 className="text-sm font-semibold text-white">Vendor Spend Directory & Price Risk</h3>
-          <span className="text-xs text-neutral-muted">{vendors.length} Approved Suppliers</span>
+        <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
+          <h3 className="text-sm font-semibold text-black">Vendor Spend Directory & Price Risk</h3>
+          <span className="text-xs text-black">{vendors.length} Approved Suppliers</span>
         </div>
 
         <div className="overflow-x-auto mt-3">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="text-neutral-muted border-b border-white/[0.06]">
+              <tr className="text-black border-b border-[#E2E8F0]">
                 <th className="pb-3 font-medium">Supplier / Vendor</th>
                 <th className="pb-3 font-medium">Category</th>
                 <th className="pb-3 font-medium text-center">Orders</th>
@@ -77,10 +77,10 @@ export const ProcurementOptimization: React.FC = () => {
             <tbody className="divide-y divide-white/[0.04]">
               {vendors.map((v: any, idx: number) => (
                 <tr key={idx} className="hover:bg-white/[0.02]">
-                  <td className="py-3 font-medium text-white">{v.vendor}</td>
-                  <td className="py-3 text-neutral-muted">{v.category}</td>
-                  <td className="py-3 text-center text-neutral-offwhite">{v.transactionCount}</td>
-                  <td className="py-3 text-right font-bold text-neutral-offwhite font-mono">
+                  <td className="py-3 font-medium text-black">{v.vendor}</td>
+                  <td className="py-3 text-black">{v.category}</td>
+                  <td className="py-3 text-center text-black">{v.transactionCount}</td>
+                  <td className="py-3 text-right font-bold text-black font-mono">
                     ₹{v.totalSpend?.toLocaleString('en-IN')}
                   </td>
                   <td className="py-3 text-center">

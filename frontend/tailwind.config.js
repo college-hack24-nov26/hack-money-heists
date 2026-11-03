@@ -19,8 +19,8 @@ export default {
           soft: "#ECECF1",
         },
         text: {
-          primary: "#15151B",
-          secondary: "#71717A",
+          primary: "#000000",
+          secondary: "#0A0A0C",
         },
         surface: {
           dark: "#11131B",
@@ -53,8 +53,8 @@ export default {
           coral: "#E46D72"
         },
         neutral: {
-          offwhite: "#15151B",
-          muted: "#71717A",
+          offwhite: "#000000",
+          muted: "#0A0A0C",
           border: "#E5E5EB"
         }
       },

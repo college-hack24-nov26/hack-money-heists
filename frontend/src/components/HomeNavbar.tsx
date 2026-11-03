@@ -57,10 +57,10 @@ export const HomeNavbar: React.FC<HomeNavbarProps> = ({
                   e.preventDefault();
                   handleLinkClick(link.name, link.href);
                 }}
-                className={`relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                className={`relative px-3.5 py-1.5 rounded-full text-sm font-bold transition-colors ${
                   isActive
-                    ? 'text-[#6D45CF] font-semibold bg-white shadow-xs'
-                    : 'text-[#71717A] hover:text-[#15151B] hover:bg-white/50'
+                    ? 'text-black font-extrabold bg-white shadow-xs'
+                    : 'text-black hover:text-[#6D45CF] hover:bg-white/60'
                 }`}
               >
                 {link.name}
@@ -74,7 +74,7 @@ export const HomeNavbar: React.FC<HomeNavbarProps> = ({
           <Button
             variant="ghost"
             onClick={onLoginClick}
-            className="text-sm font-semibold text-[#15151B] hover:text-[#6D45CF] px-4"
+            className="text-sm font-bold text-black hover:text-[#6D45CF] px-4"
           >
             Login
           </Button>
@@ -82,7 +82,7 @@ export const HomeNavbar: React.FC<HomeNavbarProps> = ({
           <Button
             variant="default"
             onClick={onLaunchDashboard}
-            className="text-sm font-semibold h-11 px-6 bg-[#6D45CF] hover:bg-[#5B37B5] text-white shadow-[0_4px_14px_rgba(109,69,207,0.25)] flex items-center gap-2"
+            className="text-sm font-bold h-11 px-6 bg-[#6D45CF] hover:bg-[#5B37B5] text-white shadow-[0_4px_14px_rgba(109,69,207,0.25)] flex items-center gap-2"
           >
             <span>Get Started</span>
             <ArrowRight className="w-4 h-4" />
@@ -93,7 +93,7 @@ export const HomeNavbar: React.FC<HomeNavbarProps> = ({
         <div className="flex items-center sm:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2.5 rounded-xl border border-[#E5E5EB] text-[#15151B] hover:bg-[#F7F7FA] focus:outline-none"
+            className="p-2.5 rounded-xl border border-[#E5E5EB] text-black hover:bg-[#F7F7FA] focus:outline-none"
             aria-label="Toggle navigation"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -113,7 +113,7 @@ export const HomeNavbar: React.FC<HomeNavbarProps> = ({
                   e.preventDefault();
                   handleLinkClick(link.name, link.href);
                 }}
-                className="px-3 py-2 rounded-lg text-sm font-medium text-[#15151B] hover:bg-[#F7F7FA] transition-colors"
+                className="px-3 py-2 rounded-lg text-sm font-medium text-black hover:bg-[#F7F7FA] transition-colors"
               >
                 {link.name}
               </a>

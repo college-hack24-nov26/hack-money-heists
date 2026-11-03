@@ -98,12 +98,12 @@ export const InvoiceFraudDetector: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl glass-panel">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+            <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
               Intelligent Invoice Fraud & Forensic Detector
             </h1>
             <MetricBadge label="OCR & Checksum Audit" variant="emerald" />
           </div>
-          <p className="text-xs text-neutral-muted mt-1 max-w-2xl">
+          <p className="text-xs text-black mt-1 max-w-2xl">
             Statutory GSTIN checksum verification, RBI IFSC validation, duplicate disbursement hashing, tax calculation consistency, and Benford's Law anomaly detection.
           </p>
         </div>
@@ -121,11 +121,11 @@ export const InvoiceFraudDetector: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Invoices List */}
         <div className="lg:col-span-5 space-y-3">
-          <div className="flex items-center justify-between gap-2 p-1 bg-navy/60 rounded-xl border border-white/[0.06] text-xs">
+          <div className="flex items-center justify-between gap-2 p-1 bg-navy/60 rounded-xl border border-[#E2E8F0] text-xs">
             <button
               onClick={() => setFilter('all')}
               className={`flex-1 py-1.5 rounded-lg transition-colors font-medium ${
-                filter === 'all' ? 'bg-accent-blue/20 text-white border border-accent-blue/30' : 'text-neutral-muted'
+                filter === 'all' ? 'bg-accent-blue/20 text-white border border-accent-blue/30' : 'text-black'
               }`}
             >
               All Invoices ({invoices.length})
@@ -133,7 +133,7 @@ export const InvoiceFraudDetector: React.FC = () => {
             <button
               onClick={() => setFilter('flagged')}
               className={`flex-1 py-1.5 rounded-lg transition-colors font-medium ${
-                filter === 'flagged' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'text-neutral-muted'
+                filter === 'flagged' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'text-black'
               }`}
             >
               Flagged ({invoices.filter((i) => i.risk_score >= 50).length})
@@ -141,7 +141,7 @@ export const InvoiceFraudDetector: React.FC = () => {
             <button
               onClick={() => setFilter('verified')}
               className={`flex-1 py-1.5 rounded-lg transition-colors font-medium ${
-                filter === 'verified' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'text-neutral-muted'
+                filter === 'verified' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'text-black'
               }`}
             >
               Verified ({invoices.filter((i) => i.status === 'VERIFIED' || i.status === 'PAID').length})
@@ -158,20 +158,20 @@ export const InvoiceFraudDetector: React.FC = () => {
                   className={`p-4 rounded-xl border cursor-pointer transition-all ${
                     isSelected
                       ? 'bg-navy/90 border-accent-blue/50 shadow-[0_0_15px_-3px_rgba(86,139,255,0.2)]'
-                      : 'glass-panel hover:bg-navy-dark/70 border-white/[0.06]'
+                      : 'glass-panel hover:bg-[#F8FAFC]/70 border-[#E2E8F0]'
                   }`}
                 >
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-white">#{inv.invoice_number}</span>
+                    <span className="font-semibold text-black">#{inv.invoice_number}</span>
                     <MetricBadge label={inv.risk_classification} />
                   </div>
                   <div className="flex items-center justify-between mt-2 text-xs">
-                    <span className="text-neutral-muted">{inv.vendor_name}</span>
-                    <span className="font-bold text-white">
+                    <span className="text-black">{inv.vendor_name}</span>
+                    <span className="font-bold text-black">
                       ₹{inv.total_amount?.toLocaleString('en-IN')}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between mt-2 text-[11px] text-neutral-muted/70">
+                  <div className="flex items-center justify-between mt-2 text-[11px] text-black/70">
                     <span>Date: {inv.invoice_date}</span>
                     <span className="text-accent-cyan font-mono">Score: {inv.risk_score}/100</span>
                   </div>
@@ -186,15 +186,15 @@ export const InvoiceFraudDetector: React.FC = () => {
           {selectedInvoice ? (
             <GlassCard className="p-6 space-y-6">
               {/* Header with Risk Meter */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/[0.08]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#E2E8F0]">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-bold text-white font-mono">
+                    <h2 className="text-lg font-bold text-black font-mono">
                       #{selectedInvoice.invoice_number}
                     </h2>
                     <MetricBadge label={selectedInvoice.risk_classification} />
                   </div>
-                  <p className="text-xs text-neutral-muted mt-1 flex items-center gap-2">
+                  <p className="text-xs text-black mt-1 flex items-center gap-2">
                     <span>{selectedInvoice.vendor_name}</span>
                     <span>•</span>
                     <span>Dated: {selectedInvoice.invoice_date}</span>
@@ -203,7 +203,7 @@ export const InvoiceFraudDetector: React.FC = () => {
 
                 {/* Risk Gauge Pill */}
                 <div className="text-right">
-                  <span className="text-[11px] text-neutral-muted uppercase tracking-wider block">
+                  <span className="text-[11px] text-black uppercase tracking-wider block">
                     Forensic Risk Meter
                   </span>
                   <div className="flex items-center gap-2 mt-1">
@@ -219,7 +219,7 @@ export const InvoiceFraudDetector: React.FC = () => {
                         style={{ width: `${selectedInvoice.risk_score}%` }}
                       />
                     </div>
-                    <span className="text-base font-bold text-white font-mono">
+                    <span className="text-base font-bold text-black font-mono">
                       {selectedInvoice.risk_score}/100
                     </span>
                   </div>
@@ -228,26 +228,26 @@ export const InvoiceFraudDetector: React.FC = () => {
 
               {/* Financial Breakdown Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                <div className="p-3 rounded-xl bg-navy-dark/70 border border-white/[0.05]">
-                  <span className="text-neutral-muted block text-[10px]">Subtotal (Excl Tax)</span>
-                  <span className="font-bold text-white mt-1 block">
+                <div className="p-3 rounded-xl bg-[#F8FAFC]/70 border border-[#E2E8F0]">
+                  <span className="text-black block text-[10px]">Subtotal (Excl Tax)</span>
+                  <span className="font-bold text-black mt-1 block">
                     ₹{selectedInvoice.subtotal?.toLocaleString('en-IN')}
                   </span>
                 </div>
-                <div className="p-3 rounded-xl bg-navy-dark/70 border border-white/[0.05]">
-                  <span className="text-neutral-muted block text-[10px]">GST Rate</span>
-                  <span className="font-bold text-white mt-1 block font-mono">
+                <div className="p-3 rounded-xl bg-[#F8FAFC]/70 border border-[#E2E8F0]">
+                  <span className="text-black block text-[10px]">GST Rate</span>
+                  <span className="font-bold text-black mt-1 block font-mono">
                     {selectedInvoice.gst_rate || 18}%
                   </span>
                 </div>
-                <div className="p-3 rounded-xl bg-navy-dark/70 border border-white/[0.05]">
-                  <span className="text-neutral-muted block text-[10px]">Tax Amount</span>
-                  <span className="font-bold text-white mt-1 block">
+                <div className="p-3 rounded-xl bg-[#F8FAFC]/70 border border-[#E2E8F0]">
+                  <span className="text-black block text-[10px]">Tax Amount</span>
+                  <span className="font-bold text-black mt-1 block">
                     ₹{selectedInvoice.tax_amount?.toLocaleString('en-IN')}
                   </span>
                 </div>
-                <div className="p-3 rounded-xl bg-navy-dark/70 border border-white/[0.05]">
-                  <span className="text-neutral-muted block text-[10px]">Total Billed</span>
+                <div className="p-3 rounded-xl bg-[#F8FAFC]/70 border border-[#E2E8F0]">
+                  <span className="text-black block text-[10px]">Total Billed</span>
                   <span className="font-bold text-accent-cyan mt-1 block">
                     ₹{selectedInvoice.total_amount?.toLocaleString('en-IN')}
                   </span>
@@ -255,19 +255,19 @@ export const InvoiceFraudDetector: React.FC = () => {
               </div>
 
               {/* Statutory & Banking Credentials */}
-              <div className="p-4 rounded-xl bg-navy-dark/50 border border-white/[0.06] text-xs space-y-2">
-                <h4 className="font-semibold text-white text-[11px] uppercase tracking-wider text-neutral-muted">
+              <div className="p-4 rounded-xl bg-[#F8FAFC]/50 border border-[#E2E8F0] text-xs space-y-2">
+                <h4 className="font-semibold text-black text-[11px] uppercase tracking-wider text-black">
                   Statutory & Remittance Authentication
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   <div>
-                    <span className="text-neutral-muted block text-[10px]">Vendor GSTIN</span>
+                    <span className="text-black block text-[10px]">Vendor GSTIN</span>
                     <span className="font-mono text-white mt-0.5 block">
                       {selectedInvoice.gstin || 'None / Not itemized'}
                     </span>
                   </div>
                   <div>
-                    <span className="text-neutral-muted block text-[10px]">Remittance IFSC / Account</span>
+                    <span className="text-black block text-[10px]">Remittance IFSC / Account</span>
                     <span className="font-mono text-white mt-0.5 block">
                       {selectedInvoice.bank_ifsc || 'HDFC0000002'} • Acc #{selectedInvoice.bank_account || '00021020008899'}
                     </span>
@@ -277,7 +277,7 @@ export const InvoiceFraudDetector: React.FC = () => {
 
               {/* Detected Anomalies */}
               <div className="space-y-2 text-xs">
-                <h4 className="font-semibold text-white">Detected Forensic Anomalies:</h4>
+                <h4 className="font-semibold text-black">Detected Forensic Anomalies:</h4>
                 <div className="space-y-2">
                   {selectedInvoice.anomalies_detected?.map((anomaly: string, i: number) => (
                     <div
@@ -293,8 +293,8 @@ export const InvoiceFraudDetector: React.FC = () => {
 
               {/* Supporting Evidence */}
               <div className="space-y-2 text-xs">
-                <h4 className="font-semibold text-white">Forensic Evidence & Findings:</h4>
-                <ul className="list-disc pl-5 space-y-1 text-neutral-muted leading-relaxed">
+                <h4 className="font-semibold text-black">Forensic Evidence & Findings:</h4>
+                <ul className="list-disc pl-5 space-y-1 text-black leading-relaxed">
                   {selectedInvoice.supporting_evidence?.map((ev: string, i: number) => (
                     <li key={i}>{ev}</li>
                   ))}
@@ -307,7 +307,7 @@ export const InvoiceFraudDetector: React.FC = () => {
                   <ShieldCheck className="w-4 h-4" />
                   <span>Mandatory CFO Verification Protocol:</span>
                 </h4>
-                <ol className="list-decimal pl-5 space-y-1 text-neutral-offwhite">
+                <ol className="list-decimal pl-5 space-y-1 text-black">
                   {selectedInvoice.recommended_verification_steps?.map((step: string, i: number) => (
                     <li key={i}>{step}</li>
                   ))}
@@ -315,8 +315,8 @@ export const InvoiceFraudDetector: React.FC = () => {
               </div>
 
               {/* Actions Footer */}
-              <div className="flex items-center justify-between pt-4 border-t border-white/[0.08]">
-                <span className="text-[11px] text-neutral-muted">
+              <div className="flex items-center justify-between pt-4 border-t border-[#E2E8F0]">
+                <span className="text-[11px] text-black">
                   Never declare fraud without human controller verification.
                 </span>
                 <div className="flex items-center gap-3">
@@ -333,8 +333,8 @@ export const InvoiceFraudDetector: React.FC = () => {
               </div>
             </GlassCard>
           ) : (
-            <div className="p-12 text-center text-neutral-muted glass-panel rounded-2xl">
-              <FileCheck2 className="w-10 h-10 mx-auto text-neutral-muted/50 mb-3" />
+            <div className="p-12 text-center text-black glass-panel rounded-2xl">
+              <FileCheck2 className="w-10 h-10 mx-auto text-black/50 mb-3" />
               <p className="text-xs">Select an invoice from the list to view its forensic audit report.</p>
             </div>
           )}
@@ -344,91 +344,91 @@ export const InvoiceFraudDetector: React.FC = () => {
       {/* Upload Invoice Modal */}
       {showUploadModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="w-full max-w-lg rounded-2xl glass-panel p-6 border border-white/10 shadow-2xl animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-              <h3 className="text-base font-bold text-white font-['Plus_Jakarta_Sans']">
+          <div className="w-full max-w-lg rounded-2xl glass-panel p-6 border border-[#E2E8F0] shadow-2xl animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
+              <h3 className="text-base font-bold text-black font-['Plus_Jakarta_Sans']">
                 Upload & Audit Invoice
               </h3>
               <button
                 onClick={() => setShowUploadModal(false)}
-                className="p-1 rounded-lg hover:bg-white/10 text-neutral-muted hover:text-white"
+                className="p-1 rounded-lg hover:bg-white/10 text-black hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Drag & Drop Simulation Area */}
-            <div className="mt-4 p-5 rounded-xl border-2 border-dashed border-white/15 text-center bg-navy-dark/40 hover:border-accent-blue/40 transition-colors">
+            <div className="mt-4 p-5 rounded-xl border-2 border-dashed border-white/15 text-center bg-[#F8FAFC] hover:border-accent-blue/40 transition-colors">
               <UploadCloud className="w-8 h-8 text-accent-blue mx-auto mb-2" />
-              <p className="text-xs font-medium text-white">Drag & drop invoice document (PDF, PNG, JPG, XLSX)</p>
-              <p className="text-[11px] text-neutral-muted mt-1">Automatic OCR extraction for GSTIN, items & total</p>
+              <p className="text-xs font-medium text-black">Drag & drop invoice document (PDF, PNG, JPG, XLSX)</p>
+              <p className="text-[11px] text-black mt-1">Automatic OCR extraction for GSTIN, items & total</p>
             </div>
 
             <form onSubmit={handleUpload} className="space-y-3 mt-4 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-neutral-muted mb-1">Invoice Number</label>
+                  <label className="block text-black mb-1">Invoice Number</label>
                   <input
                     type="text"
                     placeholder="e.g. INV-2026-9901"
                     value={invNum}
                     onChange={(e) => setInvNum(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue font-mono"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-neutral-muted mb-1">Total Amount (₹)</label>
+                  <label className="block text-black mb-1">Total Amount (₹)</label>
                   <input
                     type="number"
                     required
                     placeholder="e.g. 54000"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-neutral-muted mb-1">Vendor Name</label>
+                <label className="block text-black mb-1">Vendor Name</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Apex Logistics, SysMatrix"
                   value={vendorName}
                   onChange={(e) => setVendorName(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-neutral-muted mb-1">Vendor GSTIN</label>
+                  <label className="block text-black mb-1">Vendor GSTIN</label>
                   <input
                     type="text"
                     placeholder="e.g. 27AAPFU0939F1ZV"
                     value={gstin}
                     onChange={(e) => setGstin(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue font-mono"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-neutral-muted mb-1">Remittance IFSC</label>
+                  <label className="block text-black mb-1">Remittance IFSC</label>
                   <input
                     type="text"
                     placeholder="e.g. HDFC0000002"
                     value={bankIfsc}
                     onChange={(e) => setBankIfsc(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue font-mono"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue font-mono"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-white/[0.08]">
+              <div className="flex justify-end gap-3 pt-4 border-t border-[#E2E8F0]">
                 <button
                   type="button"
                   onClick={() => setShowUploadModal(false)}
-                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-offwhite font-medium"
+                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-black font-medium"
                 >
                   Cancel
                 </button>

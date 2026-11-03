@@ -58,12 +58,12 @@ export const ClientManagement: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl glass-panel">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+            <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
               Client & Enterprise Accounts Receivable
             </h1>
             <MetricBadge label="Multi-Tenant Isolation" variant="blue" />
           </div>
-          <p className="text-xs text-neutral-muted mt-1 max-w-xl">
+          <p className="text-xs text-black mt-1 max-w-xl">
             Client profiles, GSTIN validation, Days Sales Outstanding (DSO) tracking, credit limits, and debtor collection monitoring.
           </p>
         </div>
@@ -79,15 +79,15 @@ export const ClientManagement: React.FC = () => {
 
       {/* Clients Table */}
       <GlassCard>
-        <div className="flex items-center justify-between pb-4 border-b border-white/[0.06]">
-          <h3 className="text-sm font-semibold text-white">Client Portfolio Directory</h3>
-          <span className="text-xs text-neutral-muted">{clients.length} Enterprise Accounts</span>
+        <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
+          <h3 className="text-sm font-semibold text-black">Client Portfolio Directory</h3>
+          <span className="text-xs text-black">{clients.length} Enterprise Accounts</span>
         </div>
 
         <div className="overflow-x-auto mt-3">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="text-neutral-muted border-b border-white/[0.06]">
+              <tr className="text-black border-b border-[#E2E8F0]">
                 <th className="pb-3 font-medium">Client / Company</th>
                 <th className="pb-3 font-medium">GSTIN</th>
                 <th className="pb-3 font-medium">Contact</th>
@@ -101,17 +101,17 @@ export const ClientManagement: React.FC = () => {
               {clients.map((c) => (
                 <tr key={c.id} className="hover:bg-white/[0.02]">
                   <td className="py-3.5">
-                    <span className="font-semibold text-white block">{c.companyName}</span>
-                    <span className="text-[11px] text-neutral-muted">{c.name}</span>
+                    <span className="font-semibold text-black block">{c.companyName}</span>
+                    <span className="text-[11px] text-black">{c.name}</span>
                   </td>
-                  <td className="py-3.5 font-mono text-neutral-muted">{c.gstin}</td>
-                  <td className="py-3.5 text-neutral-muted">{c.email}</td>
-                  <td className="py-3.5 text-right font-bold text-white font-mono">
+                  <td className="py-3.5 font-mono text-black">{c.gstin}</td>
+                  <td className="py-3.5 text-black">{c.email}</td>
+                  <td className="py-3.5 text-right font-bold text-black font-mono">
                     ₹{c.outstandingBalance?.toLocaleString('en-IN')}
                   </td>
                   <td className="py-3.5 text-center font-mono">
                     <span className={`px-2 py-0.5 rounded text-[11px] ${
-                      c.daysSalesOutstanding > 60 ? 'bg-rose-500/15 text-rose-400' : 'text-neutral-offwhite'
+                      c.daysSalesOutstanding > 60 ? 'bg-rose-500/15 text-rose-400' : 'text-black'
                     }`}>
                       {c.daysSalesOutstanding}d
                     </span>
@@ -119,7 +119,7 @@ export const ClientManagement: React.FC = () => {
                   <td className="py-3.5 text-center">
                     <MetricBadge label={c.riskProfile} />
                   </td>
-                  <td className="py-3.5 text-right font-mono text-neutral-muted">
+                  <td className="py-3.5 text-right font-mono text-black">
                     ₹{c.creditLimit?.toLocaleString('en-IN')}
                   </td>
                 </tr>
@@ -132,14 +132,14 @@ export const ClientManagement: React.FC = () => {
       {/* Onboard Client Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl glass-panel p-6 border border-white/10 shadow-2xl animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-              <h3 className="text-base font-bold text-white font-['Plus_Jakarta_Sans']">
+          <div className="w-full max-w-md rounded-2xl glass-panel p-6 border border-[#E2E8F0] shadow-2xl animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
+              <h3 className="text-base font-bold text-black font-['Plus_Jakarta_Sans']">
                 Onboard Enterprise Client
               </h3>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="p-1 rounded-lg hover:bg-white/10 text-neutral-muted hover:text-white"
+                className="p-1 rounded-lg hover:bg-white/10 text-black hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -147,68 +147,68 @@ export const ClientManagement: React.FC = () => {
 
             <form onSubmit={handleAddClient} className="space-y-3 mt-4 text-xs">
               <div>
-                <label className="block text-neutral-muted mb-1">Company Legal Name</label>
+                <label className="block text-black mb-1">Company Legal Name</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Wipro Technologies Ltd"
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                 />
               </div>
 
               <div>
-                <label className="block text-neutral-muted mb-1">Primary Contact Person</label>
+                <label className="block text-black mb-1">Primary Contact Person</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Ramesh Iyer"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-neutral-muted mb-1">GSTIN</label>
+                  <label className="block text-black mb-1">GSTIN</label>
                   <input
                     type="text"
                     placeholder="29AAACW1234D1ZZ"
                     value={gstin}
                     onChange={(e) => setGstin(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue font-mono"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-neutral-muted mb-1">Credit Limit (₹)</label>
+                  <label className="block text-black mb-1">Credit Limit (₹)</label>
                   <input
                     type="number"
                     placeholder="1500000"
                     value={creditLimit}
                     onChange={(e) => setCreditLimit(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue font-mono"
+                    className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-neutral-muted mb-1">Accounts Email</label>
+                <label className="block text-black mb-1">Accounts Email</label>
                 <input
                   type="email"
                   placeholder="billing@wipro.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-navy-dark border border-white/10 text-white focus:outline-none focus:border-accent-blue"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-white focus:outline-none focus:border-accent-blue"
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-white/[0.08]">
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-offwhite font-medium"
+                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-black font-medium"
                 >
                   Cancel
                 </button>

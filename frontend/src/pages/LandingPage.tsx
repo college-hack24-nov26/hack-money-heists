@@ -35,7 +35,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
   const estimatedAnnualSavings = Math.round(calcMonthlySpend * 0.082 * 12);
 
   return (
-    <div className="min-h-screen bg-white text-[#15151B] font-sans selection:bg-[#EDE7FF] selection:text-[#6D45CF]">
+    <div className="min-h-screen bg-white text-black font-sans selection:bg-[#EDE7FF] selection:text-[#6D45CF]">
       {/* 1. HORIZONTAL STICKY NAVBAR (No vertical sidebar) */}
       <HomeNavbar onLaunchDashboard={onLaunchDashboard} />
 
@@ -69,13 +69,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
           <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#EDE7FF] text-[#6D45CF] border border-[#DDD3FA]">
             The New Financial Paradigm
           </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#15151B] mt-4 tracking-tight font-['Plus_Jakarta_Sans',sans-serif]">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-black mt-4 tracking-tight font-['Plus_Jakarta_Sans',sans-serif]">
             Accounting Shows the Past. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">
               ARTHIQ Predicts the Future.
             </span>
           </h2>
-          <p className="text-base sm:text-lg text-[#71717A] mt-4 leading-relaxed">
+          <p className="text-base sm:text-lg text-black mt-4 leading-relaxed">
             Traditional bookkeeping answers <em>what happened last month</em>. ARTHIQ behaves like a tireless, Chartered Accountant-level analyst working directly alongside you to identify where capital is leaking and how to protect liquidity.
           </p>
         </div>
@@ -86,10 +86,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             <div className="w-12 h-12 rounded-2xl bg-[#EDE7FF] text-[#6D45CF] flex items-center justify-center font-bold text-lg mb-6">
               01
             </div>
-            <h3 className="text-xl font-bold text-[#15151B] mb-2 font-['Plus_Jakarta_Sans']">
+            <h3 className="text-xl font-bold text-black mb-2 font-['Plus_Jakarta_Sans']">
               Understand Why Money Goes Where It Goes
             </h3>
-            <p className="text-sm text-[#71717A] leading-relaxed">
+            <p className="text-sm text-black leading-relaxed">
               Automated categorization, machine learning outlier tracking on operating expenses, and visibility into subtle SaaS licensing sprawl across departments.
             </p>
           </div>
@@ -98,10 +98,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#16A879] flex items-center justify-center font-bold text-lg mb-6">
               02
             </div>
-            <h3 className="text-xl font-bold text-[#15151B] mb-2 font-['Plus_Jakarta_Sans']">
+            <h3 className="text-xl font-bold text-black mb-2 font-['Plus_Jakarta_Sans']">
               Forecast Cash Trajectories with Certainty
             </h3>
-            <p className="text-sm text-[#71717A] leading-relaxed">
+            <p className="text-sm text-black leading-relaxed">
               Predict inflows, outflows, and working capital buffers over 7, 30, 60, and 90-day horizons with calibrated 95% uncertainty envelopes.
             </p>
           </div>
@@ -110,10 +110,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             <div className="w-12 h-12 rounded-2xl bg-rose-50 text-[#E46D72] flex items-center justify-center font-bold text-lg mb-6">
               03
             </div>
-            <h3 className="text-xl font-bold text-[#15151B] mb-2 font-['Plus_Jakarta_Sans']">
+            <h3 className="text-xl font-bold text-black mb-2 font-['Plus_Jakarta_Sans']">
               Plug Involuntary Value Leakages
             </h3>
-            <p className="text-sm text-[#71717A] leading-relaxed">
+            <p className="text-sm text-black leading-relaxed">
               Expose unannounced supplier price escalations (+23%), duplicate disbursements, and the silent interest drag of overdue client receivables.
             </p>
           </div>
@@ -126,10 +126,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
           <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white text-[#6D45CF] border border-[#E5E5EB]">
             System Architecture
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#15151B] mt-4 font-['Plus_Jakarta_Sans']">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-black mt-4 font-['Plus_Jakarta_Sans']">
             Comprehensive Financial Intelligence Architecture
           </h2>
-          <p className="text-base text-[#71717A] mt-3">
+          <p className="text-base text-black mt-3">
             Every module is engineered as an independent but seamlessly interconnected financial system.
           </p>
         </div>
@@ -200,10 +200,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
                       {item.badge}
                     </span>
                   </div>
-                  <h3 className="text-base font-bold text-[#15151B] mb-2 font-['Plus_Jakarta_Sans']">
+                  <h3 className="text-base font-bold text-black mb-2 font-['Plus_Jakarta_Sans']">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-[#71717A] leading-relaxed">
+                  <p className="text-xs text-black leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -224,25 +224,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-indigo-50 text-[#6D45CF] border border-indigo-100">
               Module 3: SME Cash Flow
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#15151B] font-['Plus_Jakarta_Sans'] leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-black font-['Plus_Jakarta_Sans'] leading-tight">
               Know Exactly When Cash Tightens — Weeks Before It Happens.
             </h2>
-            <p className="text-base text-[#71717A] leading-relaxed">
+            <p className="text-base text-black leading-relaxed">
               ARTHIQ models seasonal inflow spikes, client payment cycles, and payroll cadence to project your liquidity runway and alert you when your balance risks dipping below safety reserves.
             </p>
 
             <div className="space-y-3 pt-2 text-xs">
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="w-4 h-4 text-[#16A879]" />
-                <span className="text-[#15151B] font-medium">Multi-Horizon Forecasting: 7, 30, 60, and 90 days ahead.</span>
+                <span className="text-black font-medium">Multi-Horizon Forecasting: 7, 30, 60, and 90 days ahead.</span>
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="w-4 h-4 text-[#16A879]" />
-                <span className="text-[#15151B] font-medium">Statistical 95% confidence intervals showing realistic variance.</span>
+                <span className="text-black font-medium">Statistical 95% confidence intervals showing realistic variance.</span>
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="w-4 h-4 text-[#16A879]" />
-                <span className="text-[#15151B] font-medium">Automatic alerts when projected cash breaches configured safety targets.</span>
+                <span className="text-black font-medium">Automatic alerts when projected cash breaches configured safety targets.</span>
               </div>
             </div>
 
@@ -259,8 +259,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
           <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-white border border-[#E5E5EB] shadow-card">
             <div className="flex items-center justify-between pb-4 border-b border-[#E5E5EB]">
               <div>
-                <span className="text-xs font-bold text-[#15151B]">Apex Technologies — Projected Liquidity</span>
-                <p className="text-[11px] text-[#71717A]">Base Cash: ₹18.50L | Safety Floor: ₹5.00L</p>
+                <span className="text-xs font-bold text-black">Apex Technologies — Projected Liquidity</span>
+                <p className="text-[11px] text-black">Base Cash: ₹18.50L | Safety Floor: ₹5.00L</p>
               </div>
 
               {/* Horizon Switcher */}
@@ -272,7 +272,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
                     className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                       previewHorizon === d
                         ? 'bg-[#6D45CF] text-white shadow-xs'
-                        : 'text-[#71717A] hover:text-[#15151B]'
+                        : 'text-black hover:text-black'
                     }`}
                   >
                     {d}D
@@ -322,7 +322,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
               </svg>
             </div>
 
-            <div className="flex items-center justify-between text-xs text-[#71717A] pt-4 border-t border-[#F0F0F5]">
+            <div className="flex items-center justify-between text-xs text-black pt-4 border-t border-[#F0F0F5]">
               <span className="text-[#16A879] font-semibold">14.2 Months Estimated Runway</span>
               <span>Model: Holt-Winters Seasonality</span>
             </div>
@@ -339,11 +339,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
               <span>ARTHIQ Signature Feature</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#15151B] font-['Plus_Jakarta_Sans'] leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-black font-['Plus_Jakarta_Sans'] leading-tight">
               Stop Involuntary Value Erosion Across Your Ledger.
             </h2>
 
-            <p className="text-base text-[#71717A] leading-relaxed">
+            <p className="text-base text-black leading-relaxed">
               Most businesses lose between <strong>6% to 12% of total operational expenditure</strong> to overlapping software subscriptions, unannounced vendor price creep, duplicate invoice settlements, and carrying costs on overdue receivables.
             </p>
 
@@ -353,8 +353,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
                   PLD
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#15151B]">Redundant SaaS Licenses Identified: ₹18,500/mo</h4>
-                  <p className="text-[#71717A] mt-0.5">Dual video conferencing licenses (Zoom Pro + Google Meet) paid simultaneously for 8 months.</p>
+                  <h4 className="font-bold text-black">Redundant SaaS Licenses Identified: ₹18,500/mo</h4>
+                  <p className="text-black mt-0.5">Dual video conferencing licenses (Zoom Pro + Google Meet) paid simultaneously for 8 months.</p>
                 </div>
               </div>
 
@@ -363,8 +363,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
                   PLD
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#15151B]">Unannounced Supplier Rate Creep: ₹34,200/cycle</h4>
-                  <p className="text-[#71717A] mt-0.5">Apex Logistics unit shipment price rose 23% from ₹320 to ₹394 without volume increase.</p>
+                  <h4 className="font-bold text-black">Unannounced Supplier Rate Creep: ₹34,200/cycle</h4>
+                  <p className="text-black mt-0.5">Apex Logistics unit shipment price rose 23% from ₹320 to ₹394 without volume increase.</p>
                 </div>
               </div>
             </div>
@@ -372,17 +372,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
 
           {/* Interactive Calculator Card */}
           <div className="p-8 sm:p-10 rounded-3xl bg-[#F7F7FA] border border-[#E5E5EB] shadow-card space-y-6">
-            <h3 className="text-xl font-bold text-[#15151B] font-['Plus_Jakarta_Sans']">
+            <h3 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
               Live Profit Leakage Estimator
             </h3>
-            <p className="text-xs text-[#71717A]">
+            <p className="text-xs text-black">
               Slide to adjust your company's monthly operating expenses (OPEX):
             </p>
 
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-xs text-[#71717A]">Monthly OPEX:</span>
-                <span className="text-lg font-bold text-[#15151B] font-mono">
+                <span className="text-xs text-black">Monthly OPEX:</span>
+                <span className="text-lg font-bold text-black font-mono">
                   ₹{calcMonthlySpend.toLocaleString('en-IN')}
                 </span>
               </div>
@@ -395,7 +395,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
                 onChange={(e) => setCalcMonthlySpend(Number(e.target.value))}
                 className="w-full accent-[#6D45CF] cursor-pointer"
               />
-              <div className="flex justify-between text-[11px] text-[#71717A]">
+              <div className="flex justify-between text-[11px] text-black">
                 <span>₹5 Lakh/mo</span>
                 <span>₹50 Lakh/mo</span>
                 <span>₹1 Crore/mo</span>
@@ -404,13 +404,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
 
             {/* Calculated Recovery Result */}
             <div className="p-6 rounded-2xl bg-white border border-[#E5E5EB] text-center space-y-2">
-              <span className="text-xs font-semibold text-[#71717A] uppercase tracking-wider block">
+              <span className="text-xs font-semibold text-black uppercase tracking-wider block">
                 Estimated Recoverable Annual Savings
               </span>
               <span className="text-3xl sm:text-4xl font-extrabold text-[#6D45CF] font-mono block">
                 ₹{estimatedAnnualSavings.toLocaleString('en-IN')}
               </span>
-              <p className="text-[11px] text-[#71717A]">
+              <p className="text-[11px] text-black">
                 Calculated on verified benchmark recovery rate of 8.2% across vetted SME ledgers.
               </p>
             </div>
@@ -431,10 +431,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
           <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-rose-50 text-[#E46D72] border border-rose-200">
             Module 2: Invoice Forensics
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#15151B] mt-4 font-['Plus_Jakarta_Sans']">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-black mt-4 font-['Plus_Jakarta_Sans']">
             Autonomous Invoice Fraud & Statutory Verification
           </h2>
-          <p className="text-base text-[#71717A] mt-3">
+          <p className="text-base text-black mt-3">
             Statutory 15-character GSTIN checksum validation, RBI IFSC routing checks, duplicate invoice detection, and forensic risk classification.
           </p>
         </div>
@@ -444,16 +444,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#E5E5EB] gap-4">
             <div>
               <div className="flex items-center gap-2.5">
-                <span className="font-mono font-bold text-lg text-[#15151B]">#INV-SM-2024-DUP</span>
+                <span className="font-mono font-bold text-lg text-black">#INV-SM-2024-DUP</span>
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-100 text-[#E46D72]">
                   Critical Risk (88/100)
                 </span>
               </div>
-              <p className="text-xs text-[#71717A] mt-1">Vendor: SysMatrix Technologies • Total: ₹12,000.00</p>
+              <p className="text-xs text-black mt-1">Vendor: SysMatrix Technologies • Total: ₹12,000.00</p>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#71717A]">Status:</span>
+              <span className="text-xs text-black">Status:</span>
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-[#E46D72] border border-rose-200">
                 Payment Blocked by Controller
               </span>
@@ -462,15 +462,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 text-xs">
             <div className="p-4 rounded-2xl bg-[#F7F7FA] border border-[#E5E5EB]">
-              <span className="font-semibold text-[#15151B] block mb-1">Detected Anomaly:</span>
-              <p className="text-[#71717A] leading-relaxed">
+              <span className="font-semibold text-black block mb-1">Detected Anomaly:</span>
+              <p className="text-black leading-relaxed">
                 PO-SM-2024 was already settled on Oct 12 under voucher RTGS-SM-5511. Identical amount ₹12,000 billed again with duplicate line items within 48 hours.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#EDE7FF]/50 border border-[#DDD3FA]">
               <span className="font-semibold text-[#6D45CF] block mb-1">Recommended Verification:</span>
-              <p className="text-[#15151B] leading-relaxed">
+              <p className="text-black leading-relaxed">
                 MANDATORY: Reject payment immediately to avoid double disbursement. Issue credit reconciliation notice to vendor.
               </p>
             </div>
@@ -484,10 +484,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
           <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white text-[#6D45CF] border border-[#E5E5EB]">
             Module 5: Financial Analytics & BI
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#15151B] mt-4 font-['Plus_Jakarta_Sans']">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-black mt-4 font-['Plus_Jakarta_Sans']">
             Power BI-Grade Financial Ratios & Statement Analysis
           </h2>
-          <p className="text-base text-[#71717A] mt-3">
+          <p className="text-base text-black mt-3">
             Instant Chartered Accountant-level computation of Liquidity, Profitability, Efficiency, and Solvency ratios with 1-click Excel export.
           </p>
         </div>
@@ -502,10 +502,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             { label: "Health Score", val: "84/100", status: "Strong", desc: "Multi-factor radar" }
           ].map((r, i) => (
             <div key={i} className="p-5 rounded-2xl bg-white border border-[#E5E5EB] shadow-xs">
-              <span className="text-[11px] text-[#71717A] font-medium block">{r.label}</span>
-              <span className="text-xl font-bold text-[#15151B] mt-1 font-mono block">{r.val}</span>
+              <span className="text-[11px] text-black font-medium block">{r.label}</span>
+              <span className="text-xl font-bold text-black mt-1 font-mono block">{r.val}</span>
               <span className="text-[10px] text-[#16A879] font-semibold mt-1 block">{r.status}</span>
-              <span className="text-[10px] text-[#71717A] mt-1 block">{r.desc}</span>
+              <span className="text-[10px] text-black mt-1 block">{r.desc}</span>
             </div>
           ))}
         </div>
@@ -518,10 +518,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#EDE7FF] text-[#6D45CF] border border-[#DDD3FA]">
               Module 10: ARTHIQ AI
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#15151B] font-['Plus_Jakarta_Sans'] leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-black font-['Plus_Jakarta_Sans'] leading-tight">
               An AI Financial Consultant That Never Invents Numbers.
             </h2>
-            <p className="text-base text-[#71717A] leading-relaxed">
+            <p className="text-base text-black leading-relaxed">
               ARTHIQ AI executes audited mathematical tools directly against your verified ledger. Ask natural questions about expenses, runway, or suspicious transactions and receive precise, verifiable analysis.
             </p>
 
@@ -541,25 +541,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
                 <Bot className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-sm font-bold text-[#15151B]">ARTHIQ AI Financial Analyst</span>
+                <span className="text-sm font-bold text-black">ARTHIQ AI Financial Analyst</span>
                 <p className="text-[11px] text-[#16A879]">Connected to Apex Technologies General Ledger</p>
               </div>
             </div>
 
             {/* User message */}
-            <div className="p-3.5 rounded-2xl bg-[#F7F7FA] text-xs font-medium text-[#15151B] ml-auto max-w-sm">
+            <div className="p-3.5 rounded-2xl bg-[#F7F7FA] text-xs font-medium text-black ml-auto max-w-sm">
               "Where is my business losing unnecessary money this month?"
             </div>
 
             {/* Assistant reply with tool pills */}
-            <div className="p-4 rounded-2xl bg-[#EDE7FF]/40 border border-[#DDD3FA] text-xs text-[#15151B] space-y-2">
+            <div className="p-4 rounded-2xl bg-[#EDE7FF]/40 border border-[#DDD3FA] text-xs text-black space-y-2">
               <div className="flex items-center gap-1.5 pb-1 text-[10px] font-mono text-[#6D45CF]">
                 <span>Tool Executed: detect_profit_leakage()</span>
               </div>
               <p className="leading-relaxed">
                 I reconciled your general ledger across accounts: your company is losing approximately <strong>₹85,200 monthly</strong> (annualized recovery potential: <strong>₹8,88,400</strong>). Top sources:
               </p>
-              <ul className="list-disc pl-4 space-y-1 text-[#71717A]">
+              <ul className="list-disc pl-4 space-y-1 text-black">
                 <li><strong>Redundant Video Licenses:</strong> ₹18,500/mo overlapping Zoom and Google Meet.</li>
                 <li><strong>Logistics Rate Escalation:</strong> ₹34,200 cost spike from Apex Logistics (+23%).</li>
                 <li><strong>Duplicate Disbursement:</strong> ₹12,000 double debit on PO-2024.</li>
@@ -575,10 +575,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
           <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-50 text-[#16A879] border border-emerald-200">
             Enterprise Security
           </span>
-          <h2 className="text-3xl font-bold text-[#15151B] mt-4 font-['Plus_Jakarta_Sans']">
+          <h2 className="text-3xl font-bold text-black mt-4 font-['Plus_Jakarta_Sans']">
             Tenant-Level Row Isolation & Statutory Governance
           </h2>
-          <p className="text-sm text-[#71717A] mt-2">
+          <p className="text-sm text-black mt-2">
             Your financial statements, bank credentials, and general ledger records are encrypted with strict multi-tenant boundaries.
           </p>
         </div>
@@ -586,24 +586,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
           <div className="p-6 rounded-2xl bg-[#F7F7FA] border border-[#E5E5EB] space-y-2">
             <Lock className="w-5 h-5 text-[#6D45CF] mb-2" />
-            <h3 className="font-bold text-[#15151B] text-sm">Row-Level Tenant Isolation</h3>
-            <p className="text-[#71717A] leading-relaxed">
+            <h3 className="font-bold text-black text-sm">Row-Level Tenant Isolation</h3>
+            <p className="text-black leading-relaxed">
               Every database query is cryptographically bound to your Organization ID. No client can ever access another tenant's financial statements.
             </p>
           </div>
 
           <div className="p-6 rounded-2xl bg-[#F7F7FA] border border-[#E5E5EB] space-y-2">
             <Database className="w-5 h-5 text-[#6D45CF] mb-2" />
-            <h3 className="font-bold text-[#15151B] text-sm">Grounded Math, Zero Hallucination</h3>
-            <p className="text-[#71717A] leading-relaxed">
+            <h3 className="font-bold text-black text-sm">Grounded Math, Zero Hallucination</h3>
+            <p className="text-black leading-relaxed">
               ARTHIQ AI executes validated deterministic mathematical tools. It never invents balances or claims to have analyzed data that was not uploaded.
             </p>
           </div>
 
           <div className="p-6 rounded-2xl bg-[#F7F7FA] border border-[#E5E5EB] space-y-2">
             <ShieldCheck className="w-5 h-5 text-[#16A879] mb-2" />
-            <h3 className="font-bold text-[#15151B] text-sm">Statutory Compliance Ready</h3>
-            <p className="text-[#71717A] leading-relaxed">
+            <h3 className="font-bold text-black text-sm">Statutory Compliance Ready</h3>
+            <p className="text-black leading-relaxed">
               Built-in Indian GSTIN 15-character statutory verification, RBI IFSC routing checks, and dual-signoff accounts payable workflows.
             </p>
           </div>
@@ -613,10 +613,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
       {/* 11. FINAL CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
         <div className="p-12 sm:p-16 rounded-3xl bg-gradient-to-b from-[#EDE7FF]/40 to-[#F7F7FA] border border-[#DDD3FA] shadow-card">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#15151B] font-['Plus_Jakarta_Sans'] tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-black font-['Plus_Jakarta_Sans'] tracking-tight">
             Ready to Take Control of Your Financial Future?
           </h2>
-          <p className="text-base text-[#71717A] mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="text-base text-black mt-4 max-w-xl mx-auto leading-relaxed">
             Experience ARTHIQ today with Apex Technologies' pre-loaded live demonstration dataset.
           </p>
 
@@ -634,18 +634,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
       </section>
 
       {/* 12. PROFESSIONAL FOOTER */}
-      <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-[#E5E5EB] bg-white text-xs text-[#71717A]">
+      <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-[#E5E5EB] bg-white text-xs text-black">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <ArthiqLogo size="compact" />
           </div>
 
           <div className="flex items-center gap-6 font-medium">
-            <a href="#platform" className="hover:text-[#15151B]">Platform</a>
-            <a href="#solutions" className="hover:text-[#15151B]">Solutions</a>
-            <a href="#features" className="hover:text-[#15151B]">Features</a>
-            <a href="#intelligence" className="hover:text-[#15151B]">Intelligence</a>
-            <a href="#resources" className="hover:text-[#15151B]">Security</a>
+            <a href="#platform" className="hover:text-black">Platform</a>
+            <a href="#solutions" className="hover:text-black">Solutions</a>
+            <a href="#features" className="hover:text-black">Features</a>
+            <a href="#intelligence" className="hover:text-black">Intelligence</a>
+            <a href="#resources" className="hover:text-black">Security</a>
           </div>
 
           <div className="text-center sm:text-right">

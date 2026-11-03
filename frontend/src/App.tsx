@@ -60,7 +60,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F7FA] text-[#15151B] flex flex-col font-sans selection:bg-[#EDE7FF] selection:text-[#6D45CF]">
+    <div className="min-h-screen bg-[#F8FAFC] text-black flex flex-col font-sans selection:bg-[#EDE7FF] selection:text-[#6D45CF]">
       <Header
         currentView={currentView}
         onNavigate={setCurrentView}
