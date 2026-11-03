@@ -264,6 +264,52 @@ async function runSuite() {
     recordResult('AI Assistant Financial Reasoning', false, e.message);
   }
 
+  // TEST SUITE 8: Unified Machine Learning Subsystems
+  console.log('\n--- 8. Multi-Model ML Subsystems & Model Artifacts ---');
+  try {
+    const res = await makeRequest(`${BACKEND_BASE}/api/ml/models/versions`);
+    const data = JSON.parse(res.body);
+    const ok = data.platform_version === '1.0.0-enterprise' && data.algorithms?.invoice_fraud?.includes('XGBoost');
+    recordResult('Deployed ML Algorithm Versions Telemetry', ok, `Algorithms: ${Object.keys(data.algorithms || {}).length}`);
+  } catch (e) {
+    recordResult('Deployed ML Algorithm Versions Telemetry', false, e.message);
+  }
+
+  try {
+    const res = await makeRequest(`${BACKEND_BASE}/api/ml/models/status`);
+    const data = JSON.parse(res.body);
+    const ok = data.modules && data.modules.expense_analyzer?.status === 'TRAINED_AND_DEPLOYED';
+    recordResult('Master ML Model Training Status Report', ok, `Modules: ${Object.keys(data.modules || {}).length}`);
+  } catch (e) {
+    recordResult('Master ML Model Training Status Report', false, e.message);
+  }
+
+  try {
+    const res = await makeRequest(
+      `${BACKEND_BASE}/api/ml/procurement/optimize`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' } },
+      JSON.stringify({ vendors: [{ vendor_name: 'Vendor A', total_spend: 150000 }, { vendor_name: 'Vendor B', total_spend: 25000 }, { vendor_name: 'Vendor C', total_spend: 98000 }] })
+    );
+    const data = JSON.parse(res.body);
+    const ok = data.clusters_count === 3 && data.silhouette_score !== undefined;
+    recordResult('K-Means Vendor Clustering & Ridge Optimization', ok, `Silhouette: ${data.silhouette_score}, Clusters: ${data.clusters_count}`);
+  } catch (e) {
+    recordResult('K-Means Vendor Clustering & Ridge Optimization', false, e.message);
+  }
+
+  try {
+    const res = await makeRequest(
+      `${BACKEND_BASE}/api/assistant/query`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' } },
+      JSON.stringify({ query: 'Where is my business losing unnecessary money?' })
+    );
+    const data = JSON.parse(res.body);
+    const ok = data.tool_invoked === 'scan_profit_leakage' && data.reply_content?.length > 40;
+    recordResult('Autonomous Financial Assistant RAG & Tool Dispatcher', ok, `Tool: ${data.tool_invoked}()`);
+  } catch (e) {
+    recordResult('Autonomous Financial Assistant RAG & Tool Dispatcher', false, e.message);
+  }
+
   // SUMMARY
   console.log('\n=============================================================');
   console.log(` TEST SUMMARY: ${passedTests} / ${totalTests} PASSED (${((passedTests/totalTests)*100).toFixed(1)}%)`);

@@ -154,6 +154,30 @@ export const api = {
     return res.json();
   },
 
+  async getMlModelStatus() {
+    const res = await fetch(`${API_BASE}/ml/models/status`);
+    return res.json();
+  },
+
+  async getMlModelMetrics() {
+    const res = await fetch(`${API_BASE}/ml/models/metrics`);
+    return res.json();
+  },
+
+  async getMlModelVersions() {
+    const res = await fetch(`${API_BASE}/ml/models/versions`);
+    return res.json();
+  },
+
+  async optimizeProcurement(vendors: any[]) {
+    const res = await fetch(`${API_BASE}/ml/procurement/optimize`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ vendors })
+    });
+    return res.json();
+  },
+
   async getProcurementVendors() {
     const res = await fetch(`${API_BASE}/procurement/vendors`);
     return res.json();

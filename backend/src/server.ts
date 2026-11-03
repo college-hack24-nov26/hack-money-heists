@@ -1470,6 +1470,75 @@ app.post('/api/ai/train', mlTrainingRateLimiter, optionalAuthenticateToken, asyn
   res.json({ status: 'success', result });
 });
 
+// ---------------------------------------------------------------------
+// 13. UNIFIED MACHINE LEARNING & AI ASSISTANT API
+// ---------------------------------------------------------------------
+app.get('/api/ml/models/status', async (req: Request, res: Response) => {
+  const status = await financeEngineClient.getModelStatus();
+  res.json(status);
+});
+
+app.get('/api/ml/models/metrics', async (req: Request, res: Response) => {
+  const metrics = await financeEngineClient.getModelMetrics();
+  res.json(metrics);
+});
+
+app.get('/api/ml/models/versions', async (req: Request, res: Response) => {
+  const versions = await financeEngineClient.getModelVersions();
+  res.json(versions);
+});
+
+app.post('/api/ml/expenses/analyze', async (req: Request, res: Response) => {
+  const list = req.body.expenses || expenses;
+  const analysis = await financeEngineClient.analyzeExpenses(list, financialSummary.revenue);
+  res.json(analysis);
+});
+
+app.post('/api/ml/invoices/predict', async (req: Request, res: Response) => {
+  const invoice = req.body.invoice || invoices[0];
+  const prediction = await financeEngineClient.analyzeInvoice(invoice, invoices, {});
+  res.json(prediction);
+});
+
+app.post('/api/ml/cash-flow/forecast', handleCashflowForecast);
+
+app.post('/api/ml/profit-leakage/scan', async (req: Request, res: Response) => {
+  const list = req.body.transactions || expenses;
+  const result = await financeEngineClient.detectProfitLeakage(list, invoices, clients);
+  res.json(result);
+});
+
+app.post('/api/ml/financial-risk/assess', async (req: Request, res: Response) => {
+  const data = req.body.financial_data || financialSummary;
+  const result = await financeEngineClient.calculateRisk(data);
+  res.json(result);
+});
+
+app.post('/api/ml/procurement/optimize', async (req: Request, res: Response) => {
+  const list = req.body.vendors || [];
+  const result = await financeEngineClient.optimizeProcurement(list);
+  res.json(result);
+});
+
+app.post('/api/ml/analytics/predict', async (req: Request, res: Response) => {
+  res.json({
+    status: 'success',
+    ten_financial_ratios: (financialSummary as any).ratios || {},
+    summary: financialSummary
+  });
+});
+
+app.post('/api/assistant/query', async (req: Request, res: Response) => {
+  const { query, message } = req.body || {};
+  const userText = query || message || 'Summarize financial position';
+  const reply = await financeEngineClient.queryAssistant(userText, {
+    organization: organization.name,
+    gstin: organization.gstin,
+    available_cash: financialSummary.cash_and_equivalents
+  });
+  res.json(reply);
+});
+
 // Health check
 const handleHealth = (req: Request, res: Response) => {
   res.json({

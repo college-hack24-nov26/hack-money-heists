@@ -1295,6 +1295,64 @@ app.post('/api/ai/train', rateLimit_middleware_1.mlTrainingRateLimiter, auth_mid
     const result = await financeEngineClient_1.financeEngineClient.triggerTraining();
     res.json({ status: 'success', result });
 });
+// ---------------------------------------------------------------------
+// 13. UNIFIED MACHINE LEARNING & AI ASSISTANT API
+// ---------------------------------------------------------------------
+app.get('/api/ml/models/status', async (req, res) => {
+    const status = await financeEngineClient_1.financeEngineClient.getModelStatus();
+    res.json(status);
+});
+app.get('/api/ml/models/metrics', async (req, res) => {
+    const metrics = await financeEngineClient_1.financeEngineClient.getModelMetrics();
+    res.json(metrics);
+});
+app.get('/api/ml/models/versions', async (req, res) => {
+    const versions = await financeEngineClient_1.financeEngineClient.getModelVersions();
+    res.json(versions);
+});
+app.post('/api/ml/expenses/analyze', async (req, res) => {
+    const list = req.body.expenses || expenses;
+    const analysis = await financeEngineClient_1.financeEngineClient.analyzeExpenses(list, financialSummary.revenue);
+    res.json(analysis);
+});
+app.post('/api/ml/invoices/predict', async (req, res) => {
+    const invoice = req.body.invoice || invoices[0];
+    const prediction = await financeEngineClient_1.financeEngineClient.analyzeInvoice(invoice, invoices, {});
+    res.json(prediction);
+});
+app.post('/api/ml/cash-flow/forecast', handleCashflowForecast);
+app.post('/api/ml/profit-leakage/scan', async (req, res) => {
+    const list = req.body.transactions || expenses;
+    const result = await financeEngineClient_1.financeEngineClient.detectProfitLeakage(list, invoices, clients);
+    res.json(result);
+});
+app.post('/api/ml/financial-risk/assess', async (req, res) => {
+    const data = req.body.financial_data || financialSummary;
+    const result = await financeEngineClient_1.financeEngineClient.calculateRisk(data);
+    res.json(result);
+});
+app.post('/api/ml/procurement/optimize', async (req, res) => {
+    const list = req.body.vendors || [];
+    const result = await financeEngineClient_1.financeEngineClient.optimizeProcurement(list);
+    res.json(result);
+});
+app.post('/api/ml/analytics/predict', async (req, res) => {
+    res.json({
+        status: 'success',
+        ten_financial_ratios: financialSummary.ratios || {},
+        summary: financialSummary
+    });
+});
+app.post('/api/assistant/query', async (req, res) => {
+    const { query, message } = req.body || {};
+    const userText = query || message || 'Summarize financial position';
+    const reply = await financeEngineClient_1.financeEngineClient.queryAssistant(userText, {
+        organization: organization.name,
+        gstin: organization.gstin,
+        available_cash: financialSummary.cash_and_equivalents
+    });
+    res.json(reply);
+});
 // Health check
 const handleHealth = (req, res) => {
     res.json({

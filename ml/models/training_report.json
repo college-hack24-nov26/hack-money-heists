@@ -1,0 +1,135 @@
+{
+  "pipeline_execution_timestamp": "2026-11-04T04:52:53.214333",
+  "platform_version": "1.0.0-enterprise",
+  "modules": {
+    "expense_analyzer": {
+      "status": "TRAINED_AND_DEPLOYED",
+      "algorithms": [
+        "Isolation Forest",
+        "Local Outlier Factor (LOF)"
+      ],
+      "dataset_rows": 149,
+      "outliers_flagged": 8,
+      "outlier_rate_percent": 5.37,
+      "artifact_path": "models\\expense_analyzer\\expense_detector_ensemble.pkl"
+    },
+    "invoice_fraud": {
+      "status": "TRAINED_AND_DEPLOYED",
+      "algorithms": [
+        "Random Forest Classifier",
+        "XGBoost Classifier",
+        "Isolation Forest"
+      ],
+      "dataset_rows": 63,
+      "random_forest_metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "roc_auc": 1.0,
+        "confusion_matrix": [
+          [
+            59,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ]
+      },
+      "xgboost_metrics": {
+        "accuracy": 0.9365,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "roc_auc": 0.9831,
+        "confusion_matrix": [
+          [
+            59,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ]
+      },
+      "feature_importance": {
+        "amount_inr": 0.1779,
+        "tax_inr": 0.27,
+        "tax_ratio": 0.0774,
+        "gstin_valid": 0.0,
+        "term_days": 0.001,
+        "vendor_freq": 0.2357,
+        "is_potential_duplicate": 0.238
+      },
+      "artifact_path": "models\\invoice_fraud\\invoice_fraud_ensemble.pkl"
+    },
+    "cash_flow": {
+      "status": "TRAINED_AND_DEPLOYED",
+      "algorithms": [
+        "ARIMA(1,1,1)",
+        "Prophet",
+        "XGBoost Regressor",
+        "Exponential Smoothing"
+      ],
+      "ensemble_weights": {
+        "arima": 0.25,
+        "prophet": 0.3,
+        "xgboost": 0.25,
+        "ets": 0.2
+      },
+      "forecast_horizon_days": 30,
+      "historical_daily_records": 213,
+      "runway_days": 999,
+      "artifact_path": "models\\cash_flow\\cashflow_ensemble.pkl"
+    },
+    "profit_leakage": {
+      "status": "TRAINED_AND_DEPLOYED",
+      "algorithms": [
+        "Rule-Based Detection Matrix (10 Rules)",
+        "Isolation Forest"
+      ],
+      "total_leakage_identified": 4642095.0,
+      "recoverable_savings": 2487066,
+      "potential_annual_savings": 6641640,
+      "anomalies_count": 81,
+      "artifact_path": "models\\profit_leakage\\profit_leakage_engine.pkl"
+    },
+    "financial_risk": {
+      "status": "TRAINED_AND_DEPLOYED",
+      "algorithms": [
+        "Logistic Regression",
+        "Isolation Forest",
+        "Risk Radar Matrix"
+      ],
+      "training_samples": 150,
+      "logistic_accuracy": 0.7867,
+      "logistic_f1_score": 0.7538,
+      "artifact_path": "models\\financial_risk\\risk_scorer_model.pkl"
+    },
+    "procurement": {
+      "status": "TRAINED_AND_DEPLOYED",
+      "algorithms": [
+        "K-Means Clustering (k=3)",
+        "Ridge Price Pattern Regression"
+      ],
+      "silhouette_score": 0.359,
+      "vendors_analyzed": 24,
+      "savings_opportunity": 15021.67,
+      "artifact_path": "models\\procurement\\procurement_optimizer.pkl"
+    },
+    "analytics": {
+      "status": "TRAINED_AND_DEPLOYED",
+      "algorithms": [
+        "Linear Regression (Revenue & Expense Trends)",
+        "10 Ratio Accounting Formulas"
+      ],
+      "operating_leverage": "Positive",
+      "revenue_growth_rate": 16428.57,
+      "expense_growth_rate": 9071.43,
+      "artifact_path": "models\\analytics\\financial_analytics_engine.pkl"
+    }
+  }
+}
