@@ -1,0 +1,10 @@
+Topic,Details
+Purpose,ARTHIQ demonstration and software testing dataset.
+Data authenticity,Synthetic but realistic sample records. Not real bank/customer data.
+Coverage,Seven complete calendar months: April through October 2026.
+Ledger design,"All transactions have unique IDs, positive INR amounts, categories and payment details."
+Monthly reconciliation,Monthly income and expenses are calculated directly from the transaction ledger.
+Cash reconciliation,Closing cash = opening cash + income - expenses; next month's opening equals prior closing.
+Invoices,Paid invoices link to income transactions. Open invoices are not counted as cash received.
+Budgets,Monthly category budgets are compared against actual expenses from the ledger.
+Caution,"Use this for demos, UI testing and model evaluation only; it is not audited financial data."

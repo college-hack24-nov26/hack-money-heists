@@ -1,0 +1,276 @@
+Transaction_ID,Date,Type,Category,Counterparty,Amount_INR,Payment_Method,Status,Reference_ID,Notes
+TXN-00014,2026-04-01,Income,Service Revenue,Aster Learning Centre,30120,NEFT,Received,REF-00014,Synthetic demo transaction
+TXN-00031,2026-04-01,Expense,Office Rent,Pinnacle Commercial Properties,29712,UPI,Paid,REF-00031,Synthetic demo transaction
+TXN-00033,2026-04-01,Expense,Inventory Purchase,Metro Paper Traders,22552,UPI,Paid,REF-00033,Synthetic demo transaction
+TXN-00001,2026-04-03,Income,Product Sales,Walk-in Customers,35159,IMPS,Received,REF-00001,Synthetic demo transaction
+TXN-00006,2026-04-04,Income,Product Sales,UrbanDesk Co.,24499,UPI,Received,REF-00006,Synthetic demo transaction
+TXN-00019,2026-04-04,Expense,Salaries,Monthly Payroll,142893,Bank Transfer,Paid,REF-00019,Synthetic demo transaction
+TXN-00013,2026-04-05,Income,Product Sales,Vertex Systems,55699,IMPS,Received,REF-00013,Synthetic demo transaction
+TXN-00027,2026-04-05,Expense,Insurance,SecureShield Insurance,8680,IMPS,Paid,REF-00027,Synthetic demo transaction
+TXN-00036,2026-04-05,Expense,Inventory Purchase,Apex Stationery Wholesale,13463,UPI,Paid,REF-00036,Synthetic demo transaction
+TXN-00016,2026-04-06,Income,Service Revenue,Pioneer Schools,14571,Bank Transfer,Received,REF-00016,Synthetic demo transaction
+TXN-00035,2026-04-07,Expense,Inventory Purchase,Prime Supplies India,18621,NEFT,Paid,REF-00035,Synthetic demo transaction
+TXN-00030,2026-04-08,Expense,Office Rent,Pinnacle Commercial Properties,29712,IMPS,Paid,REF-00030,Synthetic demo transaction
+TXN-00018,2026-04-11,Income,Product Sales,BluePeak Services,43120,Card,Received,REF-00018,Synthetic demo transaction
+TXN-00039,2026-04-12,Expense,Marketing,LocalPrint Studio,6623,Bank Transfer,Paid,REF-00039,Synthetic demo transaction
+TXN-00002,2026-04-13,Income,Service Revenue,Aster Learning Centre,33622,Card,Received,REF-00002,Synthetic demo transaction
+TXN-00015,2026-04-13,Income,Product Sales,Northstar Coaching,49991,UPI,Received,REF-00015,Synthetic demo transaction
+TXN-00029,2026-04-14,Expense,Inventory Purchase,Apex Stationery Wholesale,11722,UPI,Paid,REF-00029,Synthetic demo transaction
+TXN-00022,2026-04-15,Expense,Software Subscriptions,CloudDesk Software,4754,Bank Transfer,Paid,REF-00022,Synthetic demo transaction
+TXN-00005,2026-04-16,Income,Product Sales,Walk-in Customers,17008,Bank Transfer,Received,REF-00005,Synthetic demo transaction
+TXN-00026,2026-04-16,Expense,Transport & Delivery,Local Delivery Partners,6345,NEFT,Paid,REF-00026,Synthetic demo transaction
+TXN-00025,2026-04-17,Expense,Inventory Purchase,Metro Paper Traders,17299,IMPS,Paid,REF-00025,Synthetic demo transaction
+TXN-00004,2026-04-19,Income,Product Sales,Walk-in Customers,66423,Card,Received,REF-00004,Synthetic demo transaction
+TXN-00008,2026-04-19,Income,Service Revenue,BluePeak Services,32826,Bank Transfer,Received,REF-00008,Synthetic demo transaction
+TXN-00024,2026-04-19,Expense,Repairs & Maintenance,Office Care Services,3841,IMPS,Paid,REF-00024,Synthetic demo transaction
+TXN-00028,2026-04-19,Expense,Travel,CityCab Services,4910,Bank Transfer,Paid,REF-00028,Synthetic demo transaction
+TXN-00007,2026-04-21,Income,Service Revenue,BluePeak Services,18538,IMPS,Received,REF-00007,Synthetic demo transaction
+TXN-00038,2026-04-21,Expense,Marketing,LocalPrint Studio,11281,Bank Transfer,Paid,REF-00038,Synthetic demo transaction
+TXN-00009,2026-04-22,Income,Product Sales,Walk-in Customers,49280,Bank Transfer,Received,REF-00009,Synthetic demo transaction
+TXN-00012,2026-04-25,Income,Service Revenue,Vertex Systems,28473,NEFT,Received,REF-00012,Synthetic demo transaction
+TXN-00017,2026-04-25,Income,Service Revenue,BluePeak Services,31928,Card,Received,REF-00017,Synthetic demo transaction
+TXN-00032,2026-04-25,Expense,Inventory Purchase,Apex Stationery Wholesale,31095,Card,Paid,REF-00032,Synthetic demo transaction
+TXN-00003,2026-04-27,Income,Product Sales,Vertex Systems,21385,IMPS,Received,REF-00003,Synthetic demo transaction
+TXN-00010,2026-04-28,Income,Product Sales,Northstar Coaching,52152,Card,Received,REF-00010,Synthetic demo transaction
+TXN-00011,2026-04-28,Income,Product Sales,Vertex Systems,35206,Card,Received,REF-00011,Synthetic demo transaction
+TXN-00020,2026-04-28,Expense,Office Rent,Pinnacle Commercial Properties,29712,Bank Transfer,Paid,REF-00020,Synthetic demo transaction
+TXN-00021,2026-04-28,Expense,Insurance,SecureShield Insurance,12380,Bank Transfer,Paid,REF-00021,Synthetic demo transaction
+TXN-00034,2026-04-29,Expense,Inventory Purchase,Metro Paper Traders,29853,Card,Paid,REF-00034,Synthetic demo transaction
+TXN-00037,2026-04-29,Expense,Inventory Purchase,Bright Office Mart,26840,NEFT,Paid,REF-00037,Synthetic demo transaction
+TXN-00023,2026-04-30,Expense,Office Rent,Pinnacle Commercial Properties,29712,Bank Transfer,Paid,REF-00023,Synthetic demo transaction
+TXN-00045,2026-05-02,Income,Product Sales,Vertex Systems,28113,Card,Received,REF-00045,Synthetic demo transaction
+TXN-00052,2026-05-02,Income,Product Sales,Pioneer Schools,19546,Bank Transfer,Received,REF-00052,Synthetic demo transaction
+TXN-00040,2026-05-03,Income,Product Sales,Pioneer Schools,45703,IMPS,Received,REF-00040,Synthetic demo transaction
+TXN-00043,2026-05-04,Income,Installation Revenue,Aster Learning Centre,20284,Bank Transfer,Received,REF-00043,Synthetic demo transaction
+TXN-00058,2026-05-05,Expense,Salaries,Monthly Payroll,150482,Bank Transfer,Paid,REF-00058,Synthetic demo transaction
+TXN-00064,2026-05-05,Expense,Marketing,PixelReach Media,13648,Card,Paid,REF-00064,Synthetic demo transaction
+TXN-00046,2026-05-06,Income,Service Revenue,Aster Learning Centre,32191,Bank Transfer,Received,REF-00046,Synthetic demo transaction
+TXN-00050,2026-05-06,Income,Product Sales,BluePeak Services,53980,UPI,Received,REF-00050,Synthetic demo transaction
+TXN-00055,2026-05-06,Income,Service Revenue,Pioneer Schools,32166,IMPS,Received,REF-00055,Synthetic demo transaction
+TXN-00059,2026-05-06,Expense,Office Rent,Pinnacle Commercial Properties,30724,Bank Transfer,Paid,REF-00059,Synthetic demo transaction
+TXN-00062,2026-05-07,Expense,Marketing,PixelReach Media,10546,Card,Paid,REF-00062,Synthetic demo transaction
+TXN-00075,2026-05-07,Expense,Inventory Purchase,Metro Paper Traders,20883,IMPS,Paid,REF-00075,Synthetic demo transaction
+TXN-00047,2026-05-09,Income,Installation Revenue,Aster Learning Centre,13894,IMPS,Received,REF-00047,Synthetic demo transaction
+TXN-00066,2026-05-09,Expense,Office Supplies,Stationery Hub,1279,Bank Transfer,Paid,REF-00066,Synthetic demo transaction
+TXN-00044,2026-05-11,Income,Product Sales,Walk-in Customers,23960,UPI,Received,REF-00044,Synthetic demo transaction
+TXN-00053,2026-05-12,Income,Product Sales,UrbanDesk Co.,46325,UPI,Received,REF-00053,Synthetic demo transaction
+TXN-00077,2026-05-13,Expense,Bank Charges,HDFC Bank,792,NEFT,Paid,REF-00077,Synthetic demo transaction
+TXN-00060,2026-05-14,Expense,Insurance,SecureShield Insurance,12802,Bank Transfer,Paid,REF-00060,Synthetic demo transaction
+TXN-00065,2026-05-16,Expense,Office Rent,Pinnacle Commercial Properties,30724,Bank Transfer,Paid,REF-00065,Synthetic demo transaction
+TXN-00078,2026-05-16,Expense,Inventory Purchase,Bright Office Mart,24436,Bank Transfer,Paid,REF-00078,Synthetic demo transaction
+TXN-00042,2026-05-17,Income,Service Revenue,Aster Learning Centre,45043,Card,Received,REF-00042,Synthetic demo transaction
+TXN-00041,2026-05-18,Income,Service Revenue,Pioneer Schools,43341,IMPS,Received,REF-00041,Synthetic demo transaction
+TXN-00071,2026-05-18,Expense,Inventory Purchase,Prime Supplies India,25653,IMPS,Paid,REF-00071,Synthetic demo transaction
+TXN-00048,2026-05-19,Income,Product Sales,UrbanDesk Co.,28432,UPI,Received,REF-00048,Synthetic demo transaction
+TXN-00056,2026-05-19,Income,Product Sales,UrbanDesk Co.,72692,UPI,Received,REF-00056,Synthetic demo transaction
+TXN-00061,2026-05-19,Expense,Software Subscriptions,LedgerFlow SaaS,4916,Bank Transfer,Paid,REF-00061,Synthetic demo transaction
+TXN-00076,2026-05-19,Expense,Inventory Purchase,Metro Paper Traders,24264,Bank Transfer,Paid,REF-00076,Synthetic demo transaction
+TXN-00070,2026-05-21,Expense,Insurance,SecureShield Insurance,6638,UPI,Paid,REF-00070,Synthetic demo transaction
+TXN-00054,2026-05-22,Income,Service Revenue,BluePeak Services,44063,Bank Transfer,Received,REF-00054,Synthetic demo transaction
+TXN-00067,2026-05-22,Expense,Inventory Purchase,Metro Paper Traders,31598,NEFT,Paid,REF-00067,Synthetic demo transaction
+TXN-00057,2026-05-24,Income,Installation Revenue,UrbanDesk Co.,32277,UPI,Received,REF-00057,Synthetic demo transaction
+TXN-00073,2026-05-24,Expense,Inventory Purchase,Bright Office Mart,15086,Bank Transfer,Paid,REF-00073,Synthetic demo transaction
+TXN-00074,2026-05-26,Expense,Inventory Purchase,Apex Stationery Wholesale,21761,Bank Transfer,Paid,REF-00074,Synthetic demo transaction
+TXN-00051,2026-05-27,Income,Product Sales,Walk-in Customers,34761,UPI,Received,REF-00051,Synthetic demo transaction
+TXN-00069,2026-05-27,Expense,Insurance,SecureShield Insurance,6377,UPI,Paid,REF-00069,Synthetic demo transaction
+TXN-00049,2026-05-28,Income,Product Sales,BluePeak Services,48229,Bank Transfer,Received,REF-00049,Synthetic demo transaction
+TXN-00063,2026-05-28,Expense,Marketing,LocalPrint Studio,10943,Bank Transfer,Paid,REF-00063,Synthetic demo transaction
+TXN-00068,2026-05-30,Expense,Office Rent,Pinnacle Commercial Properties,30724,Card,Paid,REF-00068,Synthetic demo transaction
+TXN-00072,2026-05-31,Expense,Office Rent,Pinnacle Commercial Properties,30724,UPI,Paid,REF-00072,Synthetic demo transaction
+TXN-00085,2026-06-01,Income,Product Sales,Pioneer Schools,21411,IMPS,Received,REF-00085,Synthetic demo transaction
+TXN-00089,2026-06-02,Income,Service Revenue,Aster Learning Centre,39922,Bank Transfer,Received,REF-00089,Synthetic demo transaction
+TXN-00100,2026-06-02,Expense,Software Subscriptions,CloudDesk Software,6480,Bank Transfer,Paid,REF-00100,Synthetic demo transaction
+TXN-00103,2026-06-02,Expense,Inventory Purchase,Bright Office Mart,39368,IMPS,Paid,REF-00103,Synthetic demo transaction
+TXN-00097,2026-06-03,Expense,Salaries,Monthly Payroll,186729,Bank Transfer,Paid,REF-00097,Synthetic demo transaction
+TXN-00114,2026-06-03,Expense,Inventory Purchase,Apex Stationery Wholesale,12527,Card,Paid,REF-00114,Synthetic demo transaction
+TXN-00116,2026-06-04,Expense,Inventory Purchase,Bright Office Mart,40092,Bank Transfer,Paid,REF-00116,Synthetic demo transaction
+TXN-00115,2026-06-05,Expense,Inventory Purchase,Bright Office Mart,24700,Bank Transfer,Paid,REF-00115,Synthetic demo transaction
+TXN-00082,2026-06-06,Income,Product Sales,Pioneer Schools,41593,Bank Transfer,Received,REF-00082,Synthetic demo transaction
+TXN-00104,2026-06-06,Expense,Bank Charges,HDFC Bank,666,Bank Transfer,Paid,REF-00104,Synthetic demo transaction
+TXN-00095,2026-06-07,Income,Installation Revenue,Aster Learning Centre,9825,NEFT,Received,REF-00095,Synthetic demo transaction
+TXN-00102,2026-06-07,Expense,Transport & Delivery,CityLine Couriers,4723,Card,Paid,REF-00102,Synthetic demo transaction
+TXN-00081,2026-06-08,Income,Service Revenue,Vertex Systems,27060,NEFT,Received,REF-00081,Synthetic demo transaction
+TXN-00087,2026-06-08,Income,Product Sales,BluePeak Services,23123,IMPS,Received,REF-00087,Synthetic demo transaction
+TXN-00080,2026-06-10,Income,Product Sales,BluePeak Services,57621,NEFT,Received,REF-00080,Synthetic demo transaction
+TXN-00079,2026-06-13,Income,Product Sales,Pioneer Schools,69541,UPI,Received,REF-00079,Synthetic demo transaction
+TXN-00090,2026-06-13,Income,Product Sales,BluePeak Services,46538,Bank Transfer,Received,REF-00090,Synthetic demo transaction
+TXN-00086,2026-06-14,Income,Product Sales,Pioneer Schools,20741,Bank Transfer,Received,REF-00086,Synthetic demo transaction
+TXN-00111,2026-06-14,Expense,Inventory Purchase,Apex Stationery Wholesale,21319,UPI,Paid,REF-00111,Synthetic demo transaction
+TXN-00098,2026-06-16,Expense,Office Rent,Pinnacle Commercial Properties,40498,Bank Transfer,Paid,REF-00098,Synthetic demo transaction
+TXN-00110,2026-06-16,Expense,Transport & Delivery,SwiftRoute Logistics,2666,Bank Transfer,Paid,REF-00110,Synthetic demo transaction
+TXN-00107,2026-06-17,Expense,Bank Charges,HDFC Bank,999,NEFT,Paid,REF-00107,Synthetic demo transaction
+TXN-00101,2026-06-18,Expense,Inventory Purchase,Prime Supplies India,21569,Bank Transfer,Paid,REF-00101,Synthetic demo transaction
+TXN-00088,2026-06-21,Income,Product Sales,Walk-in Customers,49794,Card,Received,REF-00088,Synthetic demo transaction
+TXN-00099,2026-06-21,Expense,Insurance,SecureShield Insurance,16874,Bank Transfer,Paid,REF-00099,Synthetic demo transaction
+TXN-00091,2026-06-22,Income,Service Revenue,Pioneer Schools,22639,Card,Received,REF-00091,Synthetic demo transaction
+TXN-00092,2026-06-22,Income,Service Revenue,Aster Learning Centre,30069,IMPS,Received,REF-00092,Synthetic demo transaction
+TXN-00113,2026-06-22,Expense,Inventory Purchase,Prime Supplies India,13247,NEFT,Paid,REF-00113,Synthetic demo transaction
+TXN-00105,2026-06-23,Expense,Utilities,Pune Water Services,5016,Card,Paid,REF-00105,Synthetic demo transaction
+TXN-00084,2026-06-24,Income,Product Sales,Pioneer Schools,43932,UPI,Received,REF-00084,Synthetic demo transaction
+TXN-00106,2026-06-24,Expense,Inventory Purchase,Prime Supplies India,29215,NEFT,Paid,REF-00106,Synthetic demo transaction
+TXN-00083,2026-06-26,Income,Product Sales,Vertex Systems,40114,Card,Received,REF-00083,Synthetic demo transaction
+TXN-00096,2026-06-27,Income,Product Sales,UrbanDesk Co.,40910,NEFT,Received,REF-00096,Synthetic demo transaction
+TXN-00108,2026-06-27,Expense,Inventory Purchase,Bright Office Mart,32698,Bank Transfer,Paid,REF-00108,Synthetic demo transaction
+TXN-00109,2026-06-27,Expense,Inventory Purchase,Metro Paper Traders,13293,IMPS,Paid,REF-00109,Synthetic demo transaction
+TXN-00093,2026-06-29,Income,Product Sales,BluePeak Services,41774,Card,Received,REF-00093,Synthetic demo transaction
+TXN-00112,2026-06-29,Expense,Software Subscriptions,CloudDesk Software,5321,Bank Transfer,Paid,REF-00112,Synthetic demo transaction
+TXN-00094,2026-06-30,Income,Product Sales,Walk-in Customers,63393,Bank Transfer,Received,REF-00094,Synthetic demo transaction
+TXN-00123,2026-07-01,Income,Product Sales,BluePeak Services,50058,Card,Received,REF-00123,Synthetic demo transaction
+TXN-00124,2026-07-01,Income,Product Sales,Pioneer Schools,46095,Card,Received,REF-00124,Synthetic demo transaction
+TXN-00142,2026-07-01,Expense,Software Subscriptions,CloudDesk Software,4966,Card,Paid,REF-00142,Synthetic demo transaction
+TXN-00129,2026-07-02,Income,Product Sales,Pioneer Schools,48204,Card,Received,REF-00129,Synthetic demo transaction
+TXN-00144,2026-07-03,Expense,Insurance,SecureShield Insurance,10217,Bank Transfer,Paid,REF-00144,Synthetic demo transaction
+TXN-00145,2026-07-03,Expense,Inventory Purchase,Bright Office Mart,33997,IMPS,Paid,REF-00145,Synthetic demo transaction
+TXN-00120,2026-07-06,Income,Service Revenue,BluePeak Services,14076,Card,Received,REF-00120,Synthetic demo transaction
+TXN-00121,2026-07-06,Income,Product Sales,BluePeak Services,36939,Card,Received,REF-00121,Synthetic demo transaction
+TXN-00128,2026-07-07,Income,Product Sales,Walk-in Customers,23808,Bank Transfer,Received,REF-00128,Synthetic demo transaction
+TXN-00135,2026-07-07,Expense,Salaries,Monthly Payroll,174112,Bank Transfer,Paid,REF-00135,Synthetic demo transaction
+TXN-00155,2026-07-08,Expense,Transport & Delivery,CityLine Couriers,5937,UPI,Paid,REF-00155,Synthetic demo transaction
+TXN-00125,2026-07-09,Income,Product Sales,Pioneer Schools,47869,Bank Transfer,Received,REF-00125,Synthetic demo transaction
+TXN-00117,2026-07-11,Income,Product Sales,Vertex Systems,28159,Card,Received,REF-00117,Synthetic demo transaction
+TXN-00138,2026-07-11,Expense,Software Subscriptions,CloudDesk Software,5568,Bank Transfer,Paid,REF-00138,Synthetic demo transaction
+TXN-00151,2026-07-11,Expense,Inventory Purchase,Prime Supplies India,16542,Bank Transfer,Paid,REF-00151,Synthetic demo transaction
+TXN-00122,2026-07-12,Income,Product Sales,Northstar Coaching,72683,IMPS,Received,REF-00122,Synthetic demo transaction
+TXN-00118,2026-07-14,Income,Product Sales,Northstar Coaching,21036,NEFT,Received,REF-00118,Synthetic demo transaction
+TXN-00131,2026-07-14,Income,Product Sales,UrbanDesk Co.,17464,IMPS,Received,REF-00131,Synthetic demo transaction
+TXN-00136,2026-07-14,Expense,Office Rent,Pinnacle Commercial Properties,34803,Bank Transfer,Paid,REF-00136,Synthetic demo transaction
+TXN-00148,2026-07-15,Expense,Inventory Purchase,Prime Supplies India,12993,UPI,Paid,REF-00148,Synthetic demo transaction
+TXN-00126,2026-07-16,Income,Service Revenue,BluePeak Services,37860,Bank Transfer,Received,REF-00126,Synthetic demo transaction
+TXN-00139,2026-07-17,Expense,Bank Charges,HDFC Bank,720,NEFT,Paid,REF-00139,Synthetic demo transaction
+TXN-00150,2026-07-19,Expense,Inventory Purchase,Apex Stationery Wholesale,21275,IMPS,Paid,REF-00150,Synthetic demo transaction
+TXN-00149,2026-07-20,Expense,Insurance,SecureShield Insurance,10408,NEFT,Paid,REF-00149,Synthetic demo transaction
+TXN-00152,2026-07-20,Expense,Inventory Purchase,Apex Stationery Wholesale,35596,Card,Paid,REF-00152,Synthetic demo transaction
+TXN-00140,2026-07-21,Expense,Office Supplies,Daily Essentials Store,4157,UPI,Paid,REF-00140,Synthetic demo transaction
+TXN-00134,2026-07-22,Income,Product Sales,Vertex Systems,36094,UPI,Received,REF-00134,Synthetic demo transaction
+TXN-00132,2026-07-23,Income,Product Sales,Pioneer Schools,25985,NEFT,Received,REF-00132,Synthetic demo transaction
+TXN-00133,2026-07-23,Income,Product Sales,Pioneer Schools,72490,Card,Received,REF-00133,Synthetic demo transaction
+TXN-00141,2026-07-24,Expense,Insurance,SecureShield Insurance,8500,IMPS,Paid,REF-00141,Synthetic demo transaction
+TXN-00147,2026-07-25,Expense,Inventory Purchase,Metro Paper Traders,38848,Bank Transfer,Paid,REF-00147,Synthetic demo transaction
+TXN-00146,2026-07-26,Expense,Inventory Purchase,Apex Stationery Wholesale,14189,Card,Paid,REF-00146,Synthetic demo transaction
+TXN-00127,2026-07-27,Income,Service Revenue,BluePeak Services,27534,Card,Received,REF-00127,Synthetic demo transaction
+TXN-00154,2026-07-27,Expense,Transport & Delivery,SwiftRoute Logistics,6085,UPI,Paid,REF-00154,Synthetic demo transaction
+TXN-00130,2026-07-28,Income,Product Sales,Northstar Coaching,58180,Card,Received,REF-00130,Synthetic demo transaction
+TXN-00137,2026-07-28,Expense,Insurance,SecureShield Insurance,14501,Bank Transfer,Paid,REF-00137,Synthetic demo transaction
+TXN-00153,2026-07-29,Expense,Inventory Purchase,Metro Paper Traders,27237,Bank Transfer,Paid,REF-00153,Synthetic demo transaction
+TXN-00119,2026-07-30,Income,Installation Revenue,Northstar Coaching,10466,Bank Transfer,Received,REF-00119,Synthetic demo transaction
+TXN-00143,2026-07-31,Expense,Inventory Purchase,Metro Paper Traders,29349,Card,Paid,REF-00143,Synthetic demo transaction
+TXN-00177,2026-08-01,Expense,Software Subscriptions,LedgerFlow SaaS,5413,Bank Transfer,Paid,REF-00177,Synthetic demo transaction
+TXN-00193,2026-08-01,Expense,Bank Charges,HDFC Bank,594,NEFT,Paid,REF-00193,Synthetic demo transaction
+TXN-00161,2026-08-02,Income,Product Sales,Northstar Coaching,31510,Bank Transfer,Received,REF-00161,Synthetic demo transaction
+TXN-00174,2026-08-02,Expense,Salaries,Monthly Payroll,167644,Bank Transfer,Paid,REF-00174,Synthetic demo transaction
+TXN-00186,2026-08-02,Expense,Inventory Purchase,Bright Office Mart,19108,Card,Paid,REF-00186,Synthetic demo transaction
+TXN-00160,2026-08-04,Income,Product Sales,Walk-in Customers,77316,Card,Received,REF-00160,Synthetic demo transaction
+TXN-00170,2026-08-05,Income,Product Sales,Pioneer Schools,57853,IMPS,Received,REF-00170,Synthetic demo transaction
+TXN-00182,2026-08-07,Expense,Utilities,Internet Service Provider,6536,IMPS,Paid,REF-00182,Synthetic demo transaction
+TXN-00189,2026-08-07,Expense,Repairs & Maintenance,Office Care Services,2540,Bank Transfer,Paid,REF-00189,Synthetic demo transaction
+TXN-00184,2026-08-08,Expense,Marketing,PixelReach Media,16589,IMPS,Paid,REF-00184,Synthetic demo transaction
+TXN-00158,2026-08-09,Income,Service Revenue,Vertex Systems,26001,IMPS,Received,REF-00158,Synthetic demo transaction
+TXN-00176,2026-08-09,Expense,Insurance,SecureShield Insurance,14097,Bank Transfer,Paid,REF-00176,Synthetic demo transaction
+TXN-00175,2026-08-11,Expense,Office Rent,Pinnacle Commercial Properties,33832,Bank Transfer,Paid,REF-00175,Synthetic demo transaction
+TXN-00159,2026-08-12,Income,Product Sales,BluePeak Services,63466,NEFT,Received,REF-00159,Synthetic demo transaction
+TXN-00173,2026-08-13,Income,Service Revenue,Aster Learning Centre,39114,Bank Transfer,Received,REF-00173,Synthetic demo transaction
+TXN-00181,2026-08-13,Expense,Marketing,PixelReach Media,7410,IMPS,Paid,REF-00181,Synthetic demo transaction
+TXN-00187,2026-08-13,Expense,Inventory Purchase,Metro Paper Traders,10336,NEFT,Paid,REF-00187,Synthetic demo transaction
+TXN-00195,2026-08-14,Expense,Inventory Purchase,Metro Paper Traders,11547,Bank Transfer,Paid,REF-00195,Synthetic demo transaction
+TXN-00169,2026-08-15,Income,Product Sales,Pioneer Schools,26669,Bank Transfer,Received,REF-00169,Synthetic demo transaction
+TXN-00164,2026-08-16,Income,Service Revenue,Pioneer Schools,28037,UPI,Received,REF-00164,Synthetic demo transaction
+TXN-00156,2026-08-17,Income,Installation Revenue,UrbanDesk Co.,20630,NEFT,Received,REF-00156,Synthetic demo transaction
+TXN-00194,2026-08-17,Expense,Inventory Purchase,Apex Stationery Wholesale,21979,IMPS,Paid,REF-00194,Synthetic demo transaction
+TXN-00183,2026-08-18,Expense,Office Rent,Pinnacle Commercial Properties,33832,UPI,Paid,REF-00183,Synthetic demo transaction
+TXN-00172,2026-08-19,Income,Product Sales,UrbanDesk Co.,40804,Card,Received,REF-00172,Synthetic demo transaction
+TXN-00178,2026-08-19,Expense,Inventory Purchase,Bright Office Mart,25380,Bank Transfer,Paid,REF-00178,Synthetic demo transaction
+TXN-00162,2026-08-21,Income,Service Revenue,Aster Learning Centre,31602,IMPS,Received,REF-00162,Synthetic demo transaction
+TXN-00163,2026-08-21,Income,Service Revenue,Aster Learning Centre,36135,UPI,Received,REF-00163,Synthetic demo transaction
+TXN-00190,2026-08-21,Expense,Inventory Purchase,Prime Supplies India,14153,NEFT,Paid,REF-00190,Synthetic demo transaction
+TXN-00191,2026-08-21,Expense,Inventory Purchase,Prime Supplies India,16627,NEFT,Paid,REF-00191,Synthetic demo transaction
+TXN-00192,2026-08-21,Expense,Utilities,Internet Service Provider,7661,UPI,Paid,REF-00192,Synthetic demo transaction
+TXN-00166,2026-08-22,Income,Product Sales,Northstar Coaching,31035,UPI,Received,REF-00166,Synthetic demo transaction
+TXN-00196,2026-08-22,Expense,Office Supplies,Daily Essentials Store,4611,NEFT,Paid,REF-00196,Synthetic demo transaction
+TXN-00157,2026-08-23,Income,Product Sales,Northstar Coaching,78709,NEFT,Received,REF-00157,Synthetic demo transaction
+TXN-00185,2026-08-24,Expense,Office Rent,Pinnacle Commercial Properties,33832,Card,Paid,REF-00185,Synthetic demo transaction
+TXN-00165,2026-08-25,Income,Product Sales,Vertex Systems,66154,Card,Received,REF-00165,Synthetic demo transaction
+TXN-00167,2026-08-27,Income,Service Revenue,BluePeak Services,18177,NEFT,Received,REF-00167,Synthetic demo transaction
+TXN-00179,2026-08-27,Expense,Inventory Purchase,Bright Office Mart,38112,NEFT,Paid,REF-00179,Synthetic demo transaction
+TXN-00168,2026-08-30,Income,Product Sales,BluePeak Services,22052,Bank Transfer,Received,REF-00168,Synthetic demo transaction
+TXN-00171,2026-08-30,Income,Product Sales,UrbanDesk Co.,24736,Card,Received,REF-00171,Synthetic demo transaction
+TXN-00180,2026-08-30,Expense,Inventory Purchase,Bright Office Mart,34820,UPI,Paid,REF-00180,Synthetic demo transaction
+TXN-00188,2026-08-30,Expense,Utilities,Pune Water Services,9347,UPI,Paid,REF-00188,Synthetic demo transaction
+TXN-00216,2026-09-01,Expense,Office Rent,Pinnacle Commercial Properties,43936,Bank Transfer,Paid,REF-00216,Synthetic demo transaction
+TXN-00217,2026-09-01,Expense,Insurance,SecureShield Insurance,18307,Bank Transfer,Paid,REF-00217,Synthetic demo transaction
+TXN-00225,2026-09-02,Expense,Transport & Delivery,Local Delivery Partners,6932,Bank Transfer,Paid,REF-00225,Synthetic demo transaction
+TXN-00198,2026-09-05,Income,Service Revenue,Vertex Systems,42851,UPI,Received,REF-00198,Synthetic demo transaction
+TXN-00202,2026-09-06,Income,Product Sales,Pioneer Schools,44633,NEFT,Received,REF-00202,Synthetic demo transaction
+TXN-00218,2026-09-08,Expense,Software Subscriptions,LedgerFlow SaaS,7030,Bank Transfer,Paid,REF-00218,Synthetic demo transaction
+TXN-00220,2026-09-08,Expense,Inventory Purchase,Apex Stationery Wholesale,22352,Bank Transfer,Paid,REF-00220,Synthetic demo transaction
+TXN-00208,2026-09-09,Income,Product Sales,UrbanDesk Co.,63681,Bank Transfer,Received,REF-00208,Synthetic demo transaction
+TXN-00224,2026-09-10,Expense,Inventory Purchase,Apex Stationery Wholesale,15056,IMPS,Paid,REF-00224,Synthetic demo transaction
+TXN-00199,2026-09-12,Income,Product Sales,Walk-in Customers,60172,Card,Received,REF-00199,Synthetic demo transaction
+TXN-00206,2026-09-12,Income,Product Sales,BluePeak Services,70408,Card,Received,REF-00206,Synthetic demo transaction
+TXN-00207,2026-09-12,Income,Product Sales,Northstar Coaching,34766,Card,Received,REF-00207,Synthetic demo transaction
+TXN-00229,2026-09-13,Expense,Inventory Purchase,Metro Paper Traders,37237,UPI,Paid,REF-00229,Synthetic demo transaction
+TXN-00204,2026-09-14,Income,Product Sales,Vertex Systems,34051,Bank Transfer,Received,REF-00204,Synthetic demo transaction
+TXN-00214,2026-09-15,Income,Installation Revenue,Aster Learning Centre,31707,UPI,Received,REF-00214,Synthetic demo transaction
+TXN-00223,2026-09-15,Expense,Inventory Purchase,Metro Paper Traders,38759,Card,Paid,REF-00223,Synthetic demo transaction
+TXN-00210,2026-09-16,Income,Service Revenue,Vertex Systems,27818,Bank Transfer,Received,REF-00210,Synthetic demo transaction
+TXN-00212,2026-09-16,Income,Installation Revenue,UrbanDesk Co.,10392,NEFT,Received,REF-00212,Synthetic demo transaction
+TXN-00201,2026-09-17,Income,Product Sales,Pioneer Schools,57260,IMPS,Received,REF-00201,Synthetic demo transaction
+TXN-00221,2026-09-17,Expense,Inventory Purchase,Apex Stationery Wholesale,31666,UPI,Paid,REF-00221,Synthetic demo transaction
+TXN-00211,2026-09-19,Income,Product Sales,Pioneer Schools,32418,Card,Received,REF-00211,Synthetic demo transaction
+TXN-00222,2026-09-19,Expense,Insurance,SecureShield Insurance,6268,IMPS,Paid,REF-00222,Synthetic demo transaction
+TXN-00226,2026-09-19,Expense,Travel,CityCab Services,5346,Bank Transfer,Paid,REF-00226,Synthetic demo transaction
+TXN-00230,2026-09-19,Expense,Software Subscriptions,LedgerFlow SaaS,5545,Card,Paid,REF-00230,Synthetic demo transaction
+TXN-00203,2026-09-21,Income,Service Revenue,Pioneer Schools,24939,Bank Transfer,Received,REF-00203,Synthetic demo transaction
+TXN-00209,2026-09-21,Income,Installation Revenue,UrbanDesk Co.,32111,UPI,Received,REF-00209,Synthetic demo transaction
+TXN-00213,2026-09-21,Income,Product Sales,Northstar Coaching,42065,UPI,Received,REF-00213,Synthetic demo transaction
+TXN-00232,2026-09-21,Expense,Bank Charges,HDFC Bank,804,IMPS,Paid,REF-00232,Synthetic demo transaction
+TXN-00215,2026-09-22,Expense,Salaries,Monthly Payroll,213207,Bank Transfer,Paid,REF-00215,Synthetic demo transaction
+TXN-00227,2026-09-22,Expense,Inventory Purchase,Metro Paper Traders,23296,NEFT,Paid,REF-00227,Synthetic demo transaction
+TXN-00234,2026-09-22,Expense,Travel,CityCab Services,5358,Card,Paid,REF-00234,Synthetic demo transaction
+TXN-00228,2026-09-24,Expense,Software Subscriptions,LedgerFlow SaaS,3169,NEFT,Paid,REF-00228,Synthetic demo transaction
+TXN-00200,2026-09-25,Income,Product Sales,BluePeak Services,53502,Card,Received,REF-00200,Synthetic demo transaction
+TXN-00219,2026-09-25,Expense,Office Rent,Pinnacle Commercial Properties,43936,UPI,Paid,REF-00219,Synthetic demo transaction
+TXN-00231,2026-09-27,Expense,Marketing,LocalPrint Studio,12529,NEFT,Paid,REF-00231,Synthetic demo transaction
+TXN-00205,2026-09-29,Income,Product Sales,Vertex Systems,59763,UPI,Received,REF-00205,Synthetic demo transaction
+TXN-00197,2026-09-30,Income,Product Sales,Northstar Coaching,22463,Card,Received,REF-00197,Synthetic demo transaction
+TXN-00233,2026-09-30,Expense,Transport & Delivery,SwiftRoute Logistics,7267,Bank Transfer,Paid,REF-00233,Synthetic demo transaction
+TXN-00258,2026-10-01,Expense,Inventory Purchase,Prime Supplies India,36489,UPI,Paid,REF-00258,Synthetic demo transaction
+TXN-00268,2026-10-01,Expense,Insurance,SecureShield Insurance,5276,NEFT,Paid,REF-00268,Synthetic demo transaction
+TXN-00243,2026-10-02,Income,Product Sales,Vertex Systems,26126,Card,Received,REF-00243,Synthetic demo transaction
+TXN-00245,2026-10-03,Income,Product Sales,Northstar Coaching,26000,Card,Received,REF-00245,Synthetic demo transaction
+TXN-00235,2026-10-05,Income,Product Sales,Northstar Coaching,27308,NEFT,Received,REF-00235,Synthetic demo transaction
+TXN-00238,2026-10-06,Income,Product Sales,Vertex Systems,63022,UPI,Received,REF-00238,Synthetic demo transaction
+TXN-00242,2026-10-06,Income,Product Sales,UrbanDesk Co.,64704,NEFT,Received,REF-00242,Synthetic demo transaction
+TXN-00264,2026-10-06,Expense,Inventory Purchase,Metro Paper Traders,14933,UPI,Paid,REF-00264,Synthetic demo transaction
+TXN-00236,2026-10-09,Income,Product Sales,Northstar Coaching,18518,UPI,Received,REF-00236,Synthetic demo transaction
+TXN-00273,2026-10-09,Expense,Insurance,SecureShield Insurance,5859,UPI,Paid,REF-00273,Synthetic demo transaction
+TXN-00246,2026-10-10,Income,Product Sales,Walk-in Customers,26358,Card,Received,REF-00246,Synthetic demo transaction
+TXN-00248,2026-10-10,Income,Product Sales,UrbanDesk Co.,73351,Card,Received,REF-00248,Synthetic demo transaction
+TXN-00249,2026-10-10,Income,Installation Revenue,UrbanDesk Co.,10781,Card,Received,REF-00249,Synthetic demo transaction
+TXN-00271,2026-10-10,Expense,Transport & Delivery,CityLine Couriers,10122,NEFT,Paid,REF-00271,Synthetic demo transaction
+TXN-00247,2026-10-12,Income,Product Sales,UrbanDesk Co.,33995,Bank Transfer,Received,REF-00247,Synthetic demo transaction
+TXN-00263,2026-10-13,Expense,Inventory Purchase,Metro Paper Traders,31252,Card,Paid,REF-00263,Synthetic demo transaction
+TXN-00254,2026-10-14,Expense,Office Rent,Pinnacle Commercial Properties,32499,Bank Transfer,Paid,REF-00254,Synthetic demo transaction
+TXN-00270,2026-10-14,Expense,Inventory Purchase,Metro Paper Traders,27440,Bank Transfer,Paid,REF-00270,Synthetic demo transaction
+TXN-00237,2026-10-15,Income,Product Sales,UrbanDesk Co.,52964,NEFT,Received,REF-00237,Synthetic demo transaction
+TXN-00255,2026-10-15,Expense,Insurance,SecureShield Insurance,13541,Bank Transfer,Paid,REF-00255,Synthetic demo transaction
+TXN-00265,2026-10-15,Expense,Inventory Purchase,Metro Paper Traders,16144,IMPS,Paid,REF-00265,Synthetic demo transaction
+TXN-00244,2026-10-16,Income,Product Sales,Northstar Coaching,77731,IMPS,Received,REF-00244,Synthetic demo transaction
+TXN-00262,2026-10-16,Expense,Insurance,SecureShield Insurance,9698,UPI,Paid,REF-00262,Synthetic demo transaction
+TXN-00272,2026-10-16,Expense,Repairs & Maintenance,Precision Maintenance,7714,IMPS,Paid,REF-00272,Synthetic demo transaction
+TXN-00252,2026-10-18,Income,Product Sales,UrbanDesk Co.,56192,IMPS,Received,REF-00252,Synthetic demo transaction
+TXN-00251,2026-10-19,Income,Product Sales,Northstar Coaching,31156,Card,Received,REF-00251,Synthetic demo transaction
+TXN-00275,2026-10-19,Expense,Transport & Delivery,CityLine Couriers,5336,NEFT,Paid,REF-00275,Synthetic demo transaction
+TXN-00274,2026-10-20,Expense,Marketing,LocalPrint Studio,12446,IMPS,Paid,REF-00274,Synthetic demo transaction
+TXN-00240,2026-10-22,Income,Product Sales,Walk-in Customers,25061,NEFT,Received,REF-00240,Synthetic demo transaction
+TXN-00253,2026-10-22,Expense,Salaries,Monthly Payroll,161769,Bank Transfer,Paid,REF-00253,Synthetic demo transaction
+TXN-00257,2026-10-23,Expense,Travel,CityCab Services,6798,NEFT,Paid,REF-00257,Synthetic demo transaction
+TXN-00261,2026-10-23,Expense,Inventory Purchase,Metro Paper Traders,29925,IMPS,Paid,REF-00261,Synthetic demo transaction
+TXN-00260,2026-10-24,Expense,Inventory Purchase,Prime Supplies India,35585,UPI,Paid,REF-00260,Synthetic demo transaction
+TXN-00239,2026-10-25,Income,Service Revenue,Vertex Systems,37545,NEFT,Received,REF-00239,Synthetic demo transaction
+TXN-00250,2026-10-25,Income,Installation Revenue,Northstar Coaching,18957,NEFT,Received,REF-00250,Synthetic demo transaction
+TXN-00259,2026-10-25,Expense,Inventory Purchase,Prime Supplies India,15362,IMPS,Paid,REF-00259,Synthetic demo transaction
+TXN-00269,2026-10-25,Expense,Office Rent,Pinnacle Commercial Properties,32499,UPI,Paid,REF-00269,Synthetic demo transaction
+TXN-00241,2026-10-27,Income,Product Sales,BluePeak Services,60231,UPI,Received,REF-00241,Synthetic demo transaction
+TXN-00256,2026-10-27,Expense,Software Subscriptions,CloudDesk Software,5200,Bank Transfer,Paid,REF-00256,Synthetic demo transaction
+TXN-00266,2026-10-30,Expense,Inventory Purchase,Apex Stationery Wholesale,25593,NEFT,Paid,REF-00266,Synthetic demo transaction
+TXN-00267,2026-10-30,Expense,Bank Charges,HDFC Bank,520,NEFT,Paid,REF-00267,Synthetic demo transaction

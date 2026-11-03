@@ -45,6 +45,112 @@ let clients: Client[] = [...SEED_CLIENTS];
 let leakageFindings: ProfitLeakageFinding[] = [...SEED_PROFIT_LEAKAGE];
 let financialSummary = { ...SEED_FINANCIAL_SUMMARY };
 
+// Merge 7-month validated dataset if available
+try {
+  const candidates = [
+    path.join(__dirname, 'sampleDatabaseSeeder.json'),
+    path.join(__dirname, '../src/sampleDatabaseSeeder.json')
+  ];
+  const seederPath = candidates.find(p => fs.existsSync(p));
+  if (seederPath) {
+    const seeded = JSON.parse(fs.readFileSync(seederPath, 'utf-8'));
+    if (seeded.expenses) {
+      const existingIds = new Set(expenses.map(e => e.id));
+      for (const e of seeded.expenses) {
+        if (!existingIds.has(e.id)) {
+          expenses.push({
+            id: e.id,
+            date: e.expense_date,
+            vendor: e.vendor,
+            category: e.category,
+            description: e.description,
+            amount: Number(e.amount),
+            status: e.status || 'Approved',
+            paymentMethod: e.payment_method || 'Bank Transfer',
+            referenceNo: e.reference_no || e.id
+          });
+          existingIds.add(e.id);
+        }
+      }
+    }
+    if (seeded.invoices) {
+      const existingInv = new Set(invoices.map(i => i.id));
+      for (const i of seeded.invoices) {
+        if (!existingInv.has(i.id)) {
+          invoices.push({
+            id: i.id,
+            invoice_number: i.invoice_number,
+            vendor_name: i.vendor_name,
+            gstin: i.gstin || '',
+            bank_account: i.bank_account || '',
+            bank_ifsc: i.bank_ifsc || '',
+            invoice_date: i.invoice_date,
+            due_date: i.due_date || i.invoice_date,
+            subtotal: Number(i.subtotal),
+            gst_rate: Number(i.gst_rate || 18),
+            tax_amount: Number(i.tax_amount || 0),
+            total_amount: Number(i.total_amount),
+            status: i.status || 'PENDING',
+            risk_score: i.risk_score || 0,
+            risk_classification: i.risk_classification || 'Low Risk',
+            anomalies_detected: i.anomalies_detected || [],
+            supporting_evidence: i.supporting_evidence || [],
+            recommended_verification_steps: i.recommended_verification_steps || []
+          });
+          existingInv.add(i.id);
+        }
+      }
+    }
+    if (seeded.clients) {
+      const existingCli = new Set(clients.map(c => c.id));
+      for (const c of seeded.clients) {
+        if (!existingCli.has(c.id)) {
+          clients.push({
+            id: c.id,
+            name: c.name,
+            companyName: c.company_name || c.name,
+            gstin: c.gstin || '',
+            email: c.email || '',
+            phone: c.phone || '',
+            outstandingBalance: Number(c.outstanding_balance),
+            daysSalesOutstanding: c.days_sales_outstanding || 30,
+            riskProfile: c.risk_profile || 'Low',
+            creditLimit: Number(c.credit_limit || 1000000),
+            lastPaymentDate: c.last_payment_date || new Date().toISOString().split('T')[0],
+            contractStatus: c.contract_status || 'Active'
+          });
+          existingCli.add(c.id);
+        }
+      }
+    }
+    if (seeded.profit_leakage_findings) {
+      const existingLf = new Set(leakageFindings.map(l => l.id));
+      for (const l of seeded.profit_leakage_findings) {
+        if (!existingLf.has(l.id)) {
+          leakageFindings.push({
+            id: l.id,
+            category: l.category,
+            title: l.title,
+            department: l.department || 'Operations',
+            vendor: l.vendor || 'General Vendor',
+            frequency: l.frequency || 'One-off',
+            estimated_financial_impact: Number(l.estimated_financial_impact),
+            potential_annual_savings: Number(l.potential_annual_savings),
+            leakage_type: l.leakage_type || 'Suspected Leakage',
+            historical_comparison: l.historical_comparison || '',
+            explanation: l.explanation || '',
+            suggested_action: l.suggested_action || ''
+          });
+          existingLf.add(l.id);
+        }
+      }
+    }
+    console.log(`[*] Preloaded 7-Month SME Dataset: ${expenses.length} expenses, ${invoices.length} invoices, ${clients.length} clients, ${leakageFindings.length} leakage findings.`);
+  }
+} catch (e) {
+  console.warn('[Seeder] Could not preload sample database:', (e as Error).message);
+}
+
 // ---------------------------------------------------------------------
 // 1. AUTHENTICATION & ORGANIZATION
 // ---------------------------------------------------------------------
@@ -419,17 +525,129 @@ app.post('/api/assistant/chat', async (req: Request, res: Response) => {
   res.json({ status: 'success', reply });
 });
 
+// ---------------------------------------------------------------------
+// 11. SAMPLE DATASETS & RECONCILIATION FILES
+// ---------------------------------------------------------------------
+app.get('/api/samples', (req: Request, res: Response) => {
+  const candidates = [
+    path.join(__dirname, '../../data/samples'),
+    path.join(__dirname, '../data/samples'),
+    path.join(process.cwd(), 'data/samples')
+  ];
+  const samplesDir = candidates.find(p => fs.existsSync(p));
+  if (!samplesDir) return res.json({ samples: [], total: 0 });
+
+  try {
+    const files = fs.readdirSync(samplesDir).map(file => {
+      const filePath = path.join(samplesDir, file);
+      const stats = fs.statSync(filePath);
+      return {
+        filename: file,
+        sizeBytes: stats.size,
+        sizeFormatted: `${(stats.size / 1024).toFixed(1)} KB`,
+        extension: path.extname(file).replace('.', '').toUpperCase(),
+        isWorkbook: file.endsWith('.xlsx'),
+        updatedAt: stats.mtime.toISOString(),
+        downloadUrl: `/api/samples/download/${encodeURIComponent(file)}`
+      };
+    });
+    res.json({
+      status: 'success',
+      total: files.length,
+      samples: files,
+      databaseSummary: {
+        expensesCount: expenses.length,
+        invoicesCount: invoices.length,
+        clientsCount: clients.length,
+        leakageFindingsCount: leakageFindings.length,
+        organizationsAvailable: ['Apex Technologies Pvt Ltd', 'Aarav Office Solutions Pvt. Ltd.']
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message });
+  }
+});
+
+app.get('/api/samples/download/:filename', (req: Request, res: Response) => {
+  const filename = path.basename(req.params.filename);
+  const candidates = [
+    path.join(__dirname, '../../data/samples', filename),
+    path.join(__dirname, '../data/samples', filename),
+    path.join(process.cwd(), 'data/samples', filename),
+    path.join(process.cwd(), 'storage/samples', filename)
+  ];
+  const filePath = candidates.find(p => fs.existsSync(p));
+  if (!filePath) {
+    return res.status(404).json({ error: `Sample dataset '${filename}' not found` });
+  }
+  res.download(filePath, filename);
+});
+
+app.post('/api/samples/sync', async (req: Request, res: Response) => {
+  try {
+    const isConn = await supabaseService.testConnection();
+    if (isConn) {
+      expenses = await supabaseService.getExpenses(expenses);
+      invoices = await supabaseService.getInvoices(invoices);
+      clients = await supabaseService.getClients(clients);
+      leakageFindings = await supabaseService.getProfitLeakageFindings(leakageFindings);
+    }
+    res.json({
+      status: 'success',
+      supabaseConnected: isConn,
+      records: {
+        expenses: expenses.length,
+        invoices: invoices.length,
+        clients: clients.length,
+        leakageFindings: leakageFindings.length
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message });
+  }
+});
+
+// ---------------------------------------------------------------------
+// 12. AI TRAINING & MODEL CALIBRATION
+// ---------------------------------------------------------------------
+app.get('/api/ai/training-status', async (req: Request, res: Response) => {
+  const status = await financeEngineClient.getModelStatus();
+  res.json({ status: 'success', modelStatus: status });
+});
+
+app.post('/api/ai/train', async (req: Request, res: Response) => {
+  const result = await financeEngineClient.triggerTraining();
+  res.json({ status: 'success', result });
+});
+
 // Health check
 app.get('/api/health', (req: Request, res: Response) => {
   res.json({
     status: 'online',
     app: 'ARTHIQ Fintech Core API Gateway',
     timestamp: new Date().toISOString(),
-    organization: organization.name
+    organization: organization.name,
+    records: {
+      expenses: expenses.length,
+      invoices: invoices.length,
+      clients: clients.length,
+      leakage: leakageFindings.length
+    }
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`[*] ARTHIQ Core API Gateway running on http://127.0.0.1:${PORT}`);
+  try {
+    if (await supabaseService.testConnection()) {
+      expenses = await supabaseService.getExpenses(expenses);
+      invoices = await supabaseService.getInvoices(invoices);
+      clients = await supabaseService.getClients(clients);
+      leakageFindings = await supabaseService.getProfitLeakageFindings(leakageFindings);
+      console.log(`[*] Synchronized latest data from Supabase Cloud: ${expenses.length} expenses, ${invoices.length} invoices, ${clients.length} clients.`);
+    }
+  } catch (e) {
+    console.warn('[Sync] Initial Supabase cloud pull deferred:', (e as Error).message);
+  }
 });
 

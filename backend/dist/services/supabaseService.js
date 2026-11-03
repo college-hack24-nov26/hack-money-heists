@@ -235,5 +235,53 @@ exports.supabaseService = {
         catch (err) {
             console.warn('[Supabase] Failed to insert client:', err.message);
         }
+    },
+    // -------------------------------------------------------------------
+    // PROFIT LEAKAGE FINDINGS
+    // -------------------------------------------------------------------
+    async getProfitLeakageFindings(fallback) {
+        if (!supabaseClient)
+            return fallback;
+        try {
+            const { data, error } = await supabaseClient
+                .from('profit_leakage_findings')
+                .select('*');
+            if (error || !data || data.length === 0) {
+                return fallback;
+            }
+            return data.map((d) => ({
+                id: d.id,
+                category: d.category,
+                title: d.title,
+                department: d.department,
+                vendor: d.vendor,
+                frequency: d.frequency,
+                estimated_financial_impact: Number(d.estimated_financial_impact),
+                potential_annual_savings: Number(d.potential_annual_savings),
+                leakage_type: d.leakage_type || 'Suspected Leakage',
+                historical_comparison: d.historical_comparison || '',
+                explanation: d.explanation || '',
+                suggested_action: d.suggested_action || ''
+            }));
+        }
+        catch {
+            return fallback;
+        }
+    },
+    // -------------------------------------------------------------------
+    // VENDORS
+    // -------------------------------------------------------------------
+    async getVendors() {
+        if (!supabaseClient)
+            return [];
+        try {
+            const { data, error } = await supabaseClient.from('vendors').select('*');
+            if (error || !data)
+                return [];
+            return data;
+        }
+        catch {
+            return [];
+        }
     }
 };

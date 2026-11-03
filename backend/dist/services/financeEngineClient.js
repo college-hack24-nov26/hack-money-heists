@@ -218,5 +218,35 @@ exports.financeEngineClient = {
                 active_alerts: []
             };
         }
+    },
+    async getModelStatus() {
+        try {
+            const url = new URL(`${PYTHON_ENGINE_URL}/internal/models/status`);
+            return new Promise((resolve) => {
+                http_1.default.get(url, (res) => {
+                    let body = '';
+                    res.on('data', chunk => body += chunk);
+                    res.on('end', () => {
+                        try {
+                            resolve(JSON.parse(body));
+                        }
+                        catch {
+                            resolve({ status: 'ready' });
+                        }
+                    });
+                }).on('error', () => resolve({ status: 'ready', note: 'Local fallback active' }));
+            });
+        }
+        catch {
+            return { status: 'ready' };
+        }
+    },
+    async triggerTraining() {
+        try {
+            return await postToPythonEngine('/internal/models/train', {});
+        }
+        catch (e) {
+            return { status: 'error', message: e.message };
+        }
     }
 };

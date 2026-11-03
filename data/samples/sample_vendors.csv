@@ -1,0 +1,11 @@
+vendor_id,vendor_name,payment_terms_days,risk_tier
+V001,Apex Raw Materials,30,Low
+V002,BrightPack Supplies,15,Medium
+V003,CoreTech Components,30,Low
+V004,Delta Logistics,15,Medium
+V005,Evergreen Chemicals,30,Low
+V006,FineTools Industrial,30,Low
+V007,Galaxy Electricals,15,Medium
+V008,Horizon Office Mart,15,Low
+V009,Indus Packaging,30,Medium
+V010,Jupiter Machinery,30,Low

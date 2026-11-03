@@ -1,0 +1,8 @@
+Test_ID,Feature,Example_Prompt,Expected_Correct_Behavior,Validation_Method
+01,Monthly performance,"Summarize income, expenses and net cash flow for each month.",Totals must match the Transactions sheet exactly.,Aggregation and reconciliation
+02,Expense breakdown,Which expense categories account for the largest spend?,Rank categories by total expense across the seven-month period.,Category grouping
+03,Budget tracking,Which categories exceeded budget in October 2026?,Compare October actuals with October category budgets; show rupee and percentage variance.,Budget variance
+04,Invoice follow-up,Which customer invoices are outstanding or overdue?,"Show the four open invoices, their amounts and due dates; distinguish overdue from pending.",Invoice status and date logic
+05,Cash position,How did the cash position change from April to October?,Use opening balance plus monthly net cash flow; ending balances must reconcile.,Cash-flow reconciliation
+06,AI assistant,Give management three practical financial observations from this dataset.,Use computed trends only; distinguish observations from recommendations.,Grounded analysis
+07,Data validation,"Check for missing IDs, invalid amounts or inconsistent invoice links.",IDs unique; amounts positive; paid invoices linked to income transactions; outstanding invoices have no receipt link.,Data quality checks

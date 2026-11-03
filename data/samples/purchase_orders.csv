@@ -1,0 +1,42 @@
+po_id,vendor_id,vendor_name,order_date,category,item_description,quantity,unit_price_inr,total_amount_inr,delivery_status
+PO-1001,V010,Jupiter Machinery,2026-10-16,Maintenance,Maintenance supply,407,1214.38,494252.66,In Transit
+PO-1002,V004,Delta Logistics,2026-10-07,Maintenance,Maintenance supply,357,1152.92,411592.44,Delivered
+PO-1003,V002,BrightPack Supplies,2026-10-21,Raw Materials,Raw Materials supply,168,1199.83,201571.44,Delivered
+PO-1004,V010,Jupiter Machinery,2026-07-24,Packaging,Packaging supply,56,1371.67,76813.52,In Transit
+PO-1005,V007,Galaxy Electricals,2026-06-07,Packaging,Packaging supply,412,845.96,348535.52,In Transit
+PO-1006,V009,Indus Packaging,2026-09-09,Packaging,Packaging supply,141,1377.95,194290.95,Delayed
+PO-1007,V005,Evergreen Chemicals,2026-10-11,Raw Materials,Raw Materials supply,249,1447.31,360380.19,Delivered
+PO-1008,V004,Delta Logistics,2026-10-24,Office Supplies,Office Supplies supply,443,1222.51,541571.93,In Transit
+PO-1009,V002,BrightPack Supplies,2026-08-01,Maintenance,Maintenance supply,284,255.5,72562,In Transit
+PO-1010,V005,Evergreen Chemicals,2026-09-13,Maintenance,Maintenance supply,65,1038.27,67487.55,Delayed
+PO-1011,V001,Apex Raw Materials,2026-09-18,Maintenance,Maintenance supply,478,946.32,452340.96,Delivered
+PO-1012,V008,Horizon Office Mart,2026-10-10,Office Supplies,Office Supplies supply,69,278.48,19215.12,Delivered
+PO-1013,V005,Evergreen Chemicals,2026-08-04,Raw Materials,Raw Materials supply,130,1339.91,174188.3,Delivered
+PO-1014,V007,Galaxy Electricals,2026-08-12,Office Supplies,Office Supplies supply,310,1134.02,351546.2,Delivered
+PO-1015,V007,Galaxy Electricals,2026-10-04,Office Supplies,Office Supplies supply,325,659.52,214344,In Transit
+PO-1016,V001,Apex Raw Materials,2026-10-12,Packaging,Packaging supply,237,711.47,168618.39,Delivered
+PO-1017,V006,FineTools Industrial,2026-05-22,Maintenance,Maintenance supply,288,1360.41,391798.08,In Transit
+PO-1018,V001,Apex Raw Materials,2026-08-09,Packaging,Packaging supply,72,1427.6,102787.2,Delayed
+PO-1019,V002,BrightPack Supplies,2026-10-07,Raw Materials,Raw Materials supply,35,1197.25,41903.75,Delivered
+PO-1020,V003,CoreTech Components,2026-09-07,Raw Materials,Raw Materials supply,434,1166.52,506269.68,Delivered
+PO-1021,V010,Jupiter Machinery,2026-06-08,Maintenance,Maintenance supply,406,289.53,117549.18,Delivered
+PO-1022,V005,Evergreen Chemicals,2026-06-05,Maintenance,Maintenance supply,418,327.79,137016.22,Delivered
+PO-1023,V003,CoreTech Components,2026-05-12,Packaging,Packaging supply,311,539.76,167865.36,Delivered
+PO-1024,V005,Evergreen Chemicals,2026-05-05,Office Supplies,Office Supplies supply,279,241.38,67345.02,Delivered
+PO-1025,V008,Horizon Office Mart,2026-08-25,Maintenance,Maintenance supply,272,923.01,251058.72,Delayed
+PO-1026,V009,Indus Packaging,2026-06-20,Raw Materials,Raw Materials supply,382,1192.18,455412.76,In Transit
+PO-1027,V008,Horizon Office Mart,2026-10-01,Raw Materials,Raw Materials supply,255,1283.16,327205.8,Delayed
+PO-1028,V002,BrightPack Supplies,2026-08-23,Office Supplies,Office Supplies supply,47,1356.96,63777.12,In Transit
+PO-1029,V010,Jupiter Machinery,2026-06-03,Packaging,Packaging supply,150,966.53,144979.5,In Transit
+PO-1030,V007,Galaxy Electricals,2026-09-17,Maintenance,Maintenance supply,242,797.88,193086.96,Delayed
+PO-1031,V002,BrightPack Supplies,2026-10-04,Packaging,Packaging supply,230,721.21,165878.3,Delivered
+PO-1032,V007,Galaxy Electricals,2026-07-15,Office Supplies,Office Supplies supply,222,1116.05,247763.1,In Transit
+PO-1033,V007,Galaxy Electricals,2026-07-22,Maintenance,Maintenance supply,201,1434.1,288254.1,Delayed
+PO-1034,V002,BrightPack Supplies,2026-05-03,Raw Materials,Raw Materials supply,231,217.12,50154.72,In Transit
+PO-1035,V003,CoreTech Components,2026-09-02,Maintenance,Maintenance supply,353,253.57,89510.21,In Transit
+PO-1036,V007,Galaxy Electricals,2026-10-02,Maintenance,Maintenance supply,317,523.68,166006.56,Delivered
+PO-1037,V010,Jupiter Machinery,2026-09-07,Packaging,Packaging supply,346,764.71,264589.66,Delivered
+PO-1038,V006,FineTools Industrial,2026-09-12,Raw Materials,Raw Materials supply,400,475.57,190228,Delivered
+PO-1039,V007,Galaxy Electricals,2026-09-25,Raw Materials,Raw Materials supply,321,1399.3,449175.3,In Transit
+PO-1040,V001,Apex Raw Materials,2026-06-09,Maintenance,Maintenance supply,481,562.55,270586.55,Delivered
+

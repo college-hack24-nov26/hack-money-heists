@@ -1,0 +1,131 @@
+Invoice_ID,Customer_ID,Customer_Name,Issue_Date,Due_Date,Invoice_Amount_INR,Status,Paid_Date,Linked_Transaction_ID,Invoice_Type,Notes
+AR-0001,CUST-101,Aster Learning Centre,2026-04-01,2026-05-01,30120,Paid,2026-04-01,TXN-00014,Accounts receivable,Paid invoice; linked income transaction
+AR-0002,CUST-102,Walk-in Customers,2026-04-03,2026-05-03,35159,Paid,2026-04-03,TXN-00001,Accounts receivable,Paid invoice; linked income transaction
+AR-0003,CUST-103,UrbanDesk Co.,2026-04-04,2026-05-04,24499,Paid,2026-04-04,TXN-00006,Accounts receivable,Paid invoice; linked income transaction
+AR-0004,CUST-104,Vertex Systems,2026-04-05,2026-05-05,55699,Paid,2026-04-05,TXN-00013,Accounts receivable,Paid invoice; linked income transaction
+AR-0005,CUST-105,Pioneer Schools,2026-04-06,2026-05-06,14571,Paid,2026-04-06,TXN-00016,Accounts receivable,Paid invoice; linked income transaction
+AR-0006,CUST-106,BluePeak Services,2026-04-11,2026-05-11,43120,Paid,2026-04-11,TXN-00018,Accounts receivable,Paid invoice; linked income transaction
+AR-0007,CUST-107,Aster Learning Centre,2026-04-13,2026-05-13,33622,Paid,2026-04-13,TXN-00002,Accounts receivable,Paid invoice; linked income transaction
+AR-0008,CUST-108,Northstar Coaching,2026-04-13,2026-05-13,49991,Paid,2026-04-13,TXN-00015,Accounts receivable,Paid invoice; linked income transaction
+AR-0009,CUST-109,Walk-in Customers,2026-04-16,2026-05-16,17008,Paid,2026-04-16,TXN-00005,Accounts receivable,Paid invoice; linked income transaction
+AR-0010,CUST-110,Walk-in Customers,2026-04-19,2026-05-19,66423,Paid,2026-04-19,TXN-00004,Accounts receivable,Paid invoice; linked income transaction
+AR-0011,CUST-111,BluePeak Services,2026-04-19,2026-05-19,32826,Paid,2026-04-19,TXN-00008,Accounts receivable,Paid invoice; linked income transaction
+AR-0012,CUST-112,BluePeak Services,2026-04-21,2026-05-21,18538,Paid,2026-04-21,TXN-00007,Accounts receivable,Paid invoice; linked income transaction
+AR-0013,CUST-113,Walk-in Customers,2026-04-22,2026-05-22,49280,Paid,2026-04-22,TXN-00009,Accounts receivable,Paid invoice; linked income transaction
+AR-0014,CUST-114,Vertex Systems,2026-04-25,2026-05-25,28473,Paid,2026-04-25,TXN-00012,Accounts receivable,Paid invoice; linked income transaction
+AR-0015,CUST-115,BluePeak Services,2026-04-25,2026-05-25,31928,Paid,2026-04-25,TXN-00017,Accounts receivable,Paid invoice; linked income transaction
+AR-0016,CUST-116,Vertex Systems,2026-04-27,2026-05-27,21385,Paid,2026-04-27,TXN-00003,Accounts receivable,Paid invoice; linked income transaction
+AR-0017,CUST-117,Northstar Coaching,2026-04-28,2026-05-28,52152,Paid,2026-04-28,TXN-00010,Accounts receivable,Paid invoice; linked income transaction
+AR-0018,CUST-118,Vertex Systems,2026-04-28,2026-05-28,35206,Paid,2026-04-28,TXN-00011,Accounts receivable,Paid invoice; linked income transaction
+AR-0019,CUST-101,Vertex Systems,2026-05-02,2026-06-01,28113,Paid,2026-05-02,TXN-00045,Accounts receivable,Paid invoice; linked income transaction
+AR-0020,CUST-102,Pioneer Schools,2026-05-02,2026-06-01,19546,Paid,2026-05-02,TXN-00052,Accounts receivable,Paid invoice; linked income transaction
+AR-0021,CUST-103,Pioneer Schools,2026-05-03,2026-06-02,45703,Paid,2026-05-03,TXN-00040,Accounts receivable,Paid invoice; linked income transaction
+AR-0022,CUST-104,Aster Learning Centre,2026-05-04,2026-06-03,20284,Paid,2026-05-04,TXN-00043,Accounts receivable,Paid invoice; linked income transaction
+AR-0023,CUST-105,Aster Learning Centre,2026-05-06,2026-06-05,32191,Paid,2026-05-06,TXN-00046,Accounts receivable,Paid invoice; linked income transaction
+AR-0024,CUST-106,BluePeak Services,2026-05-06,2026-06-05,53980,Paid,2026-05-06,TXN-00050,Accounts receivable,Paid invoice; linked income transaction
+AR-0025,CUST-107,Pioneer Schools,2026-05-06,2026-06-05,32166,Paid,2026-05-06,TXN-00055,Accounts receivable,Paid invoice; linked income transaction
+AR-0026,CUST-108,Aster Learning Centre,2026-05-09,2026-06-08,13894,Paid,2026-05-09,TXN-00047,Accounts receivable,Paid invoice; linked income transaction
+AR-0027,CUST-109,Walk-in Customers,2026-05-11,2026-06-10,23960,Paid,2026-05-11,TXN-00044,Accounts receivable,Paid invoice; linked income transaction
+AR-0028,CUST-110,UrbanDesk Co.,2026-05-12,2026-06-11,46325,Paid,2026-05-12,TXN-00053,Accounts receivable,Paid invoice; linked income transaction
+AR-0029,CUST-111,Aster Learning Centre,2026-05-17,2026-06-16,45043,Paid,2026-05-17,TXN-00042,Accounts receivable,Paid invoice; linked income transaction
+AR-0030,CUST-112,Pioneer Schools,2026-05-18,2026-06-17,43341,Paid,2026-05-18,TXN-00041,Accounts receivable,Paid invoice; linked income transaction
+AR-0031,CUST-113,UrbanDesk Co.,2026-05-19,2026-06-18,28432,Paid,2026-05-19,TXN-00048,Accounts receivable,Paid invoice; linked income transaction
+AR-0032,CUST-114,UrbanDesk Co.,2026-05-19,2026-06-18,72692,Paid,2026-05-19,TXN-00056,Accounts receivable,Paid invoice; linked income transaction
+AR-0033,CUST-115,BluePeak Services,2026-05-22,2026-06-21,44063,Paid,2026-05-22,TXN-00054,Accounts receivable,Paid invoice; linked income transaction
+AR-0034,CUST-116,UrbanDesk Co.,2026-05-24,2026-06-23,32277,Paid,2026-05-24,TXN-00057,Accounts receivable,Paid invoice; linked income transaction
+AR-0035,CUST-117,Walk-in Customers,2026-05-27,2026-06-26,34761,Paid,2026-05-27,TXN-00051,Accounts receivable,Paid invoice; linked income transaction
+AR-0036,CUST-118,BluePeak Services,2026-05-28,2026-06-27,48229,Paid,2026-05-28,TXN-00049,Accounts receivable,Paid invoice; linked income transaction
+AR-0037,CUST-101,Pioneer Schools,2026-06-01,2026-07-01,21411,Paid,2026-06-01,TXN-00085,Accounts receivable,Paid invoice; linked income transaction
+AR-0038,CUST-102,Aster Learning Centre,2026-06-02,2026-07-02,39922,Paid,2026-06-02,TXN-00089,Accounts receivable,Paid invoice; linked income transaction
+AR-0039,CUST-103,Pioneer Schools,2026-06-06,2026-07-06,41593,Paid,2026-06-06,TXN-00082,Accounts receivable,Paid invoice; linked income transaction
+AR-0040,CUST-104,Aster Learning Centre,2026-06-07,2026-07-07,9825,Paid,2026-06-07,TXN-00095,Accounts receivable,Paid invoice; linked income transaction
+AR-0041,CUST-105,Vertex Systems,2026-06-08,2026-07-08,27060,Paid,2026-06-08,TXN-00081,Accounts receivable,Paid invoice; linked income transaction
+AR-0042,CUST-106,BluePeak Services,2026-06-08,2026-07-08,23123,Paid,2026-06-08,TXN-00087,Accounts receivable,Paid invoice; linked income transaction
+AR-0043,CUST-107,BluePeak Services,2026-06-10,2026-07-10,57621,Paid,2026-06-10,TXN-00080,Accounts receivable,Paid invoice; linked income transaction
+AR-0044,CUST-108,Pioneer Schools,2026-06-13,2026-07-13,69541,Paid,2026-06-13,TXN-00079,Accounts receivable,Paid invoice; linked income transaction
+AR-0045,CUST-109,BluePeak Services,2026-06-13,2026-07-13,46538,Paid,2026-06-13,TXN-00090,Accounts receivable,Paid invoice; linked income transaction
+AR-0046,CUST-110,Pioneer Schools,2026-06-14,2026-07-14,20741,Paid,2026-06-14,TXN-00086,Accounts receivable,Paid invoice; linked income transaction
+AR-0047,CUST-111,Walk-in Customers,2026-06-21,2026-07-21,49794,Paid,2026-06-21,TXN-00088,Accounts receivable,Paid invoice; linked income transaction
+AR-0048,CUST-112,Pioneer Schools,2026-06-22,2026-07-22,22639,Paid,2026-06-22,TXN-00091,Accounts receivable,Paid invoice; linked income transaction
+AR-0049,CUST-113,Aster Learning Centre,2026-06-22,2026-07-22,30069,Paid,2026-06-22,TXN-00092,Accounts receivable,Paid invoice; linked income transaction
+AR-0050,CUST-114,Pioneer Schools,2026-06-24,2026-07-24,43932,Paid,2026-06-24,TXN-00084,Accounts receivable,Paid invoice; linked income transaction
+AR-0051,CUST-115,Vertex Systems,2026-06-26,2026-07-26,40114,Paid,2026-06-26,TXN-00083,Accounts receivable,Paid invoice; linked income transaction
+AR-0052,CUST-116,UrbanDesk Co.,2026-06-27,2026-07-27,40910,Paid,2026-06-27,TXN-00096,Accounts receivable,Paid invoice; linked income transaction
+AR-0053,CUST-117,BluePeak Services,2026-06-29,2026-07-29,41774,Paid,2026-06-29,TXN-00093,Accounts receivable,Paid invoice; linked income transaction
+AR-0054,CUST-118,Walk-in Customers,2026-06-30,2026-07-30,63393,Paid,2026-06-30,TXN-00094,Accounts receivable,Paid invoice; linked income transaction
+AR-0055,CUST-101,BluePeak Services,2026-07-01,2026-07-31,50058,Paid,2026-07-01,TXN-00123,Accounts receivable,Paid invoice; linked income transaction
+AR-0056,CUST-102,Pioneer Schools,2026-07-01,2026-07-31,46095,Paid,2026-07-01,TXN-00124,Accounts receivable,Paid invoice; linked income transaction
+AR-0057,CUST-103,Pioneer Schools,2026-07-02,2026-08-01,48204,Paid,2026-07-02,TXN-00129,Accounts receivable,Paid invoice; linked income transaction
+AR-0058,CUST-104,BluePeak Services,2026-07-06,2026-08-05,14076,Paid,2026-07-06,TXN-00120,Accounts receivable,Paid invoice; linked income transaction
+AR-0059,CUST-105,BluePeak Services,2026-07-06,2026-08-05,36939,Paid,2026-07-06,TXN-00121,Accounts receivable,Paid invoice; linked income transaction
+AR-0060,CUST-106,Walk-in Customers,2026-07-07,2026-08-06,23808,Paid,2026-07-07,TXN-00128,Accounts receivable,Paid invoice; linked income transaction
+AR-0061,CUST-107,Pioneer Schools,2026-07-09,2026-08-08,47869,Paid,2026-07-09,TXN-00125,Accounts receivable,Paid invoice; linked income transaction
+AR-0062,CUST-108,Vertex Systems,2026-07-11,2026-08-10,28159,Paid,2026-07-11,TXN-00117,Accounts receivable,Paid invoice; linked income transaction
+AR-0063,CUST-109,Northstar Coaching,2026-07-12,2026-08-11,72683,Paid,2026-07-12,TXN-00122,Accounts receivable,Paid invoice; linked income transaction
+AR-0064,CUST-110,Northstar Coaching,2026-07-14,2026-08-13,21036,Paid,2026-07-14,TXN-00118,Accounts receivable,Paid invoice; linked income transaction
+AR-0065,CUST-111,UrbanDesk Co.,2026-07-14,2026-08-13,17464,Paid,2026-07-14,TXN-00131,Accounts receivable,Paid invoice; linked income transaction
+AR-0066,CUST-112,BluePeak Services,2026-07-16,2026-08-15,37860,Paid,2026-07-16,TXN-00126,Accounts receivable,Paid invoice; linked income transaction
+AR-0067,CUST-113,Vertex Systems,2026-07-22,2026-08-21,36094,Paid,2026-07-22,TXN-00134,Accounts receivable,Paid invoice; linked income transaction
+AR-0068,CUST-114,Pioneer Schools,2026-07-23,2026-08-22,25985,Paid,2026-07-23,TXN-00132,Accounts receivable,Paid invoice; linked income transaction
+AR-0069,CUST-115,Pioneer Schools,2026-07-23,2026-08-22,72490,Paid,2026-07-23,TXN-00133,Accounts receivable,Paid invoice; linked income transaction
+AR-0070,CUST-116,BluePeak Services,2026-07-27,2026-08-26,27534,Paid,2026-07-27,TXN-00127,Accounts receivable,Paid invoice; linked income transaction
+AR-0071,CUST-117,Northstar Coaching,2026-07-28,2026-08-27,58180,Paid,2026-07-28,TXN-00130,Accounts receivable,Paid invoice; linked income transaction
+AR-0072,CUST-118,Northstar Coaching,2026-07-30,2026-08-29,10466,Paid,2026-07-30,TXN-00119,Accounts receivable,Paid invoice; linked income transaction
+AR-0073,CUST-101,Northstar Coaching,2026-08-02,2026-09-01,31510,Paid,2026-08-02,TXN-00161,Accounts receivable,Paid invoice; linked income transaction
+AR-0074,CUST-102,Walk-in Customers,2026-08-04,2026-09-03,77316,Paid,2026-08-04,TXN-00160,Accounts receivable,Paid invoice; linked income transaction
+AR-0075,CUST-103,Pioneer Schools,2026-08-05,2026-09-04,57853,Paid,2026-08-05,TXN-00170,Accounts receivable,Paid invoice; linked income transaction
+AR-0076,CUST-104,Vertex Systems,2026-08-09,2026-09-08,26001,Paid,2026-08-09,TXN-00158,Accounts receivable,Paid invoice; linked income transaction
+AR-0077,CUST-105,BluePeak Services,2026-08-12,2026-09-11,63466,Paid,2026-08-12,TXN-00159,Accounts receivable,Paid invoice; linked income transaction
+AR-0078,CUST-106,Aster Learning Centre,2026-08-13,2026-09-12,39114,Paid,2026-08-13,TXN-00173,Accounts receivable,Paid invoice; linked income transaction
+AR-0079,CUST-107,Pioneer Schools,2026-08-15,2026-09-14,26669,Paid,2026-08-15,TXN-00169,Accounts receivable,Paid invoice; linked income transaction
+AR-0080,CUST-108,Pioneer Schools,2026-08-16,2026-09-15,28037,Paid,2026-08-16,TXN-00164,Accounts receivable,Paid invoice; linked income transaction
+AR-0081,CUST-109,UrbanDesk Co.,2026-08-17,2026-09-16,20630,Paid,2026-08-17,TXN-00156,Accounts receivable,Paid invoice; linked income transaction
+AR-0082,CUST-110,UrbanDesk Co.,2026-08-19,2026-09-18,40804,Paid,2026-08-19,TXN-00172,Accounts receivable,Paid invoice; linked income transaction
+AR-0083,CUST-111,Aster Learning Centre,2026-08-21,2026-09-20,31602,Paid,2026-08-21,TXN-00162,Accounts receivable,Paid invoice; linked income transaction
+AR-0084,CUST-112,Aster Learning Centre,2026-08-21,2026-09-20,36135,Paid,2026-08-21,TXN-00163,Accounts receivable,Paid invoice; linked income transaction
+AR-0085,CUST-113,Northstar Coaching,2026-08-22,2026-09-21,31035,Paid,2026-08-22,TXN-00166,Accounts receivable,Paid invoice; linked income transaction
+AR-0086,CUST-114,Northstar Coaching,2026-08-23,2026-09-22,78709,Paid,2026-08-23,TXN-00157,Accounts receivable,Paid invoice; linked income transaction
+AR-0087,CUST-115,Vertex Systems,2026-08-25,2026-09-24,66154,Paid,2026-08-25,TXN-00165,Accounts receivable,Paid invoice; linked income transaction
+AR-0088,CUST-116,BluePeak Services,2026-08-27,2026-09-26,18177,Paid,2026-08-27,TXN-00167,Accounts receivable,Paid invoice; linked income transaction
+AR-0089,CUST-117,BluePeak Services,2026-08-30,2026-09-29,22052,Paid,2026-08-30,TXN-00168,Accounts receivable,Paid invoice; linked income transaction
+AR-0090,CUST-118,UrbanDesk Co.,2026-08-30,2026-09-29,24736,Paid,2026-08-30,TXN-00171,Accounts receivable,Paid invoice; linked income transaction
+AR-0091,CUST-101,Vertex Systems,2026-09-05,2026-10-05,42851,Paid,2026-09-05,TXN-00198,Accounts receivable,Paid invoice; linked income transaction
+AR-0092,CUST-102,Pioneer Schools,2026-09-06,2026-10-06,44633,Paid,2026-09-06,TXN-00202,Accounts receivable,Paid invoice; linked income transaction
+AR-0093,CUST-103,UrbanDesk Co.,2026-09-09,2026-10-09,63681,Paid,2026-09-09,TXN-00208,Accounts receivable,Paid invoice; linked income transaction
+AR-0094,CUST-104,Walk-in Customers,2026-09-12,2026-10-12,60172,Paid,2026-09-12,TXN-00199,Accounts receivable,Paid invoice; linked income transaction
+AR-0095,CUST-105,BluePeak Services,2026-09-12,2026-10-12,70408,Paid,2026-09-12,TXN-00206,Accounts receivable,Paid invoice; linked income transaction
+AR-0096,CUST-106,Northstar Coaching,2026-09-12,2026-10-12,34766,Paid,2026-09-12,TXN-00207,Accounts receivable,Paid invoice; linked income transaction
+AR-0097,CUST-107,Vertex Systems,2026-09-14,2026-10-14,34051,Paid,2026-09-14,TXN-00204,Accounts receivable,Paid invoice; linked income transaction
+AR-0098,CUST-108,Aster Learning Centre,2026-09-15,2026-10-15,31707,Paid,2026-09-15,TXN-00214,Accounts receivable,Paid invoice; linked income transaction
+AR-0099,CUST-109,Vertex Systems,2026-09-16,2026-10-16,27818,Paid,2026-09-16,TXN-00210,Accounts receivable,Paid invoice; linked income transaction
+AR-0100,CUST-110,UrbanDesk Co.,2026-09-16,2026-10-16,10392,Paid,2026-09-16,TXN-00212,Accounts receivable,Paid invoice; linked income transaction
+AR-0101,CUST-111,Pioneer Schools,2026-09-17,2026-10-17,57260,Paid,2026-09-17,TXN-00201,Accounts receivable,Paid invoice; linked income transaction
+AR-0102,CUST-112,Pioneer Schools,2026-09-19,2026-10-19,32418,Paid,2026-09-19,TXN-00211,Accounts receivable,Paid invoice; linked income transaction
+AR-0103,CUST-113,Pioneer Schools,2026-09-21,2026-10-21,24939,Paid,2026-09-21,TXN-00203,Accounts receivable,Paid invoice; linked income transaction
+AR-0104,CUST-114,UrbanDesk Co.,2026-09-21,2026-10-21,32111,Paid,2026-09-21,TXN-00209,Accounts receivable,Paid invoice; linked income transaction
+AR-0105,CUST-115,Northstar Coaching,2026-09-21,2026-10-21,42065,Paid,2026-09-21,TXN-00213,Accounts receivable,Paid invoice; linked income transaction
+AR-0106,CUST-116,BluePeak Services,2026-09-25,2026-10-25,53502,Paid,2026-09-25,TXN-00200,Accounts receivable,Paid invoice; linked income transaction
+AR-0107,CUST-117,Vertex Systems,2026-09-29,2026-10-29,59763,Paid,2026-09-29,TXN-00205,Accounts receivable,Paid invoice; linked income transaction
+AR-0108,CUST-118,Northstar Coaching,2026-09-30,2026-10-30,22463,Paid,2026-09-30,TXN-00197,Accounts receivable,Paid invoice; linked income transaction
+AR-0109,CUST-101,Vertex Systems,2026-10-02,2026-11-01,26126,Paid,2026-10-02,TXN-00243,Accounts receivable,Paid invoice; linked income transaction
+AR-0110,CUST-102,Northstar Coaching,2026-10-03,2026-11-02,26000,Paid,2026-10-03,TXN-00245,Accounts receivable,Paid invoice; linked income transaction
+AR-0111,CUST-103,Northstar Coaching,2026-10-05,2026-11-04,27308,Paid,2026-10-05,TXN-00235,Accounts receivable,Paid invoice; linked income transaction
+AR-0112,CUST-104,Vertex Systems,2026-10-06,2026-11-05,63022,Paid,2026-10-06,TXN-00238,Accounts receivable,Paid invoice; linked income transaction
+AR-0113,CUST-105,UrbanDesk Co.,2026-10-06,2026-11-05,64704,Paid,2026-10-06,TXN-00242,Accounts receivable,Paid invoice; linked income transaction
+AR-0114,CUST-106,Northstar Coaching,2026-10-09,2026-11-08,18518,Paid,2026-10-09,TXN-00236,Accounts receivable,Paid invoice; linked income transaction
+AR-0115,CUST-107,Walk-in Customers,2026-10-10,2026-11-09,26358,Paid,2026-10-10,TXN-00246,Accounts receivable,Paid invoice; linked income transaction
+AR-0116,CUST-108,UrbanDesk Co.,2026-10-10,2026-11-09,73351,Paid,2026-10-10,TXN-00248,Accounts receivable,Paid invoice; linked income transaction
+AR-0117,CUST-109,UrbanDesk Co.,2026-10-10,2026-11-09,10781,Paid,2026-10-10,TXN-00249,Accounts receivable,Paid invoice; linked income transaction
+AR-0118,CUST-110,UrbanDesk Co.,2026-10-12,2026-11-11,33995,Paid,2026-10-12,TXN-00247,Accounts receivable,Paid invoice; linked income transaction
+AR-0119,CUST-111,UrbanDesk Co.,2026-10-15,2026-11-14,52964,Paid,2026-10-15,TXN-00237,Accounts receivable,Paid invoice; linked income transaction
+AR-0120,CUST-112,Northstar Coaching,2026-10-16,2026-11-15,77731,Paid,2026-10-16,TXN-00244,Accounts receivable,Paid invoice; linked income transaction
+AR-0121,CUST-113,UrbanDesk Co.,2026-10-18,2026-11-17,56192,Paid,2026-10-18,TXN-00252,Accounts receivable,Paid invoice; linked income transaction
+AR-0122,CUST-114,Northstar Coaching,2026-10-19,2026-11-18,31156,Paid,2026-10-19,TXN-00251,Accounts receivable,Paid invoice; linked income transaction
+AR-0123,CUST-115,Walk-in Customers,2026-10-22,2026-11-21,25061,Paid,2026-10-22,TXN-00240,Accounts receivable,Paid invoice; linked income transaction
+AR-0124,CUST-116,Vertex Systems,2026-10-25,2026-11-24,37545,Paid,2026-10-25,TXN-00239,Accounts receivable,Paid invoice; linked income transaction
+AR-0125,CUST-117,Northstar Coaching,2026-10-25,2026-11-24,18957,Paid,2026-10-25,TXN-00250,Accounts receivable,Paid invoice; linked income transaction
+AR-0126,CUST-118,BluePeak Services,2026-10-27,2026-11-26,60231,Paid,2026-10-27,TXN-00241,Accounts receivable,Paid invoice; linked income transaction
+AR-0127,CUST-102,Vertex Systems,2026-10-18,2026-11-17,28500,Pending,,,Accounts receivable,Outstanding invoice; no receipt transaction yet
+AR-0128,CUST-103,Pioneer Schools,2026-10-22,2026-11-21,41200,Pending,,,Accounts receivable,Outstanding invoice; no receipt transaction yet
+AR-0129,CUST-104,BluePeak Services,2026-10-25,2026-10-30,19600,Overdue,,,Accounts receivable,Outstanding invoice; no receipt transaction yet
+AR-0130,CUST-105,UrbanDesk Co.,2026-10-28,2026-11-27,33750,Pending,,,Accounts receivable,Outstanding invoice; no receipt transaction yet

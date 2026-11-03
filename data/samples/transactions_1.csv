@@ -1,0 +1,146 @@
+transaction_id,date,type,category,description,counterparty_id,counterparty_name,amount_inr,payment_method,reference_no,status
+TX0001,2026-05-21,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,19250.54,UPI,RCPT-2605-001,Cleared
+TX0002,2026-05-08,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,24976.9,NEFT,RCPT-2605-002,Cleared
+TX0003,2026-05-22,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,47524.63,NEFT,RCPT-2605-003,Cleared
+TX0004,2026-05-01,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,28931.9,NEFT,RCPT-2605-004,Cleared
+TX0005,2026-05-18,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,53800.98,Bank Transfer,RCPT-2605-005,Cleared
+TX0006,2026-05-08,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,47463.28,NEFT,RCPT-2605-006,Cleared
+TX0007,2026-05-25,Income,Sales Revenue,Customer payment - Silverline Stores,C003,Silverline Stores,52906.97,UPI,RCPT-2605-007,Cleared
+TX0008,2026-05-09,Income,Sales Revenue,Customer payment - Silverline Stores,C003,Silverline Stores,28765.69,UPI,RCPT-2605-008,Cleared
+TX0009,2026-05-04,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,36996.37,UPI,RCPT-2605-009,Cleared
+TX0010,2026-05-12,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,58356.41,Bank Transfer,RCPT-2605-010,Cleared
+TX0011,2026-05-18,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,66655.79,Bank Transfer,RCPT-2605-011,Cleared
+TX0012,2026-05-03,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,59470.23,UPI,RCPT-2605-012,Cleared
+TX0013,2026-05-19,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,53228.59,NEFT,RCPT-2605-013,Cleared
+TX0014,2026-05-22,Expense,Raw Materials,Raw Materials payment - Delta Logistics,V004,Delta Logistics,103762.64,NEFT,PAY-2605-014,Cleared
+TX0015,2026-05-28,Expense,Raw Materials,Raw Materials payment - Delta Logistics,V004,Delta Logistics,108470.78,Bank Transfer,PAY-2605-015,Cleared
+TX0016,2026-05-09,Expense,Packaging,Packaging payment - Horizon Office Mart,V008,Horizon Office Mart,59179.08,UPI,PAY-2605-016,Cleared
+TX0017,2026-05-06,Expense,Utilities,Utilities payment - FineTools Industrial,V006,FineTools Industrial,27568.55,UPI,PAY-2605-017,Cleared
+TX0018,2026-05-23,Expense,Logistics,Logistics payment - BrightPack Supplies,V002,BrightPack Supplies,44566.76,RTGS,PAY-2605-018,Cleared
+TX0019,2026-05-18,Expense,Salaries,Salaries payment - Delta Logistics,V004,Delta Logistics,60862.9,Bank Transfer,PAY-2605-019,Cleared
+TX0020,2026-05-09,Expense,Salaries,Salaries payment - Indus Packaging,V009,Indus Packaging,63223.84,UPI,PAY-2605-020,Cleared
+TX0021,2026-05-27,Expense,Maintenance,Maintenance payment - Apex Raw Materials,V001,Apex Raw Materials,21206.67,NEFT,PAY-2605-021,Cleared
+TX0022,2026-05-26,Expense,Marketing,Marketing payment - FineTools Industrial,V006,FineTools Industrial,18893.05,NEFT,PAY-2605-022,Cleared
+TX0023,2026-05-07,Expense,Software,Software payment - Jupiter Machinery,V010,Jupiter Machinery,14529.19,UPI,PAY-2605-023,Cleared
+TX0024,2026-05-07,Expense,Office Supplies,Office Supplies payment - Horizon Office Mart,V008,Horizon Office Mart,8473.98,Bank Transfer,PAY-2605-024,Cleared
+TX0025,2026-06-05,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,24981.52,UPI,RCPT-2606-001,Cleared
+TX0026,2026-06-24,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,62891.14,Bank Transfer,RCPT-2606-002,Cleared
+TX0027,2026-06-12,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,67866.29,RTGS,RCPT-2606-003,Cleared
+TX0028,2026-06-17,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,22545.47,NEFT,RCPT-2606-004,Cleared
+TX0029,2026-06-04,Income,Sales Revenue,Customer payment - Silverline Stores,C003,Silverline Stores,49372.3,Bank Transfer,RCPT-2606-005,Cleared
+TX0030,2026-06-20,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,37238.37,Bank Transfer,RCPT-2606-006,Cleared
+TX0031,2026-06-17,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,66553.92,NEFT,RCPT-2606-007,Cleared
+TX0032,2026-06-22,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,52085.52,UPI,RCPT-2606-008,Cleared
+TX0033,2026-06-25,Income,Sales Revenue,Customer payment - Summit Traders,C006,Summit Traders,23577.61,Bank Transfer,RCPT-2606-009,Cleared
+TX0034,2026-06-06,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,18162.27,UPI,RCPT-2606-010,Cleared
+TX0035,2026-06-17,Income,Sales Revenue,Customer payment - Silverline Stores,C003,Silverline Stores,43384.08,NEFT,RCPT-2606-011,Cleared
+TX0036,2026-06-21,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,60083.47,RTGS,RCPT-2606-012,Cleared
+TX0037,2026-06-05,Income,Sales Revenue,Customer payment - Summit Traders,C006,Summit Traders,56125.54,NEFT,RCPT-2606-013,Cleared
+TX0038,2026-06-20,Expense,Raw Materials,Raw Materials payment - FineTools Industrial,V006,FineTools Industrial,89425.73,NEFT,PAY-2606-038,Cleared
+TX0039,2026-06-12,Expense,Raw Materials,Raw Materials payment - Evergreen Chemicals,V005,Evergreen Chemicals,76868.4,RTGS,PAY-2606-039,Cleared
+TX0040,2026-06-19,Expense,Packaging,Packaging payment - BrightPack Supplies,V002,BrightPack Supplies,42238.13,Bank Transfer,PAY-2606-040,Cleared
+TX0041,2026-06-27,Expense,Utilities,Utilities payment - BrightPack Supplies,V002,BrightPack Supplies,38030.14,Cheque,PAY-2606-041,Cleared
+TX0042,2026-06-25,Expense,Logistics,Logistics payment - CoreTech Components,V003,CoreTech Components,33259.77,Bank Transfer,PAY-2606-042,Cleared
+TX0043,2026-06-18,Expense,Salaries,Salaries payment - CoreTech Components,V003,CoreTech Components,65132.38,Cheque,PAY-2606-043,Cleared
+TX0044,2026-06-14,Expense,Salaries,Salaries payment - Delta Logistics,V004,Delta Logistics,93014.37,RTGS,PAY-2606-044,Cleared
+TX0045,2026-06-23,Expense,Maintenance,Maintenance payment - Evergreen Chemicals,V005,Evergreen Chemicals,68000,UPI,PAY-2606-045,Cleared
+TX0046,2026-06-15,Expense,Marketing,Marketing payment - Indus Packaging,V009,Indus Packaging,19456.64,RTGS,PAY-2606-046,Cleared
+TX0047,2026-06-08,Expense,Software,Software payment - BrightPack Supplies,V002,BrightPack Supplies,10911.93,Cheque,PAY-2606-047,Cleared
+TX0048,2026-06-18,Expense,Office Supplies,Office Supplies payment - Delta Logistics,V004,Delta Logistics,9445.74,NEFT,PAY-2606-048,Cleared
+TX0049,2026-07-03,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,29447.09,NEFT,RCPT-2607-001,Cleared
+TX0050,2026-07-11,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,43707.81,UPI,RCPT-2607-002,Cleared
+TX0051,2026-07-22,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,28711.84,RTGS,RCPT-2607-003,Cleared
+TX0052,2026-07-24,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,30149.86,Bank Transfer,RCPT-2607-004,Cleared
+TX0053,2026-07-26,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,27520.5,NEFT,RCPT-2607-005,Cleared
+TX0054,2026-07-22,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,35714.88,Bank Transfer,RCPT-2607-006,Cleared
+TX0055,2026-07-15,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,51668.23,NEFT,RCPT-2607-007,Cleared
+TX0056,2026-07-02,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,54410.68,NEFT,RCPT-2607-008,Cleared
+TX0057,2026-07-08,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,27510.45,Bank Transfer,RCPT-2607-009,Cleared
+TX0058,2026-07-05,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,27174.4,Bank Transfer,RCPT-2607-010,Cleared
+TX0059,2026-07-08,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,40156.54,NEFT,RCPT-2607-011,Cleared
+TX0060,2026-07-02,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,66449.81,RTGS,RCPT-2607-012,Cleared
+TX0061,2026-07-06,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,42282.06,RTGS,RCPT-2607-013,Cleared
+TX0062,2026-07-28,Expense,Raw Materials,Raw Materials payment - Galaxy Electricals,V007,Galaxy Electricals,110283.12,RTGS,PAY-2607-062,Cleared
+TX0063,2026-07-13,Expense,Raw Materials,Raw Materials payment - Apex Raw Materials,V001,Apex Raw Materials,114459.57,UPI,PAY-2607-063,Cleared
+TX0064,2026-07-26,Expense,Packaging,Packaging payment - Horizon Office Mart,V008,Horizon Office Mart,48385.68,Cheque,PAY-2607-064,Cleared
+TX0065,2026-07-22,Expense,Utilities,Utilities payment - Horizon Office Mart,V008,Horizon Office Mart,24200.59,UPI,PAY-2607-065,Cleared
+TX0066,2026-07-07,Expense,Logistics,Logistics payment - Apex Raw Materials,V001,Apex Raw Materials,43862.32,Cheque,PAY-2607-066,Cleared
+TX0067,2026-07-02,Expense,Salaries,Salaries payment - FineTools Industrial,V006,FineTools Industrial,56400.94,Cheque,PAY-2607-067,Cleared
+TX0068,2026-07-16,Expense,Salaries,Salaries payment - Indus Packaging,V009,Indus Packaging,92614.26,Cheque,PAY-2607-068,Cleared
+TX0069,2026-07-06,Expense,Maintenance,Maintenance payment - Apex Raw Materials,V001,Apex Raw Materials,31450.9,NEFT,PAY-2607-069,Cleared
+TX0070,2026-07-28,Expense,Marketing,Marketing payment - CoreTech Components,V003,CoreTech Components,15167.44,NEFT,PAY-2607-070,Cleared
+TX0071,2026-07-22,Expense,Software,Software payment - Delta Logistics,V004,Delta Logistics,11353.37,Cheque,PAY-2607-071,Cleared
+TX0072,2026-07-08,Expense,Office Supplies,Office Supplies payment - Jupiter Machinery,V010,Jupiter Machinery,9476.38,Cheque,PAY-2607-072,Cleared
+TX0073,2026-08-03,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,50868.66,UPI,RCPT-2608-001,Cleared
+TX0074,2026-08-09,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,51486.3,UPI,RCPT-2608-002,Cleared
+TX0075,2026-08-08,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,37789.29,UPI,RCPT-2608-003,Cleared
+TX0076,2026-08-15,Income,Sales Revenue,Customer payment - Summit Traders,C006,Summit Traders,64450.92,NEFT,RCPT-2608-004,Cleared
+TX0077,2026-08-01,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,49057.96,NEFT,RCPT-2608-005,Cleared
+TX0078,2026-08-03,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,43294.23,RTGS,RCPT-2608-006,Cleared
+TX0079,2026-08-12,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,61963.51,UPI,RCPT-2608-007,Cleared
+TX0080,2026-08-10,Income,Sales Revenue,Customer payment - Silverline Stores,C003,Silverline Stores,39909.23,UPI,RCPT-2608-008,Cleared
+TX0081,2026-08-20,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,51393.16,UPI,RCPT-2608-009,Cleared
+TX0082,2026-08-22,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,64946.5,RTGS,RCPT-2608-010,Cleared
+TX0083,2026-08-09,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,62485.64,RTGS,RCPT-2608-011,Cleared
+TX0084,2026-08-09,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,48241.49,UPI,RCPT-2608-012,Cleared
+TX0085,2026-08-07,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,43270.45,UPI,RCPT-2608-013,Cleared
+TX0086,2026-08-28,Expense,Raw Materials,Raw Materials payment - Apex Raw Materials,V001,Apex Raw Materials,69451.84,Bank Transfer,PAY-2608-086,Cleared
+TX0087,2026-08-27,Expense,Raw Materials,Raw Materials payment - Evergreen Chemicals,V005,Evergreen Chemicals,67021.97,UPI,PAY-2608-087,Cleared
+TX0088,2026-08-25,Expense,Packaging,Packaging payment - CoreTech Components,V003,CoreTech Components,59223.09,UPI,PAY-2608-088,Cleared
+TX0089,2026-08-06,Expense,Utilities,Utilities payment - Horizon Office Mart,V008,Horizon Office Mart,30868.23,Bank Transfer,PAY-2608-089,Cleared
+TX0090,2026-08-18,Expense,Logistics,Logistics payment - Apex Raw Materials,V001,Apex Raw Materials,32871.27,RTGS,PAY-2608-090,Cleared
+TX0091,2026-08-18,Expense,Salaries,Salaries payment - Apex Raw Materials,V001,Apex Raw Materials,89052.99,Cheque,PAY-2608-091,Cleared
+TX0092,2026-08-18,Expense,Salaries,Salaries payment - CoreTech Components,V003,CoreTech Components,72051.04,NEFT,PAY-2608-092,Cleared
+TX0093,2026-08-10,Expense,Maintenance,Maintenance payment - FineTools Industrial,V006,FineTools Industrial,30585.74,NEFT,PAY-2608-093,Cleared
+TX0094,2026-08-12,Expense,Marketing,Marketing payment - Delta Logistics,V004,Delta Logistics,22039.15,NEFT,PAY-2608-094,Cleared
+TX0095,2026-08-12,Expense,Software,Software payment - Indus Packaging,V009,Indus Packaging,14581.39,Bank Transfer,PAY-2608-095,Cleared
+TX0096,2026-08-20,Expense,Office Supplies,Office Supplies payment - CoreTech Components,V003,CoreTech Components,11145.85,RTGS,PAY-2608-096,Cleared
+TX0097,2026-09-06,Income,Sales Revenue,Customer payment - Silverline Stores,C003,Silverline Stores,62070.81,NEFT,RCPT-2609-001,Cleared
+TX0098,2026-09-06,Income,Sales Revenue,Customer payment - Summit Traders,C006,Summit Traders,57119.32,Bank Transfer,RCPT-2609-002,Cleared
+TX0099,2026-09-26,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,31340.29,NEFT,RCPT-2609-003,Cleared
+TX0100,2026-09-13,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,60929.66,RTGS,RCPT-2609-004,Cleared
+TX0101,2026-09-07,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,35482.92,RTGS,RCPT-2609-005,Cleared
+TX0102,2026-09-08,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,51001.66,Bank Transfer,RCPT-2609-006,Cleared
+TX0103,2026-09-11,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,61217.65,UPI,RCPT-2609-007,Cleared
+TX0104,2026-09-12,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,51975.91,UPI,RCPT-2609-008,Cleared
+TX0105,2026-09-01,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,61851.92,UPI,RCPT-2609-009,Cleared
+TX0106,2026-09-06,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,19912.86,Bank Transfer,RCPT-2609-010,Cleared
+TX0107,2026-09-12,Income,Sales Revenue,Customer payment - Summit Traders,C006,Summit Traders,39819.69,NEFT,RCPT-2609-011,Cleared
+TX0108,2026-09-13,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,30736.13,Bank Transfer,RCPT-2609-012,Cleared
+TX0109,2026-09-01,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,36211.07,NEFT,RCPT-2609-013,Cleared
+TX0110,2026-09-22,Expense,Raw Materials,Raw Materials payment - FineTools Industrial,V006,FineTools Industrial,96207.03,NEFT,PAY-2609-110,Cleared
+TX0111,2026-09-24,Expense,Raw Materials,Raw Materials payment - Evergreen Chemicals,V005,Evergreen Chemicals,90358.97,Bank Transfer,PAY-2609-111,Cleared
+TX0112,2026-09-11,Expense,Packaging,Packaging payment - Galaxy Electricals,V007,Galaxy Electricals,61074.02,Cheque,PAY-2609-112,Cleared
+TX0113,2026-09-05,Expense,Utilities,Utilities payment - Delta Logistics,V004,Delta Logistics,28663.5,Bank Transfer,PAY-2609-113,Cleared
+TX0114,2026-09-22,Expense,Logistics,Logistics payment - CoreTech Components,V003,CoreTech Components,44716.91,UPI,PAY-2609-114,Cleared
+TX0115,2026-09-13,Expense,Salaries,Salaries payment - Indus Packaging,V009,Indus Packaging,89016.46,UPI,PAY-2609-115,Cleared
+TX0116,2026-09-10,Expense,Salaries,Salaries payment - Delta Logistics,V004,Delta Logistics,72055.3,Cheque,PAY-2609-116,Cleared
+TX0117,2026-09-20,Expense,Maintenance,Maintenance payment - FineTools Industrial,V006,FineTools Industrial,24509.83,Bank Transfer,PAY-2609-117,Cleared
+TX0118,2026-09-22,Expense,Marketing,Marketing payment - Delta Logistics,V004,Delta Logistics,20125.15,RTGS,PAY-2609-118,Cleared
+TX0119,2026-09-22,Expense,Software,Software payment - BrightPack Supplies,V002,BrightPack Supplies,10547.04,Cheque,PAY-2609-119,Cleared
+TX0120,2026-09-11,Expense,Office Supplies,Office Supplies payment - BrightPack Supplies,V002,BrightPack Supplies,10604.85,RTGS,PAY-2609-120,Cleared
+TX0121,2026-10-22,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,29232.03,RTGS,RCPT-2610-001,Cleared
+TX0122,2026-10-05,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,20310.69,Bank Transfer,RCPT-2610-002,Cleared
+TX0123,2026-10-20,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,40770.81,RTGS,RCPT-2610-003,Cleared
+TX0124,2026-10-23,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,42718.86,RTGS,RCPT-2610-004,Cleared
+TX0125,2026-10-05,Income,Sales Revenue,Customer payment - Northstar Retail,C001,Northstar Retail,62632.99,NEFT,RCPT-2610-005,Cleared
+TX0126,2026-10-25,Income,Sales Revenue,Customer payment - Bluepeak Industries,C007,Bluepeak Industries,28942.06,Bank Transfer,RCPT-2610-006,Cleared
+TX0127,2026-10-02,Income,Sales Revenue,Customer payment - Metro Wholesale,C004,Metro Wholesale,63873.5,NEFT,RCPT-2610-007,Cleared
+TX0128,2026-10-15,Income,Sales Revenue,Customer payment - Silverline Stores,C003,Silverline Stores,58070.83,UPI,RCPT-2610-008,Cleared
+TX0129,2026-10-25,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,48632.62,Bank Transfer,RCPT-2610-009,Cleared
+TX0130,2026-10-27,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,62860.41,Bank Transfer,RCPT-2610-010,Cleared
+TX0131,2026-10-15,Income,Sales Revenue,Customer payment - Orchid Enterprises,C005,Orchid Enterprises,55588.84,UPI,RCPT-2610-011,Cleared
+TX0132,2026-10-25,Income,Sales Revenue,Customer payment - Cedar Home Products,C008,Cedar Home Products,49337.42,UPI,RCPT-2610-012,Cleared
+TX0133,2026-10-15,Income,Sales Revenue,Customer payment - Pioneer Distributors,C002,Pioneer Distributors,53677.24,RTGS,RCPT-2610-013,Cleared
+TX0134,2026-10-09,Expense,Raw Materials,Raw Materials payment - FineTools Industrial,V006,FineTools Industrial,80913.36,Cheque,PAY-2610-134,Cleared
+TX0135,2026-10-03,Expense,Raw Materials,Raw Materials payment - CoreTech Components,V003,CoreTech Components,72401.87,Bank Transfer,PAY-2610-135,Cleared
+TX0136,2026-10-23,Expense,Packaging,Packaging payment - CoreTech Components,V003,CoreTech Components,61357.71,NEFT,PAY-2610-136,Cleared
+TX0137,2026-10-14,Expense,Utilities,Utilities payment - Galaxy Electricals,V007,Galaxy Electricals,27158.81,Bank Transfer,PAY-2610-137,Cleared
+TX0138,2026-10-14,Expense,Logistics,Logistics payment - Apex Raw Materials,V001,Apex Raw Materials,35104.74,Bank Transfer,PAY-2610-138,Cleared
+TX0139,2026-10-13,Expense,Salaries,Salaries payment - Jupiter Machinery,V010,Jupiter Machinery,93734.61,NEFT,PAY-2610-139,Cleared
+TX0140,2026-10-28,Expense,Salaries,Salaries payment - Jupiter Machinery,V010,Jupiter Machinery,69976,NEFT,PAY-2610-140,Cleared
+TX0141,2026-10-12,Expense,Maintenance,Maintenance payment - Evergreen Chemicals,V005,Evergreen Chemicals,28548.65,Bank Transfer,PAY-2610-141,Cleared
+TX0142,2026-10-18,Expense,Marketing,Marketing payment - Indus Packaging,V009,Indus Packaging,23358.52,RTGS,PAY-2610-142,Cleared
+TX0143,2026-10-16,Expense,Software,Software payment - Delta Logistics,V004,Delta Logistics,10474.13,Bank Transfer,PAY-2610-143,Cleared
+TX0144,2026-10-01,Expense,Office Supplies,Office Supplies payment - Galaxy Electricals,V007,Galaxy Electricals,8174.09,Bank Transfer,PAY-2610-144,Cleared
+

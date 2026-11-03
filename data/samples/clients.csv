@@ -1,0 +1,9 @@
+client_id,client_name,credit_terms_days,industry
+C001,Northstar Retail,30,Retail
+C002,Pioneer Distributors,45,Distribution
+C003,Silverline Stores,30,Retail
+C004,Metro Wholesale,15,Wholesale
+C005,Orchid Enterprises,30,Manufacturing
+C006,Summit Traders,45,Trading
+C007,Bluepeak Industries,30,Industrial
+C008,Cedar Home Products,15,Retail

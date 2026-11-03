@@ -148,13 +148,30 @@ ALTER TABLE invoices ENABLE ROW LEVEL SECURITY;
 ALTER TABLE profit_leakage_findings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON organizations;
 CREATE POLICY "Allow public read-write for demo tenant" ON organizations FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON users;
 CREATE POLICY "Allow public read-write for demo tenant" ON users FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON accounts;
 CREATE POLICY "Allow public read-write for demo tenant" ON accounts FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON clients;
 CREATE POLICY "Allow public read-write for demo tenant" ON clients FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON vendors;
 CREATE POLICY "Allow public read-write for demo tenant" ON vendors FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON expenses;
 CREATE POLICY "Allow public read-write for demo tenant" ON expenses FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON invoices;
 CREATE POLICY "Allow public read-write for demo tenant" ON invoices FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON profit_leakage_findings;
 CREATE POLICY "Allow public read-write for demo tenant" ON profit_leakage_findings FOR ALL USING (true);
+
+DROP POLICY IF EXISTS "Allow public read-write for demo tenant" ON audit_logs;
 CREATE POLICY "Allow public read-write for demo tenant" ON audit_logs FOR ALL USING (true);
 

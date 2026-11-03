@@ -33,10 +33,10 @@ export interface Expense {
   id: string;
   date: string;
   vendor: string;
-  category: 'Operating' | 'Administrative' | 'Marketing' | 'Employee' | 'Procurement' | 'Subscriptions';
+  category: 'Operating' | 'Administrative' | 'Marketing' | 'Employee' | 'Procurement' | 'Subscriptions' | string;
   description: string;
   amount: number;
-  status: 'Approved' | 'Flagged' | 'Audited';
+  status: 'Approved' | 'Flagged' | 'Audited' | string;
   paymentMethod: string;
   referenceNo: string;
 }

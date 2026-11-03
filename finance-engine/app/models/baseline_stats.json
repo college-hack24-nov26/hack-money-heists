@@ -1,0 +1,181 @@
+{
+  "dataset_period": "2026-04-01 to 2026-10-31 (7 Months)",
+  "total_records": 215,
+  "total_spend": 6843149.35,
+  "mean_transaction": 31828.6,
+  "std_transaction": 35485.64,
+  "median_transaction": 21569.0,
+  "anomaly_threshold_zscore": 2.5,
+  "categories": {
+    "Bank Charges": {
+      "count": 7,
+      "mean": 727.86,
+      "std": 145.62,
+      "median": 720.0,
+      "p75": 798.0,
+      "p95": 940.5,
+      "max": 999.0,
+      "iqr_upper": 1092.0
+    },
+    "Insurance": {
+      "count": 17,
+      "mean": 10613.12,
+      "std": 3873.63,
+      "median": 10217.0,
+      "p75": 13541.0,
+      "p95": 17160.6,
+      "max": 18307.0,
+      "iqr_upper": 25621.25
+    },
+    "Inventory Purchase": {
+      "count": 58,
+      "mean": 24247.09,
+      "std": 8625.03,
+      "median": 23780.0,
+      "p75": 31212.75,
+      "p95": 38772.35,
+      "max": 40092.0,
+      "iqr_upper": 57408.94
+    },
+    "Logistics": {
+      "count": 6,
+      "mean": 39063.63,
+      "std": 5369.27,
+      "median": 39483.53,
+      "p75": 44390.65,
+      "p95": 44679.37,
+      "max": 44716.91,
+      "iqr_upper": 63062.52
+    },
+    "Maintenance": {
+      "count": 6,
+      "mean": 34050.3,
+      "std": 15586.26,
+      "median": 29567.2,
+      "p75": 31234.61,
+      "p95": 58862.72,
+      "max": 68000.0,
+      "iqr_upper": 41235.99
+    },
+    "Marketing": {
+      "count": 15,
+      "mean": 14737.0,
+      "std": 4997.21,
+      "median": 13648.0,
+      "p75": 19174.84,
+      "p95": 22434.96,
+      "max": 23358.52,
+      "iqr_upper": 33284.82
+    },
+    "Office Rent": {
+      "count": 17,
+      "mean": 33612.41,
+      "std": 4594.31,
+      "median": 32499.0,
+      "p75": 33832.0,
+      "p95": 43936.0,
+      "max": 43936.0,
+      "iqr_upper": 39271.0
+    },
+    "Office Supplies": {
+      "count": 9,
+      "mean": 7485.32,
+      "std": 3166.64,
+      "median": 8473.98,
+      "p75": 9476.38,
+      "p95": 10929.45,
+      "max": 11145.85,
+      "iqr_upper": 17990.79
+    },
+    "Packaging": {
+      "count": 6,
+      "mean": 55242.95,
+      "std": 7290.11,
+      "median": 59201.08,
+      "p75": 60611.29,
+      "p95": 61286.79,
+      "max": 61357.71,
+      "iqr_upper": 77283.99
+    },
+    "Raw Materials": {
+      "count": 12,
+      "mean": 89968.77,
+      "std": 16057.57,
+      "median": 89892.35,
+      "p75": 104939.68,
+      "p95": 112162.52,
+      "max": 114459.57,
+      "iqr_upper": 156018.51
+    },
+    "Repairs & Maintenance": {
+      "count": 3,
+      "mean": 4698.33,
+      "std": 2197.55,
+      "median": 3841.0,
+      "p75": 5777.5,
+      "p95": 7326.7,
+      "max": 7714.0,
+      "iqr_upper": 10304.75
+    },
+    "Salaries": {
+      "count": 19,
+      "mean": 111261.64,
+      "std": 48692.07,
+      "median": 92614.26,
+      "p75": 156125.5,
+      "p95": 189376.8,
+      "max": 213207.0,
+      "iqr_upper": 305071.47
+    },
+    "Software": {
+      "count": 6,
+      "mean": 12066.18,
+      "std": 1783.05,
+      "median": 11132.65,
+      "p75": 13735.24,
+      "p95": 14568.34,
+      "max": 14581.39,
+      "iqr_upper": 19154.94
+    },
+    "Software Subscriptions": {
+      "count": 11,
+      "mean": 5305.64,
+      "std": 936.06,
+      "median": 5321.0,
+      "p75": 5556.5,
+      "p95": 6755.0,
+      "max": 7030.0,
+      "iqr_upper": 6633.62
+    },
+    "Transport & Delivery": {
+      "count": 9,
+      "mean": 6157.0,
+      "std": 1902.06,
+      "median": 6085.0,
+      "p75": 6932.0,
+      "p95": 8980.0,
+      "max": 10122.0,
+      "iqr_upper": 9725.0
+    },
+    "Travel": {
+      "count": 4,
+      "mean": 5603.0,
+      "std": 713.15,
+      "median": 5352.0,
+      "p75": 5718.0,
+      "p95": 6582.0,
+      "max": 6798.0,
+      "iqr_upper": 6559.75
+    },
+    "Utilities": {
+      "count": 10,
+      "mean": 20504.98,
+      "std": 11460.47,
+      "median": 25679.7,
+      "p75": 28389.76,
+      "p95": 34807.28,
+      "max": 38030.14,
+      "iqr_upper": 63927.47
+    }
+  }
+}

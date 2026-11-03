@@ -1,0 +1,28 @@
+{
+  "status": "success",
+  "trained_at": "2026-11-04T01:29:38.973774",
+  "model": "IsolationForest (n_estimators=100, contamination=0.05)",
+  "training_dataset_size": 215,
+  "total_spend_analyzed": 6843149.35,
+  "categories_calibrated": [
+    "Bank Charges",
+    "Insurance",
+    "Inventory Purchase",
+    "Logistics",
+    "Maintenance",
+    "Marketing",
+    "Office Rent",
+    "Office Supplies",
+    "Packaging",
+    "Raw Materials",
+    "Repairs & Maintenance",
+    "Salaries",
+    "Software",
+    "Software Subscriptions",
+    "Transport & Delivery",
+    "Travel",
+    "Utilities"
+  ],
+  "model_file": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\hack-money-heists\\finance-engine\\app\\models\\isolation_forest_expense.pkl",
+  "baseline_file": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\hack-money-heists\\finance-engine\\app\\models\\baseline_stats.json"
+}

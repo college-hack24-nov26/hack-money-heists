@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import io
@@ -19,12 +20,43 @@ CORS(app)
 
 @app.route('/health', methods=['GET'])
 def health_check():
+    report_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models', 'training_report.json')
+    trained = os.path.exists(report_file)
     return jsonify({
         "status": "online",
         "service": "ARTHIQ Finance Intelligence Engine",
         "version": "1.0.0",
-        "models_loaded": ["cashflow_holt_seasonality", "invoice_fraud_forensics", "profit_leakage_detector", "risk_radar_engine"]
+        "models_loaded": [
+            "isolation_forest_anomaly_detector",
+            "cashflow_holt_seasonality",
+            "invoice_fraud_forensics",
+            "profit_leakage_detector",
+            "risk_radar_engine"
+        ],
+        "trained_on_7_month_dataset": trained
     })
+
+@app.route('/internal/models/status', methods=['GET'])
+def model_status():
+    report_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models', 'training_report.json')
+    if os.path.exists(report_file):
+        with open(report_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return jsonify(data)
+    return jsonify({
+        "status": "ready",
+        "model": "IsolationForest & Heuristic Baselines",
+        "note": "Initial baseline active"
+    })
+
+@app.route('/internal/models/train', methods=['POST'])
+def trigger_training():
+    try:
+        from train_models import train_expense_models
+        res = train_expense_models()
+        return jsonify(res)
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/internal/analyze/cashflow', methods=['POST'])
 def handle_cashflow():
