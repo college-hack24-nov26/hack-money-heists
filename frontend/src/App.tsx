@@ -15,7 +15,8 @@ import { AssistantChat } from './pages/AssistantChat';
 import { ReportsSettings } from './pages/ReportsSettings';
 
 export const App: React.FC = () => {
-  const [viewMode, setViewMode] = useState<'landing' | 'dashboard'>('dashboard');
+  // Default to the redesigned homepage
+  const [viewMode, setViewMode] = useState<'landing' | 'dashboard'>('landing');
   const [currentView, setCurrentView] = useState<string>('overview');
 
   if (viewMode === 'landing') {
@@ -59,11 +60,11 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-midnight text-neutral-offwhite flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F7F7FA] text-[#15151B] flex flex-col font-sans selection:bg-[#EDE7FF] selection:text-[#6D45CF]">
       <Header
         currentView={currentView}
         onNavigate={setCurrentView}
-        onToggleLanding={() => setViewMode(viewMode === 'dashboard' ? 'landing' : 'dashboard')}
+        onToggleLanding={() => setViewMode('landing')}
       />
 
       <div className="flex-1 flex overflow-hidden">
@@ -78,4 +79,3 @@ export const App: React.FC = () => {
 };
 
 export default App;
-

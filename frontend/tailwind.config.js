@@ -7,6 +7,37 @@ export default {
   theme: {
     extend: {
       colors: {
+        // New Premium SaaS Minimalist Palette
+        brand: {
+          violet: "#8B5CF6",
+          deep: "#6D45CF",
+          soft: "#EDE7FF",
+        },
+        bg: {
+          primary: "#FFFFFF",
+          secondary: "#F7F7FA",
+          soft: "#ECECF1",
+        },
+        text: {
+          primary: "#15151B",
+          secondary: "#71717A",
+        },
+        surface: {
+          dark: "#11131B",
+          glass: "rgba(17,19,27,0.78)",
+          card: "#FFFFFF",
+        },
+        fin: {
+          success: "#16A879",
+          warning: "#E5A33D",
+          critical: "#E46D72",
+        },
+        border: {
+          DEFAULT: "#E5E5EB",
+          light: "#E5E5EB",
+          subtle: "#F0F0F5",
+        },
+        // Legacy colors retained for dashboard widgets
         midnight: "#080D16",
         navy: {
           DEFAULT: "#101827",
@@ -15,28 +46,57 @@ export default {
         },
         graphite: "#171F2D",
         accent: {
-          blue: "#568BFF",
-          cyan: "#64D9E8",
-          emerald: "#35C99A",
-          amber: "#F59E0B",
-          coral: "#F87171"
+          blue: "#8B5CF6",
+          cyan: "#6D45CF",
+          emerald: "#16A879",
+          amber: "#E5A33D",
+          coral: "#E46D72"
         },
         neutral: {
-          offwhite: "#F1F4F8",
-          muted: "#8B96A8",
-          border: "rgba(255, 255, 255, 0.08)"
+          offwhite: "#15151B",
+          muted: "#71717A",
+          border: "#E5E5EB"
         }
       },
       fontFamily: {
-        sans: ["Inter", "Plus Jakarta Sans", "system-ui", "sans-serif"]
+        sans: ["Inter", "Geist Sans", "Plus Jakarta Sans", "Manrope", "system-ui", "sans-serif"]
       },
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-        glow: "0 0 25px -5px rgba(86, 139, 255, 0.25)",
-        emeraldGlow: "0 0 25px -5px rgba(53, 201, 154, 0.25)"
-      }
+        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.08)",
+        card: "0 2px 10px 0 rgba(0, 0, 0, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02)",
+        cardHover: "0 12px 30px -10px rgba(109, 69, 207, 0.12), 0 4px 12px 0 rgba(0, 0, 0, 0.03)",
+        violetGlow: "0 0 30px -5px rgba(139, 92, 246, 0.25)",
+      },
+      animation: {
+        "fade-in": "fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fade-up": "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "float-subtle": "floatSubtle 6s ease-in-out infinite",
+        "float-reverse": "floatReverse 7s ease-in-out infinite",
+        "pulse-gentle": "pulseGentle 4s ease-in-out infinite",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        floatSubtle: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        floatReverse: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(8px)" },
+        },
+        pulseGentle: {
+          "0%, 100%": { opacity: "0.85" },
+          "50%": { opacity: "1" },
+        },
+      },
     },
   },
   plugins: [],
 }
-

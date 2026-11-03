@@ -12,11 +12,11 @@ export const MetricBadge: React.FC<MetricBadgeProps> = ({
   className = ''
 }) => {
   const variantStyles = {
-    emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-    amber: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-    coral: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
-    blue: 'bg-accent-blue/10 text-accent-blue border-accent-blue/20',
-    neutral: 'bg-white/5 text-neutral-muted border-white/10'
+    emerald: 'bg-emerald-50 text-[#16A879] border-emerald-200/80',
+    amber: 'bg-amber-50 text-[#E5A33D] border-amber-200/80',
+    coral: 'bg-rose-50 text-[#E46D72] border-rose-200/80',
+    blue: 'bg-[#EDE7FF] text-[#6D45CF] border-[#DDD3FA]',
+    neutral: 'bg-[#F7F7FA] text-[#71717A] border-[#E5E5EB]'
   };
 
   let resolvedVariant = variant;
@@ -25,17 +25,18 @@ export const MetricBadge: React.FC<MetricBadgeProps> = ({
     resolvedVariant = 'coral';
   } else if (l.includes('medium') || l.includes('warning') || l.includes('watch') || l.includes('suspected')) {
     resolvedVariant = 'amber';
-  } else if (l.includes('low') || l.includes('healthy') || l.includes('verified') || l.includes('active') || l.includes('strong')) {
+  } else if (l.includes('low') || l.includes('healthy') || l.includes('verified') || l.includes('active') || l.includes('strong') || l.includes('positive')) {
     resolvedVariant = 'emerald';
+  } else if (l.includes('ml') || l.includes('predictive') || l.includes('ai') || l.includes('signature')) {
+    resolvedVariant = 'blue';
   }
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${variantStyles[resolvedVariant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${variantStyles[resolvedVariant]} ${className}`}
     >
       <span className="w-1.5 h-1.5 rounded-full bg-current" />
       {label}
     </span>
   );
 };
-
