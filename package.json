@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "ARTHIQ — AI-Powered Financial Intelligence & Management Platform",
   "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
     "test": "python finance-engine/test_engine.py",
     "build": "npm --prefix backend run build && npm --prefix frontend run build",
     "start:engine": "python finance-engine/app/main.py",
     "start:backend": "node backend/dist/server.js",
-    "start:frontend": "npm --prefix frontend run preview",
-    "dev:frontend": "npm --prefix frontend run dev",
-    "dev:backend": "npm --prefix backend run dev"
+    "start:frontend": "npm --prefix frontend run preview"
   },
   "keywords": [
     "fintech",

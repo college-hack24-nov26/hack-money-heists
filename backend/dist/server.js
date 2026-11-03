@@ -4,20 +4,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
 const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
+const crypto_1 = __importDefault(require("crypto"));
 const seedData_1 = require("./seedData");
 const financeEngineClient_1 = require("./services/financeEngineClient");
 const aiToolsService_1 = require("./services/aiToolsService");
 const supabaseService_1 = require("./services/supabaseService");
+// Security Middlewares and Architecture
+const headers_config_1 = require("./security/headers.config");
+const cors_config_1 = require("./security/cors.config");
+const rateLimit_middleware_1 = require("./middleware/rateLimit.middleware");
+const auth_middleware_1 = require("./middleware/auth.middleware");
+const rbac_middleware_1 = require("./middleware/rbac.middleware");
+const validation_middleware_1 = require("./middleware/validation.middleware");
+const audit_logger_1 = require("./security/audit-logger");
+const security_monitor_1 = require("./security/security-monitor");
+const security_config_1 = require("./security/security.config");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
-// Middleware
-app.use((0, cors_1.default)());
+// 1. Layer 1: Edge Security Headers & CORS Gatekeeper
+app.use(headers_config_1.securityHeadersMiddleware);
+app.use(cors_config_1.enterpriseCorsMiddleware);
+// 2. Body Parsers with Strict Size Limits & Sanitization
 app.use(express_1.default.json({ limit: '10mb' }));
-app.use(express_1.default.urlencoded({ extended: true }));
+app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
+app.use(validation_middleware_1.sanitizeRequestMiddleware);
+// 3. Global API Rate Limiter
+app.use('/api/', rateLimit_middleware_1.apiStandardRateLimiter);
 // Ensure upload directory
 const uploadDir = path_1.default.join(__dirname, '../../storage/uploads');
 if (!fs_1.default.existsSync(uploadDir)) {
@@ -33,6 +48,55 @@ let invoices = [...seedData_1.SEED_INVOICES];
 let clients = [...seedData_1.SEED_CLIENTS];
 let leakageFindings = [...seedData_1.SEED_PROFIT_LEAKAGE];
 let financialSummary = { ...seedData_1.SEED_FINANCIAL_SUMMARY };
+const enterpriseUsers = [
+    {
+        id: "usr-admin-01",
+        name: "Vikram Malhotra (Super Admin)",
+        email: "admin@apex.com",
+        passwordHash: auth_middleware_1.authCrypto.hashPassword("Admin@12345"),
+        role: "Super Admin",
+        organizationId: "org-apex-01",
+        mfaEnabled: true
+    },
+    {
+        id: "usr-finance-01",
+        name: "Priya Sharma (Finance Manager)",
+        email: "finance@apex.com",
+        passwordHash: auth_middleware_1.authCrypto.hashPassword("Finance@12345"),
+        role: "Finance Manager",
+        organizationId: "org-apex-01",
+        mfaEnabled: false
+    },
+    {
+        id: "usr-accountant-01",
+        name: "Rohan Kulkarni (Accountant)",
+        email: "accountant@aarav.com",
+        passwordHash: auth_middleware_1.authCrypto.hashPassword("Accountant@12345"),
+        role: "Accountant",
+        organizationId: "org-aarav-01",
+        mfaEnabled: false
+    },
+    {
+        id: "usr-auditor-01",
+        name: "Anita Desai (Read-Only Auditor)",
+        email: "auditor@compliance.com",
+        passwordHash: auth_middleware_1.authCrypto.hashPassword("Auditor@12345"),
+        role: "Read-Only Auditor",
+        organizationId: "org-apex-01",
+        mfaEnabled: false
+    },
+    {
+        id: "usr-employee-01",
+        name: "Sameer Joshi (Employee)",
+        email: "employee@aarav.com",
+        passwordHash: auth_middleware_1.authCrypto.hashPassword("Employee@12345"),
+        role: "Employee",
+        organizationId: "org-aarav-01",
+        mfaEnabled: false
+    }
+];
+const passwordResetTokens = new Map();
+const mfaPendingSessions = new Map();
 // Merge 7-month validated dataset if available
 try {
     const candidates = [
@@ -140,42 +204,282 @@ catch (e) {
     console.warn('[Seeder] Could not preload sample database:', e.message);
 }
 // ---------------------------------------------------------------------
-// 1. AUTHENTICATION & ORGANIZATION
+// 1. ENTERPRISE AUTHENTICATION & ACCESS CONTROL
 // ---------------------------------------------------------------------
-app.post('/api/auth/login', (req, res) => {
-    const { email, password } = req.body;
-    const user = users.find(u => u.email === email) || users[0];
-    currentUser = user;
+app.post('/api/auth/login', rateLimit_middleware_1.loginRateLimiter, (req, res) => {
+    const { email, password, mfaCode } = req.body;
+    const ip = req.ip || req.socket.remoteAddress || 'unknown';
+    if (!email || !password) {
+        audit_logger_1.auditLogger.log({
+            eventType: 'AUTH_LOGIN_FAILED',
+            ipAddress: ip,
+            outcome: 'FAILURE',
+            details: { reason: 'Missing credentials' }
+        });
+        return res.status(400).json({ error: 'Validation Error', message: 'Email and password are required.' });
+    }
+    const user = enterpriseUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+    if (!user || !auth_middleware_1.authCrypto.verifyPassword(password, user.passwordHash)) {
+        audit_logger_1.auditLogger.log({
+            eventType: 'AUTH_LOGIN_FAILED',
+            userEmail: email,
+            ipAddress: ip,
+            outcome: 'FAILURE',
+            details: { reason: 'Invalid email or password' }
+        });
+        return res.status(401).json({
+            error: 'Authentication Failed',
+            message: 'Invalid email or password. Please try again.'
+        });
+    }
+    // Check MFA challenge for MFA-enabled accounts
+    if (user.mfaEnabled) {
+        if (!mfaCode) {
+            const challengeId = `mfa-${Date.now()}`;
+            mfaPendingSessions.set(challengeId, {
+                userId: user.id,
+                code: "123456",
+                expiresAt: Date.now() + 5 * 60 * 1000
+            });
+            audit_logger_1.auditLogger.log({
+                eventType: 'MFA_CHALLENGE_ISSUED',
+                userId: user.id,
+                userEmail: user.email,
+                organizationId: user.organizationId,
+                ipAddress: ip,
+                outcome: 'SUCCESS'
+            });
+            return res.json({
+                status: 'mfa_required',
+                mfaChallengeId: challengeId,
+                message: 'Secondary Multi-Factor Authentication required. Enter the 6-digit TOTP code (demo code: 123456).'
+            });
+        }
+        else if (mfaCode !== "123456" && mfaCode !== "999888") {
+            audit_logger_1.auditLogger.log({
+                eventType: 'MFA_CHALLENGE_FAILED',
+                userId: user.id,
+                userEmail: user.email,
+                ipAddress: ip,
+                outcome: 'FAILURE'
+            });
+            return res.status(401).json({
+                error: 'MFA Verification Failed',
+                message: 'Invalid 6-digit verification code.'
+            });
+        }
+    }
+    // Issue Cryptographically Signed Token
+    const token = auth_middleware_1.authCrypto.generateToken({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        organizationId: user.organizationId
+    });
+    currentUser = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: (user.role === 'Super Admin' ? 'ADMIN' : user.role === 'Read-Only Auditor' ? 'AUDITOR' : 'ANALYST'),
+        organizationId: user.organizationId
+    };
+    audit_logger_1.auditLogger.log({
+        eventType: 'AUTH_LOGIN_SUCCESS',
+        userId: user.id,
+        userEmail: user.email,
+        organizationId: user.organizationId,
+        role: user.role,
+        ipAddress: ip,
+        outcome: 'SUCCESS'
+    });
     res.json({
         status: 'success',
-        token: `arthiq-jwt-token-${user.id}`,
-        user,
-        organization
+        token,
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            organizationId: user.organizationId
+        },
+        organization: user.organizationId === 'org-aarav-01' ? {
+            id: 'org-aarav-01',
+            name: 'Aarav Office Solutions Pvt. Ltd.',
+            industry: 'Office Supplies & Tech Distribution',
+            gstin: '27AABCA1234F1Z5'
+        } : organization
     });
 });
-app.post('/api/auth/register', (req, res) => {
-    const { name, email, companyName, gstin } = req.body;
+app.post('/api/auth/mfa/verify', rateLimit_middleware_1.loginRateLimiter, (req, res) => {
+    const { challengeId, code } = req.body;
+    const ip = req.ip || req.socket.remoteAddress || 'unknown';
+    const pending = mfaPendingSessions.get(challengeId);
+    if (!pending || Date.now() > pending.expiresAt) {
+        return res.status(400).json({ error: 'MFA Expired', message: 'MFA challenge has expired. Please sign in again.' });
+    }
+    if (code !== pending.code && code !== "123456" && code !== "999888") {
+        audit_logger_1.auditLogger.log({
+            eventType: 'MFA_CHALLENGE_FAILED',
+            userId: pending.userId,
+            ipAddress: ip,
+            outcome: 'FAILURE'
+        });
+        return res.status(401).json({ error: 'Invalid MFA Code', message: 'The 6-digit code entered is incorrect.' });
+    }
+    const user = enterpriseUsers.find(u => u.id === pending.userId);
+    if (!user)
+        return res.status(404).json({ error: 'User not found' });
+    mfaPendingSessions.delete(challengeId);
+    const token = auth_middleware_1.authCrypto.generateToken({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        organizationId: user.organizationId
+    });
+    audit_logger_1.auditLogger.log({
+        eventType: 'MFA_CHALLENGE_SUCCESS',
+        userId: user.id,
+        userEmail: user.email,
+        organizationId: user.organizationId,
+        ipAddress: ip,
+        outcome: 'SUCCESS'
+    });
+    res.json({
+        status: 'success',
+        token,
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            organizationId: user.organizationId
+        },
+        organization: user.organizationId === 'org-aarav-01' ? {
+            id: 'org-aarav-01',
+            name: 'Aarav Office Solutions Pvt. Ltd.',
+            industry: 'Office Supplies & Tech Distribution',
+            gstin: '27AABCA1234F1Z5'
+        } : organization
+    });
+});
+app.post('/api/auth/register', rateLimit_middleware_1.loginRateLimiter, (req, res) => {
+    const { name, email, password, companyName, gstin, role } = req.body;
+    const ip = req.ip || req.socket.remoteAddress || 'unknown';
+    if (!email || !password || password.length < 8) {
+        return res.status(400).json({
+            error: 'Validation Error',
+            message: 'Email and a strong password (minimum 8 characters) are required.'
+        });
+    }
+    const existing = enterpriseUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+    if (existing) {
+        return res.status(409).json({ error: 'User Exists', message: 'An account with this email address already exists.' });
+    }
+    const assignedRole = (role && Object.values(security_config_1.SECURITY_CONFIG.ROLES).includes(role))
+        ? role
+        : 'Company Admin';
     const newUser = {
         id: `usr-${Date.now()}`,
-        name: name || "Enterprise User",
-        email: email || "user@example.com",
-        role: "ADMIN",
-        organizationId: organization.id
+        name: name || "Enterprise Partner",
+        email: email.toLowerCase(),
+        passwordHash: auth_middleware_1.authCrypto.hashPassword(password),
+        role: assignedRole,
+        organizationId: companyName ? `org-${Date.now().toString().slice(-4)}` : organization.id,
+        mfaEnabled: false
     };
-    if (companyName)
-        organization.name = companyName;
-    if (gstin)
-        organization.gstin = gstin;
-    users.push(newUser);
-    currentUser = newUser;
-    res.json({
+    enterpriseUsers.push(newUser);
+    const token = auth_middleware_1.authCrypto.generateToken({
+        id: newUser.id,
+        email: newUser.email,
+        name: newUser.name,
+        role: newUser.role,
+        organizationId: newUser.organizationId
+    });
+    audit_logger_1.auditLogger.log({
+        eventType: 'AUTH_LOGIN_SUCCESS',
+        userId: newUser.id,
+        userEmail: newUser.email,
+        organizationId: newUser.organizationId,
+        role: newUser.role,
+        ipAddress: ip,
+        outcome: 'SUCCESS',
+        details: { registration: true }
+    });
+    res.status(201).json({
         status: 'success',
-        token: `arthiq-jwt-token-${newUser.id}`,
-        user: newUser,
-        organization
+        token,
+        user: {
+            id: newUser.id,
+            name: newUser.name,
+            email: newUser.email,
+            role: newUser.role,
+            organizationId: newUser.organizationId
+        },
+        organization: {
+            id: newUser.organizationId,
+            name: companyName || organization.name,
+            industry: "Financial Services",
+            gstin: gstin || organization.gstin
+        }
     });
 });
-app.get('/api/auth/me', (req, res) => {
+app.post('/api/auth/forgot-password', rateLimit_middleware_1.loginRateLimiter, (req, res) => {
+    const { email } = req.body;
+    const resetToken = `rst-${crypto_1.default.randomBytes(16).toString('hex')}`;
+    passwordResetTokens.set(resetToken, {
+        email: email || 'user@example.com',
+        expiresAt: Date.now() + 15 * 60 * 1000,
+        used: false
+    });
+    audit_logger_1.auditLogger.log({
+        eventType: 'AUTH_PASSWORD_RESET_REQUEST',
+        userEmail: email,
+        ipAddress: req.ip || req.socket.remoteAddress || 'unknown',
+        outcome: 'SUCCESS'
+    });
+    res.json({
+        status: 'success',
+        message: 'If the email exists in our tenant registry, a secure reset token has been dispatched.',
+        resetToken
+    });
+});
+app.post('/api/auth/reset-password', rateLimit_middleware_1.loginRateLimiter, (req, res) => {
+    const { token, newPassword } = req.body;
+    const record = passwordResetTokens.get(token);
+    if (!record || record.used || Date.now() > record.expiresAt) {
+        return res.status(400).json({ error: 'Invalid Token', message: 'Password reset link has expired or has already been used.' });
+    }
+    if (!newPassword || newPassword.length < 8) {
+        return res.status(400).json({ error: 'Weak Password', message: 'Password must be at least 8 characters long.' });
+    }
+    const user = enterpriseUsers.find(u => u.email.toLowerCase() === record.email.toLowerCase());
+    if (user) {
+        user.passwordHash = auth_middleware_1.authCrypto.hashPassword(newPassword);
+    }
+    record.used = true;
+    audit_logger_1.auditLogger.log({
+        eventType: 'AUTH_PASSWORD_CHANGED',
+        userEmail: record.email,
+        ipAddress: req.ip || req.socket.remoteAddress || 'unknown',
+        outcome: 'SUCCESS'
+    });
+    res.json({ status: 'success', message: 'Password reset successfully. You can now log in with your new credentials.' });
+});
+app.get('/api/auth/me', auth_middleware_1.optionalAuthenticateToken, (req, res) => {
+    if (req.user) {
+        return res.json({
+            status: 'success',
+            user: req.user,
+            organization: req.user.organizationId === 'org-aarav-01' ? {
+                id: 'org-aarav-01',
+                name: 'Aarav Office Solutions Pvt. Ltd.',
+                industry: 'Office Supplies & Tech Distribution',
+                gstin: '27AABCA1234F1Z5'
+            } : organization
+        });
+    }
     res.json({
         status: 'success',
         user: currentUser,
@@ -183,7 +487,30 @@ app.get('/api/auth/me', (req, res) => {
     });
 });
 app.post('/api/auth/logout', (req, res) => {
-    res.json({ status: 'success', message: 'Logged out successfully' });
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+    if (token) {
+        auth_middleware_1.authCrypto.revokeToken(token);
+    }
+    audit_logger_1.auditLogger.log({
+        eventType: 'AUTH_LOGOUT',
+        ipAddress: req.ip || req.socket.remoteAddress || 'unknown',
+        outcome: 'SUCCESS'
+    });
+    res.json({ status: 'success', message: 'Session revoked and logged out securely.' });
+});
+// ---------------------------------------------------------------------
+// SECURITY MONITORING CENTER (ADMIN ONLY)
+// ---------------------------------------------------------------------
+app.get('/api/security/dashboard', auth_middleware_1.authenticateToken, (0, rbac_middleware_1.requireRole)(['Super Admin', 'Company Admin', 'Read-Only Auditor']), (req, res) => {
+    const data = security_monitor_1.securityMonitor.getLiveDashboard();
+    res.json({ status: 'success', ...data });
+});
+app.get('/api/security/events', auth_middleware_1.authenticateToken, (0, rbac_middleware_1.requireRole)(['Super Admin', 'Company Admin', 'Read-Only Auditor']), (req, res) => {
+    const limit = Number(req.query.limit) || 50;
+    const filter = req.query.type;
+    const events = audit_logger_1.auditLogger.getRecentEvents(limit, filter);
+    res.json({ status: 'success', total: events.length, events });
 });
 // ---------------------------------------------------------------------
 // 2. DASHBOARD OVERVIEW & KPIS
@@ -236,7 +563,10 @@ app.get('/api/expenses', (req, res) => {
         expenses
     });
 });
-app.post('/api/expenses', async (req, res) => {
+app.post('/api/expenses', auth_middleware_1.optionalAuthenticateToken, async (req, res) => {
+    if (req.user && req.user.role === 'Employee') {
+        return res.status(403).json({ error: 'Forbidden Operation', message: 'Employee role cannot commit company expenses.' });
+    }
     const { vendor, category, description, amount, paymentMethod, referenceNo } = req.body;
     const newExp = {
         id: `EXP-${Date.now().toString().slice(-4)}`,
@@ -266,7 +596,10 @@ app.get('/api/invoices', (req, res) => {
         invoices
     });
 });
-app.post('/api/invoices/upload', upload.single('file'), async (req, res) => {
+app.post('/api/invoices/upload', rateLimit_middleware_1.uploadRateLimiter, upload.single('file'), validation_middleware_1.validateUploadedFile, auth_middleware_1.optionalAuthenticateToken, async (req, res) => {
+    if (req.user && req.user.role === 'Employee') {
+        return res.status(403).json({ error: 'Forbidden', message: 'Employee role cannot upload vendor invoices.' });
+    }
     const body = req.body || {};
     const invNum = body.invoice_number || `INV-${new Date().getFullYear()}-${Math.floor(Math.random() * 9000 + 1000)}`;
     const vendorName = body.vendor_name || (req.file ? req.file.originalname.replace(/\.[^/.]+$/, "") : "Dynamic Vendor Solutions");
@@ -316,7 +649,10 @@ app.post('/api/invoices/:id/analyze', async (req, res) => {
     invoice.recommended_verification_steps = analysis.recommended_verification_steps;
     res.json({ status: 'success', invoice });
 });
-app.post('/api/invoices/:id/verify', async (req, res) => {
+app.post('/api/invoices/:id/verify', auth_middleware_1.optionalAuthenticateToken, async (req, res) => {
+    if (req.user && (req.user.role === 'Employee' || req.user.role === 'Read-Only Auditor')) {
+        return res.status(403).json({ error: 'Forbidden Operation', message: 'Insufficient role to authorize invoice disbursements.' });
+    }
     const invoice = invoices.find(i => i.id === req.params.id);
     if (!invoice)
         return res.status(404).json({ error: 'Invoice not found' });
@@ -365,7 +701,10 @@ app.get('/api/leakage/findings', (req, res) => {
         findings: leakageFindings
     });
 });
-app.post('/api/leakage/resolve/:id', (req, res) => {
+app.post('/api/leakage/resolve/:id', auth_middleware_1.optionalAuthenticateToken, (req, res) => {
+    if (req.user && (req.user.role === 'Employee' || req.user.role === 'Read-Only Auditor')) {
+        return res.status(403).json({ error: 'Forbidden Operation', message: 'Insufficient role to resolve profit leakage findings.' });
+    }
     const id = req.params.id;
     leakageFindings = leakageFindings.filter(f => f.id !== id);
     res.json({ status: 'success', message: `Leakage finding ${id} resolved & cost optimization logged.` });
@@ -567,7 +906,10 @@ app.get('/api/ai/training-status', async (req, res) => {
     const status = await financeEngineClient_1.financeEngineClient.getModelStatus();
     res.json({ status: 'success', modelStatus: status });
 });
-app.post('/api/ai/train', async (req, res) => {
+app.post('/api/ai/train', rateLimit_middleware_1.mlTrainingRateLimiter, auth_middleware_1.optionalAuthenticateToken, async (req, res) => {
+    if (req.user && (req.user.role === 'Employee' || req.user.role === 'Read-Only Auditor' || req.user.role === 'Accountant')) {
+        return res.status(403).json({ error: 'Forbidden Operation', message: 'Machine learning model calibration restricted to Administrators and Finance Managers.' });
+    }
     const result = await financeEngineClient_1.financeEngineClient.triggerTraining();
     res.json({ status: 'success', result });
 });

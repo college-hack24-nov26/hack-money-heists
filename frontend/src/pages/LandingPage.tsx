@@ -29,11 +29,12 @@ import { DynamicGraphEngine } from '../components/DynamicGraphEngine';
 
 interface LandingPageProps {
   onLaunchDashboard: () => void;
+  onLoginClick?: () => void;
   onAskQuestion?: (question: string) => void;
   onLaunchModule?: (moduleId: string) => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard, onAskQuestion, onLaunchModule }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard, onLoginClick, onAskQuestion, onLaunchModule }) => {
   const [calcMonthlySpend, setCalcMonthlySpend] = useState<number>(1500000);
   const [previewHorizon, setPreviewHorizon] = useState<number>(30);
   const estimatedAnnualSavings = Math.round(calcMonthlySpend * 0.082 * 12);
@@ -41,7 +42,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard, onA
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-[#EDE7FF] selection:text-[#6D45CF]">
       {/* 1. HORIZONTAL STICKY NAVBAR (No vertical sidebar) */}
-      <HomeNavbar onLaunchDashboard={onLaunchDashboard} />
+      <HomeNavbar onLaunchDashboard={onLaunchDashboard} onLoginClick={onLoginClick} />
 
       {/* 2. PREMIUM ARTHIQ HERO COMPONENT */}
       <section id="home">

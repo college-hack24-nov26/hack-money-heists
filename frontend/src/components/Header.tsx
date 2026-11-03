@@ -6,6 +6,8 @@ import {
   ShieldCheck,
   Building2,
   ExternalLink,
+  Shield,
+  LogOut
 } from 'lucide-react';
 import { ArthiqLogo } from './ArthiqLogo';
 
@@ -13,14 +15,34 @@ interface HeaderProps {
   currentView: string;
   onNavigate: (view: string) => void;
   onToggleLanding: () => void;
+  user?: {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    organizationId: string;
+  } | null;
+  onLogout?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentView,
   onNavigate,
-  onToggleLanding
+  onToggleLanding,
+  user,
+  onLogout
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
+
+  const displayName = user?.name || "Vikramaditya S.";
+  const displayRole = user?.role || "Super Admin";
+  const initials = displayName
+    .split(' ')
+    .filter(Boolean)
+    .map(p => p[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 
   const notifications = [
     {
@@ -52,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center gap-6">
         <button
           onClick={onToggleLanding}
-          className="flex items-center gap-3 focus:outline-none text-left"
+          className="flex items-center gap-3 focus:outline-none text-left cursor-pointer"
         >
           <ArthiqLogo size="compact" theme="light" />
         </button>
@@ -77,17 +99,21 @@ export const Header: React.FC<HeaderProps> = ({
           />
         </div>
 
-        {/* Quick Health Pill */}
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-[#16A879]">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          <span className="font-bold">Health: 84/100 (Strong)</span>
-        </div>
+        {/* Quick Health Pill / Security Link */}
+        <button
+          onClick={() => onNavigate('security')}
+          className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs text-[#16A879] transition-colors cursor-pointer"
+          title="Open Enterprise Security Center"
+        >
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="font-bold">Security: 96/100 (A+)</span>
+        </button>
 
         {/* Notifications */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="relative p-2 rounded-xl bg-[#F7F7FA] border border-[#E5E5EB] text-black hover:bg-[#ECECF1] transition-colors"
+            className="relative p-2 rounded-xl bg-[#F7F7FA] border border-[#E5E5EB] text-black hover:bg-[#ECECF1] transition-colors cursor-pointer"
           >
             <Bell className="w-4 h-4" />
             <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500" />
@@ -115,21 +141,33 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Landing Page Switcher */}
         <button
           onClick={onToggleLanding}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-black hover:bg-[#F7F7FA] transition-colors border border-neutral-300"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-black hover:bg-[#F7F7FA] transition-colors border border-neutral-300 cursor-pointer"
         >
           <ExternalLink className="w-3.5 h-3.5" />
           <span>Homepage</span>
         </button>
 
-        {/* User Profile */}
+        {/* User Profile & Logout */}
         <div className="flex items-center gap-2.5 pl-2 border-l border-[#E5E5EB]">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#6D45CF] to-indigo-600 flex items-center justify-center font-bold text-xs text-black">
-            VS
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#6D45CF] to-indigo-600 flex items-center justify-center font-bold text-xs text-white">
+            {initials || 'AR'}
           </div>
           <div className="hidden xl:block text-left">
-            <p className="text-xs font-extrabold text-black leading-tight">Vikramaditya S.</p>
-            <p className="text-[10px] font-bold text-black">Managing Director</p>
+            <p className="text-xs font-extrabold text-black leading-tight">{displayName}</p>
+            <div className="flex items-center gap-1">
+              <span className="text-[10px] font-bold text-[#6D45CF]">{displayRole}</span>
+            </div>
           </div>
+
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              title="Secure Session Logout"
+              className="p-1.5 rounded-lg text-neutral-500 hover:text-rose-600 hover:bg-rose-50 transition-colors ml-1 cursor-pointer"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
     </header>

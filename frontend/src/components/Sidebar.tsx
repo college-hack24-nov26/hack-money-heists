@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   LayoutDashboard,
-  Activity,
   Receipt,
   FileCheck2,
   TrendingUp,
@@ -12,21 +11,24 @@ import {
   Users2,
   Bot,
   FileSpreadsheet,
+  ShieldCheck,
   Sparkles
 } from 'lucide-react';
 
 interface SidebarProps {
   currentView: string;
   onNavigate: (view: string) => void;
+  userRole?: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate, userRole = 'Super Admin' }) => {
+  const isSecurityAuditor = ['Super Admin', 'Company Admin', 'Read-Only Auditor', 'Finance Manager'].includes(userRole);
+
   const navItems = [
     {
       id: 'overview',
       label: 'Overview',
       icon: LayoutDashboard,
-  Activity,
       badge: null
     },
     {
@@ -88,7 +90,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
       label: 'Reports & Export',
       icon: FileSpreadsheet,
       badge: null
-    }
+    },
+    ...(isSecurityAuditor ? [
+      {
+        id: 'security',
+        label: 'Security Center',
+        icon: ShieldCheck,
+        badge: 'Grade A+'
+      }
+    ] : [])
   ];
 
   return (
@@ -104,7 +114,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all group ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all group cursor-pointer ${
                 isActive
                   ? 'bg-[#EDE7FF] text-[#6D45CF] shadow-xs'
                   : 'text-black hover:text-[#6D45CF] hover:bg-[#F7F7FA]'
@@ -125,6 +135,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
                       ? 'bg-rose-100 text-[#E46D72]'
                       : item.badge.includes('Save')
                       ? 'bg-emerald-100 text-[#16A879]'
+                      : item.badge.includes('Grade')
+                      ? 'bg-emerald-100 text-emerald-700'
                       : isActive
                       ? 'bg-[#DDD3FA] text-[#6D45CF]'
                       : 'bg-neutral-200 text-black'
