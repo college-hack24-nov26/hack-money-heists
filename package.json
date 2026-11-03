@@ -1,0 +1,25 @@
+{
+  "name": "arthiq-platform",
+  "version": "1.0.0",
+  "description": "ARTHIQ — AI-Powered Financial Intelligence & Management Platform",
+  "scripts": {
+    "test": "python finance-engine/test_engine.py",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "start:engine": "python finance-engine/app/main.py",
+    "start:backend": "node backend/dist/server.js",
+    "start:frontend": "npm --prefix frontend run preview",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev"
+  },
+  "keywords": [
+    "fintech",
+    "financial-intelligence",
+    "fraud-detection",
+    "cashflow-prediction",
+    "profit-leakage",
+    "sme-finance"
+  ],
+  "author": "ARTHIQ Engineering Team",
+  "license": "MIT"
+}
+

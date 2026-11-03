@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  finance-engine:
+    build:
+      context: ./finance-engine
+      dockerfile: Dockerfile
+    container_name: arthiq-finance-engine
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: arthiq-backend
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - FINANCE_ENGINE_URL=http://finance-engine:5001
+      - DATABASE_URL=postgresql://arthiq_user:arthiq_secret@postgres:5432/arthiq_db
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=arthiq_super_secret_production_key_2026
+    depends_on:
+      - finance-engine
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: arthiq-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: arthiq-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=arthiq_user
+      - POSTGRES_PASSWORD=arthiq_secret
+      - POSTGRES_DB=arthiq_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: arthiq-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+

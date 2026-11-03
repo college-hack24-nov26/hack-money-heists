@@ -1,0 +1,23 @@
+{
+  "organization": {
+    "id": "org-apex-01",
+    "name": "Apex Technologies Pvt Ltd",
+    "industry": "Enterprise B2B Software & Automation",
+    "gstin": "27AAPFU0939F1ZV",
+    "pan": "AAPFU0939F",
+    "state": "Karnataka",
+    "currency": "INR (₹)",
+    "safetyThreshold": 500000.0
+  },
+  "metrics": {
+    "revenue": 4500000.0,
+    "cogs": 2200000.0,
+    "operatingExpenses": 1250000.0,
+    "netProfit": 694200.0,
+    "cashBalance": 1850000.0,
+    "healthScore": 84
+  },
+  "leakagesIdentifiedCount": 5,
+  "flaggedInvoicesCount": 3
+}
+
