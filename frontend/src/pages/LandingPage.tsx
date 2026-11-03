@@ -143,48 +143,56 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard, onL
           {[
             {
               icon: Receipt,
+              id: "expenses",
               title: "Smart Expense Analyzer",
               desc: "Automated OPEX categorization, Z-score outlier detection, and duplicate payment audits.",
               badge: "ML Outlier Engine",
             },
             {
               icon: FileCheck2,
+              id: "invoices",
               title: "Invoice Fraud Detector",
               desc: "Statutory 15-char GSTIN checksum verification, IFSC routing, and risk scoring (0-100).",
               badge: "Forensics & OCR",
             },
             {
               icon: TrendingUp,
+              id: "cashflow",
               title: "Cash Flow Prediction",
               desc: "Holt-Winters forecasting across 7-90 days with 95% bootstrap confidence bands.",
               badge: "Predictive AI",
             },
             {
               icon: AlertOctagon,
+              id: "leakage",
               title: "Profit Leakage Detector",
               desc: "ARTHIQ's signature feature uncovering price creep, double debits, and idle subscriptions.",
               badge: "Signature PLD",
             },
             {
               icon: BarChart3,
+              id: "analytics",
               title: "Financial Analytics & BI",
               desc: "Executive P&L statements, Balance Sheets, and 15+ CA ratios with real Excel XLSX export.",
               badge: "Power BI Grade",
             },
             {
               icon: Users2,
+              id: "clients",
               title: "Client & Receivable Isolation",
               desc: "Centralized client directory, Days Sales Outstanding (DSO), and credit limits.",
               badge: "Multi-Tenant",
             },
             {
               icon: ShieldCheck,
+              id: "risks",
               title: "Financial Risk Radar",
               desc: "Multi-factor SME stress test analyzing liquidity, profitability, credit, and fraud drag.",
               badge: "Early Warning",
             },
             {
               icon: Bot,
+              id: "assistant",
               title: "ARTHIQ AI Assistant",
               desc: "Grounded conversational financial intelligence executing ledger tools with zero hallucinated math.",
               badge: "Tool-Calling AI",
@@ -194,7 +202,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard, onL
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-white border border-[#E5E5EB] hover:border-[#D4D4DE] transition-all hover:shadow-card flex flex-col justify-between"
+                className="p-6 rounded-2xl bg-white border border-[#E5E5EB] hover:border-[#D4D4DE] transition-all hover:shadow-card flex flex-col justify-between group/card cursor-pointer"
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest("button")) return;
+                  if (onLaunchModule) onLaunchModule(item.id);
+                  else onLaunchDashboard();
+                }}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -212,10 +225,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard, onL
                     {item.desc}
                   </p>
                 </div>
-                <div className="pt-4 mt-2 border-t border-[#F0F0F5] text-xs font-semibold text-[#6D45CF] flex items-center gap-1">
-                  <span>Explore Feature</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </div>
+                <button
+                  type="button"
+                  onClick={() => onLaunchModule ? onLaunchModule(item.id) : onLaunchDashboard()}
+                  className="w-full pt-4 mt-2 border-t border-[#F0F0F5] text-xs font-bold text-[#6D45CF] hover:text-[#5B37B5] flex items-center justify-between group cursor-pointer transition-colors"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <span>Explore Feature</span>
+                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <span className="text-[10px] uppercase font-semibold text-neutral-400 group-hover:text-[#6D45CF]">Launch →</span>
+                </button>
               </div>
             );
           })}

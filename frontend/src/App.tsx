@@ -21,6 +21,11 @@ import { ForgotPassword } from './pages/ForgotPassword';
 import { ResetPassword } from './pages/ResetPassword';
 import { MfaVerification } from './pages/MfaVerification';
 import { Unauthorized } from './pages/Unauthorized';
+import {
+  resolveCurrentRoute,
+  navigateTo,
+  VIEW_ID_TO_PATH
+} from './router';
 
 export type ViewMode =
   | 'landing'
@@ -41,9 +46,10 @@ export interface EnterpriseUser {
 }
 
 export const App: React.FC = () => {
-  // Navigation & View States
-  const [viewMode, setViewMode] = useState<ViewMode>('landing');
-  const [currentView, setCurrentView] = useState<string>('overview');
+  // Initialize route from current browser URL
+  const initialRoute = resolveCurrentRoute();
+  const [viewMode, setViewMode] = useState<ViewMode>(initialRoute.viewMode);
+  const [currentView, setCurrentView] = useState<string>(initialRoute.viewId || 'overview');
   const [assistantInitialQuery, setAssistantInitialQuery] = useState<string | null>(null);
 
   // Enterprise Auth States
@@ -68,6 +74,23 @@ export const App: React.FC = () => {
     userRole: 'Employee'
   });
 
+  // Synchronize route on browser Back/Forward (popstate)
+  useEffect(() => {
+    const syncRouteFromLocation = () => {
+      const route = resolveCurrentRoute();
+      setViewMode(route.viewMode);
+      if (route.viewMode === 'dashboard') {
+        setCurrentView(route.viewId);
+      }
+      if (route.title) {
+        document.title = route.title;
+      }
+    };
+
+    window.addEventListener('popstate', syncRouteFromLocation);
+    return () => window.removeEventListener('popstate', syncRouteFromLocation);
+  }, []);
+
   // Verify Active Session on Mount
   useEffect(() => {
     if (token) {
@@ -91,6 +114,7 @@ export const App: React.FC = () => {
     setUser(authenticatedUser);
     setToken(authToken);
     setMfaChallenge(null);
+    navigateTo('/platform/overview');
     setViewMode('dashboard');
     setCurrentView('overview');
   };
@@ -112,6 +136,7 @@ export const App: React.FC = () => {
     sessionStorage.removeItem('arthiq_user');
     setUser(null);
     setToken(null);
+    navigateTo('/');
     setViewMode('landing');
   };
 
@@ -122,11 +147,14 @@ export const App: React.FC = () => {
 
   const handleAskQuestionFromShowcase = (question: string) => {
     setAssistantInitialQuery(question);
+    navigateTo('/platform/ai-assistant');
     setViewMode('dashboard');
     setCurrentView('assistant');
   };
 
   const handleLaunchModuleFromShowcase = (moduleId: string) => {
+    const targetPath = VIEW_ID_TO_PATH[moduleId] || `/platform/${moduleId}`;
+    navigateTo(targetPath);
     setViewMode('dashboard');
     setCurrentView(moduleId);
   };
@@ -144,6 +172,9 @@ export const App: React.FC = () => {
       return;
     }
 
+    const targetPath = VIEW_ID_TO_PATH[targetView] || `/platform/${targetView}`;
+    navigateTo(targetPath);
+    setViewMode('dashboard');
     setCurrentView(targetView);
   };
 
@@ -152,10 +183,19 @@ export const App: React.FC = () => {
     return (
       <Login
         onLoginSuccess={handleLoginSuccess}
-        onNavigateToRegister={() => setViewMode('register')}
-        onNavigateToForgotPassword={() => setViewMode('forgot-password')}
+        onNavigateToRegister={() => {
+          navigateTo('/register');
+          setViewMode('register');
+        }}
+        onNavigateToForgotPassword={() => {
+          navigateTo('/forgot-password');
+          setViewMode('forgot-password');
+        }}
         onMfaRequired={handleMfaRequired}
-        onBackToHome={() => setViewMode('landing')}
+        onBackToHome={() => {
+          navigateTo('/');
+          setViewMode('landing');
+        }}
       />
     );
   }
@@ -164,8 +204,14 @@ export const App: React.FC = () => {
     return (
       <Register
         onRegisterSuccess={handleLoginSuccess}
-        onNavigateToLogin={() => setViewMode('login')}
-        onBackToHome={() => setViewMode('landing')}
+        onNavigateToLogin={() => {
+          navigateTo('/login');
+          setViewMode('login');
+        }}
+        onBackToHome={() => {
+          navigateTo('/');
+          setViewMode('landing');
+        }}
       />
     );
   }
@@ -173,12 +219,19 @@ export const App: React.FC = () => {
   if (viewMode === 'forgot-password') {
     return (
       <ForgotPassword
-        onNavigateToLogin={() => setViewMode('login')}
+        onNavigateToLogin={() => {
+          navigateTo('/login');
+          setViewMode('login');
+        }}
         onNavigateToResetPassword={(tok) => {
           if (tok) setResetToken(tok);
+          navigateTo('/reset-password');
           setViewMode('reset-password');
         }}
-        onBackToHome={() => setViewMode('landing')}
+        onBackToHome={() => {
+          navigateTo('/');
+          setViewMode('landing');
+        }}
       />
     );
   }
@@ -187,9 +240,18 @@ export const App: React.FC = () => {
     return (
       <ResetPassword
         initialToken={resetToken || ''}
-        onResetSuccess={() => setViewMode('login')}
-        onNavigateToLogin={() => setViewMode('login')}
-        onBackToHome={() => setViewMode('landing')}
+        onResetSuccess={() => {
+          navigateTo('/login');
+          setViewMode('login');
+        }}
+        onNavigateToLogin={() => {
+          navigateTo('/login');
+          setViewMode('login');
+        }}
+        onBackToHome={() => {
+          navigateTo('/');
+          setViewMode('landing');
+        }}
       />
     );
   }
@@ -200,7 +262,10 @@ export const App: React.FC = () => {
         challengeId={mfaChallenge.challengeId}
         email={mfaChallenge.email}
         onVerifySuccess={handleLoginSuccess}
-        onBackToLogin={() => setViewMode('login')}
+        onBackToLogin={() => {
+          navigateTo('/login');
+          setViewMode('login');
+        }}
       />
     );
   }
@@ -210,12 +275,19 @@ export const App: React.FC = () => {
       <Unauthorized
         requiredRole={unauthorizedDetails.requiredRole}
         userRole={unauthorizedDetails.userRole}
-        onNavigateHome={() => setViewMode('landing')}
+        onNavigateHome={() => {
+          navigateTo('/');
+          setViewMode('landing');
+        }}
         onNavigateDashboard={() => {
+          navigateTo('/platform/overview');
           setViewMode('dashboard');
           setCurrentView('overview');
         }}
-        onSwitchAccount={() => setViewMode('login')}
+        onSwitchAccount={() => {
+          navigateTo('/login');
+          setViewMode('login');
+        }}
       />
     );
   }
@@ -225,10 +297,14 @@ export const App: React.FC = () => {
     return (
       <LandingPage
         onLaunchDashboard={() => {
+          navigateTo('/platform/overview');
           setViewMode('dashboard');
           setCurrentView('overview');
         }}
-        onLoginClick={() => setViewMode('login')}
+        onLoginClick={() => {
+          navigateTo('/login');
+          setViewMode('login');
+        }}
         onAskQuestion={handleAskQuestionFromShowcase}
         onLaunchModule={handleLaunchModuleFromShowcase}
       />
@@ -279,7 +355,10 @@ export const App: React.FC = () => {
       <Header
         currentView={currentView}
         onNavigate={handleNavigateWithRbac}
-        onToggleLanding={() => setViewMode('landing')}
+        onToggleLanding={() => {
+          navigateTo('/');
+          setViewMode('landing');
+        }}
         user={user}
         onLogout={handleLogout}
       />

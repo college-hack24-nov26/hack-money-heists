@@ -30,6 +30,34 @@ export const api = {
     return res.json();
   },
 
+  async getInvoiceById(id: string) {
+    const res = await fetch(`${API_BASE}/invoices/${id}`);
+    return res.json();
+  },
+
+  async getInvoiceRiskSummary() {
+    const res = await fetch(`${API_BASE}/invoices/risk-summary`);
+    return res.json();
+  },
+
+  async validateGstin(gstin: string) {
+    const res = await fetch(`${API_BASE}/invoices/validate-gstin`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ gstin })
+    });
+    return res.json();
+  },
+
+  async analyzeInvoice(data: any) {
+    const res = await fetch(`${API_BASE}/invoices/analyze`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    return res.json();
+  },
+
   async uploadInvoice(formData: FormData) {
     const res = await fetch(`${API_BASE}/invoices/upload`, {
       method: 'POST',
@@ -45,17 +73,53 @@ export const api = {
     return res.json();
   },
 
-  async getCashflowForecast(horizonDays = 30, safetyThreshold = 500000) {
+  async getCashflowForecast(horizonDays = 30, safetyThreshold = 500000, scenarioInputs?: any) {
     const res = await fetch(`${API_BASE}/cashflow/forecast`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ horizon_days: horizonDays, safety_threshold: safetyThreshold })
+      body: JSON.stringify({
+        horizon_days: horizonDays,
+        safety_threshold: safetyThreshold,
+        ...scenarioInputs
+      })
     });
+    return res.json();
+  },
+
+  async getCashflowSummary() {
+    const res = await fetch(`${API_BASE}/cashflow/summary`);
+    return res.json();
+  },
+
+  async getCashflowAlerts() {
+    const res = await fetch(`${API_BASE}/cashflow/alerts`);
+    return res.json();
+  },
+
+  async getCashflowHistory() {
+    const res = await fetch(`${API_BASE}/cashflow/history`);
     return res.json();
   },
 
   async getLeakageFindings() {
     const res = await fetch(`${API_BASE}/leakage/findings`);
+    return res.json();
+  },
+
+  async calculateLeakageSavings(monthlyOpex: number, recoveryRate = 0.048) {
+    const res = await fetch(`${API_BASE}/leakage/calculate-savings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ monthlyOpex, recoveryRate })
+    });
+    return res.json();
+  },
+
+  async scanLedger(formData: FormData) {
+    const res = await fetch(`${API_BASE}/leakage/scan-ledger`, {
+      method: 'POST',
+      body: formData
+    });
     return res.json();
   },
 
