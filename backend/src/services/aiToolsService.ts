@@ -8,6 +8,7 @@ import {
   Invoice
 } from '../seedData';
 import { financeEngineClient } from './financeEngineClient';
+import { nvidiaLlmService } from './nvidiaLlmService';
 
 export interface AssistantMessage {
   id: string;
@@ -53,9 +54,11 @@ export class AIFinancialAssistantService {
       toolsUsed.push("detect_profit_leakage()");
       const leakageResult = await financeEngineClient.detectProfitLeakage(currentExpenses, currentInvoices, SEED_CLIENTS);
       const topItems = SEED_PROFIT_LEAKAGE.slice(0, 3);
+      const totalIdentified = leakageResult?.total_identified_leakage ?? leakageResult?.total_leakage ?? leakageResult?.totalIdentified ?? 85200;
+      const annualSavings = leakageResult?.total_potential_annual_savings ?? leakageResult?.annual_savings_potential ?? leakageResult?.potentialAnnualSavings ?? 888400;
       
       responseText = `### 🔍 Profit Leakage Analysis (PLD)
-Based on real-time transaction reconciliation across your accounts, ARTHIQ identified **₹${leakageResult.total_identified_leakage.toLocaleString('en-IN')}** in active profit leakages, with an annualized recovery potential of **₹${leakageResult.total_potential_annual_savings.toLocaleString('en-IN')}**.
+Based on real-time transaction reconciliation across your accounts, ARTHIQ identified **₹${Number(totalIdentified).toLocaleString('en-IN')}** in active profit leakages, with an annualized recovery potential of **₹${Number(annualSavings).toLocaleString('en-IN')}**.
 
 **Top Leakage Sources:**
 1. **${topItems[0].title}** (${topItems[0].department}):
@@ -165,22 +168,20 @@ Total logged expenses for the current period stand at **₹${totalExp.toLocaleSt
       metricsData = { totalExpenses: totalExp, topVendors: sortedVendors.slice(0, 5) };
     }
 
-    // Default Intelligence overview
+    // Generative AI Assistant Interpretation via NVIDIA NIM / OpenAI-compatible model
     else {
-      toolsUsed.push("get_financial_overview()");
-      responseText = `### 🏢 Apex Technologies Financial Snapshot
-I evaluated your current operational finances:
-- **Net Operating Revenue:** ₹${SEED_FINANCIAL_SUMMARY.revenue.toLocaleString('en-IN')}
-- **Net Profit:** ₹${(SEED_FINANCIAL_SUMMARY.revenue - SEED_FINANCIAL_SUMMARY.cogs - SEED_FINANCIAL_SUMMARY.operating_expenses - SEED_FINANCIAL_SUMMARY.interest_expense - SEED_FINANCIAL_SUMMARY.tax_expense).toLocaleString('en-IN')} (Margin: 15.4%)
-- **Available Liquidity:** ₹${SEED_FINANCIAL_SUMMARY.cash_and_equivalents.toLocaleString('en-IN')} (Runway: 14+ months)
-- **Identified Profit Leakage:** ₹85,200 (Potential annual savings: ₹8,88,400)
-- **Flagged Invoices:** 3 invoices requiring CFO clearance before payment.
-
-Try asking me:
-- *"Where is my business losing unnecessary money?"*
-- *"Find suspicious invoices in my uploaded records"*
-- *"How much cash will we need over the next 30 days?"*
-- *"Which vendor is costing our company the most?"*`;
+      toolsUsed.push("nvidia_nim_llm(openai/gpt-oss-20b)");
+      const aiResponse = await nvidiaLlmService.analyzeAssistantQuery(query, {
+        expenses: currentExpenses,
+        invoices: currentInvoices,
+        summary: SEED_FINANCIAL_SUMMARY
+      });
+      responseText = aiResponse.text;
+      metricsData = {
+        model: "openai/gpt-oss-20b",
+        source: aiResponse.source,
+        reasoning: aiResponse.reasoning
+      };
     }
 
     const assistantMsg: AssistantMessage = {

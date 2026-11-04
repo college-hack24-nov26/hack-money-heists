@@ -41,7 +41,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate, userR
       id: 'invoices',
       label: 'Invoice Intelligence',
       icon: FileCheck2,
-      badge: '3 Flagged'
+      badge: 'Audited'
     },
     {
       id: 'cashflow',

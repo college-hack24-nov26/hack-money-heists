@@ -73,6 +73,13 @@ export const api = {
     return res.json();
   },
 
+  async verifyAllInvoices() {
+    const res = await fetch(`${API_BASE}/invoices/verify-all`, {
+      method: 'POST'
+    });
+    return res.json();
+  },
+
   async getCashflowForecast(horizonDays = 30, safetyThreshold = 500000, scenarioInputs?: any) {
     const res = await fetch(`${API_BASE}/cashflow/forecast`, {
       method: 'POST',
@@ -125,6 +132,13 @@ export const api = {
 
   async resolveLeakage(id: string) {
     const res = await fetch(`${API_BASE}/leakage/resolve/${id}`, {
+      method: 'POST'
+    });
+    return res.json();
+  },
+
+  async resolveAllLeakages() {
+    const res = await fetch(`${API_BASE}/leakage/resolve-all`, {
       method: 'POST'
     });
     return res.json();

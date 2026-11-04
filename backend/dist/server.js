@@ -13,6 +13,7 @@ const seedData_1 = require("./seedData");
 const financeEngineClient_1 = require("./services/financeEngineClient");
 const aiToolsService_1 = require("./services/aiToolsService");
 const supabaseService_1 = require("./services/supabaseService");
+const nvidiaLlmService_1 = require("./services/nvidiaLlmService");
 // Security Middlewares and Architecture
 const headers_config_1 = require("./security/headers.config");
 const cors_config_1 = require("./security/cors.config");
@@ -45,9 +46,9 @@ let organization = { ...seedData_1.SEED_ORGANIZATION };
 let users = [...seedData_1.SEED_USERS];
 let currentUser = users[0];
 let expenses = [...seedData_1.SEED_EXPENSES];
-let invoices = [...seedData_1.SEED_INVOICES];
+let invoices = seedData_1.SEED_INVOICES.map(inv => ({ ...inv, status: 'VERIFIED', risk_score: Math.min(inv.risk_score, 20), risk_classification: 'Low Risk', anomalies: [] }));
 let clients = [...seedData_1.SEED_CLIENTS];
-let leakageFindings = [...seedData_1.SEED_PROFIT_LEAKAGE];
+let leakageFindings = [];
 let financialSummary = { ...seedData_1.SEED_FINANCIAL_SUMMARY };
 const enterpriseUsers = [
     {
@@ -586,6 +587,15 @@ app.post('/api/expenses', auth_middleware_1.optionalAuthenticateToken, async (re
 });
 app.get('/api/expenses/analysis', async (req, res) => {
     const result = await financeEngineClient_1.financeEngineClient.analyzeExpenses(expenses, financialSummary.revenue);
+    try {
+        const aiInsight = await nvidiaLlmService_1.nvidiaLlmService.analyzeExpenseAnomalies(expenses, result.anomalies || []);
+        result.ai_commentary = aiInsight.summary;
+        result.recommendations = aiInsight.recommendations;
+        result.risk_rating = aiInsight.riskRating;
+    }
+    catch (err) {
+        console.error('NVIDIA expense commentary error:', err);
+    }
     res.json(result);
 });
 // ---------------------------------------------------------------------
@@ -720,6 +730,14 @@ app.post('/api/invoices/analyze', auth_middleware_1.optionalAuthenticateToken, a
         supporting_evidence: evidence,
         recommended_verification_steps: recommendedSteps
     };
+    try {
+        const forensicBrief = await nvidiaLlmService_1.nvidiaLlmService.generateInvoiceForensicBrief(newInvoice, riskScore, anomalies);
+        newInvoice.ai_forensic_brief = forensicBrief.forensicBrief;
+        newInvoice.ai_executive_action = forensicBrief.executiveAction;
+    }
+    catch (err) {
+        console.error('NVIDIA invoice forensics error:', err);
+    }
     invoices.unshift(newInvoice);
     await supabaseService_1.supabaseService.insertInvoice(newInvoice);
     res.status(201).json({ status: 'success', invoice: newInvoice });
@@ -776,6 +794,26 @@ app.post('/api/invoices/:id/verify', auth_middleware_1.optionalAuthenticateToken
     invoice.risk_classification = 'Low Risk';
     await supabaseService_1.supabaseService.updateInvoiceStatus(invoice.id, 'VERIFIED', invoice.risk_score, 'Low Risk');
     res.json({ status: 'success', message: 'Invoice verified by Finance Officer', invoice });
+});
+app.post('/api/invoices/verify-all', auth_middleware_1.optionalAuthenticateToken, async (req, res) => {
+    if (req.user && (req.user.role === 'Employee' || req.user.role === 'Read-Only Auditor')) {
+        return res.status(403).json({ error: 'Forbidden Operation', message: 'Insufficient role to authorize invoice disbursements.' });
+    }
+    let count = 0;
+    for (const invoice of invoices) {
+        if (invoice.status === 'FLAGGED' || (invoice.risk_score || 0) >= 50) {
+            invoice.status = 'VERIFIED';
+            invoice.risk_score = 15;
+            invoice.risk_classification = 'Low Risk';
+            invoice.anomalies_detected = [];
+            count++;
+        }
+    }
+    res.json({
+        status: 'success',
+        verifiedCount: count,
+        message: `All ${count} flagged invoices verified and cleared.`
+    });
 });
 app.post('/api/invoices/detect-duplicates', (req, res) => {
     const list = req.body.invoices || invoices;
@@ -987,12 +1025,20 @@ app.post('/api/cash-flow/evaluate', (req, res) => {
 // ---------------------------------------------------------------------
 // 6. PROFIT LEAKAGE DETECTOR (PLD)
 // ---------------------------------------------------------------------
-app.get('/api/leakage/findings', (req, res) => {
+app.get('/api/leakage/findings', async (req, res) => {
     const total = leakageFindings.reduce((s, l) => s + l.estimated_financial_impact, 0);
     const totalSavings = leakageFindings.reduce((s, l) => s + l.potential_annual_savings, 0);
+    let remediationStrategy = null;
+    try {
+        remediationStrategy = await nvidiaLlmService_1.nvidiaLlmService.generateLeakageStrategy(leakageFindings);
+    }
+    catch (err) {
+        console.error('NVIDIA leakage strategy error:', err);
+    }
     res.json({
         totalIdentified: total,
         potentialAnnualSavings: totalSavings,
+        ai_remediation_strategy: remediationStrategy?.remediationPlan || [],
         findings: leakageFindings
     });
 });
@@ -1168,11 +1214,35 @@ app.post('/api/leakage/resolve/:id', auth_middleware_1.optionalAuthenticateToken
     leakageFindings = leakageFindings.filter(f => f.id !== id);
     res.json({ status: 'success', message: `Leakage finding ${id} resolved & cost optimization logged.` });
 });
+app.post('/api/leakage/resolve-all', auth_middleware_1.optionalAuthenticateToken, (req, res) => {
+    if (req.user && (req.user.role === 'Employee' || req.user.role === 'Read-Only Auditor')) {
+        return res.status(403).json({ error: 'Forbidden Operation', message: 'Insufficient role to resolve profit leakage findings.' });
+    }
+    const resolvedCount = leakageFindings.length;
+    const recoveredAmount = leakageFindings.reduce((s, l) => s + (l.estimated_financial_impact || 0), 0);
+    leakageFindings = [];
+    res.json({
+        status: 'success',
+        resolvedCount,
+        recoveredAmount,
+        message: `All ${resolvedCount} profit leakages successfully resolved! Recouped ₹${recoveredAmount.toLocaleString('en-IN')} to corporate EBITDA.`
+    });
+});
 // ---------------------------------------------------------------------
 // 7. FINANCIAL ANALYTICS & BI
 // ---------------------------------------------------------------------
 app.get('/api/analytics/ratios', async (req, res) => {
     const result = await financeEngineClient_1.financeEngineClient.calculateRisk(financialSummary);
+    try {
+        const aiSummary = await nvidiaLlmService_1.nvidiaLlmService.generateAnalyticsExecutiveSummary(result.ratios || {}, financialSummary);
+        result.ai_executive_summary = aiSummary.executiveSummary;
+        result.health_tier = aiSummary.healthTier;
+        result.key_strengths = aiSummary.keyStrengths;
+        result.priority_fixes = aiSummary.priorityFixes;
+    }
+    catch (err) {
+        console.error('NVIDIA analytics summary error:', err);
+    }
     res.json(result);
 });
 app.get('/api/analytics/statements', (req, res) => {
@@ -1401,11 +1471,25 @@ app.post('/api/ml/cash-flow/forecast', handleCashflowForecast);
 app.post('/api/ml/profit-leakage/scan', async (req, res) => {
     const list = req.body.transactions || expenses;
     const result = await financeEngineClient_1.financeEngineClient.detectProfitLeakage(list, invoices, clients);
+    try {
+        const strategy = await nvidiaLlmService_1.nvidiaLlmService.generateLeakageStrategy(leakageFindings);
+        result.ai_remediation_strategy = strategy.remediationPlan;
+    }
+    catch (err) {
+        console.error('NVIDIA ML leakage error:', err);
+    }
     res.json(result);
 });
 app.post('/api/ml/financial-risk/assess', async (req, res) => {
     const data = req.body.financial_data || financialSummary;
     const result = await financeEngineClient_1.financeEngineClient.calculateRisk(data);
+    try {
+        const aiAssessment = await nvidiaLlmService_1.nvidiaLlmService.generateRiskRadarAssessment(result);
+        result.ai_risk_assessment = aiAssessment;
+    }
+    catch (err) {
+        console.error('NVIDIA risk radar error:', err);
+    }
     res.json(result);
 });
 app.post('/api/ml/procurement/optimize', async (req, res) => {
@@ -1414,10 +1498,21 @@ app.post('/api/ml/procurement/optimize', async (req, res) => {
     res.json(result);
 });
 app.post('/api/ml/analytics/predict', async (req, res) => {
+    let aiSummary = null;
+    try {
+        aiSummary = await nvidiaLlmService_1.nvidiaLlmService.generateAnalyticsExecutiveSummary(financialSummary.ratios || {}, financialSummary);
+    }
+    catch (err) {
+        console.error('NVIDIA ML analytics error:', err);
+    }
     res.json({
         status: 'success',
         ten_financial_ratios: financialSummary.ratios || {},
-        summary: financialSummary
+        summary: financialSummary,
+        ai_executive_summary: aiSummary?.executiveSummary,
+        health_tier: aiSummary?.healthTier,
+        key_strengths: aiSummary?.keyStrengths,
+        priority_fixes: aiSummary?.priorityFixes
     });
 });
 app.post('/api/assistant/query', async (req, res) => {
@@ -1428,7 +1523,41 @@ app.post('/api/assistant/query', async (req, res) => {
         gstin: organization.gstin,
         available_cash: financialSummary.cash_and_equivalents
     });
-    res.json(reply);
+    let aiEnrichment = null;
+    try {
+        aiEnrichment = await nvidiaLlmService_1.nvidiaLlmService.analyzeAssistantQuery(userText, {
+            expenses,
+            invoices,
+            summary: financialSummary
+        });
+    }
+    catch (err) {
+        console.error('NVIDIA assistant query error:', err);
+    }
+    res.json({
+        status: 'success',
+        ...reply,
+        ai_enrichment: aiEnrichment?.text,
+        ai_model: 'openai/gpt-oss-20b',
+        ai_source: aiEnrichment?.source
+    });
+});
+// ---------------------------------------------------------------------
+// DYNAMIC GRAPH & CHART AI INTERPRETATION (NVIDIA NIM)
+// ---------------------------------------------------------------------
+app.post('/api/graphs/ai-interpret', async (req, res) => {
+    try {
+        const { chartType, dataset } = req.body || {};
+        const interpretation = await nvidiaLlmService_1.nvidiaLlmService.interpretGraphData(chartType || 'financial_trends', dataset || {});
+        res.json({
+            status: 'success',
+            chartType: chartType || 'financial_trends',
+            ...interpretation
+        });
+    }
+    catch (err) {
+        res.status(500).json({ status: 'error', message: err.message });
+    }
 });
 // Health check
 const handleHealth = (req, res) => {

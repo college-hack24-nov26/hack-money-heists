@@ -36,7 +36,8 @@ import {
   DollarSign,
   PieChart as PieIcon,
   Activity,
-  Layers
+  Layers,
+  Sparkles
 } from 'lucide-react';
 import { api } from '../services/api';
 
@@ -63,6 +64,40 @@ export const DynamicGraphEngine: React.FC<DynamicGraphEngineProps> = ({ onTransa
 
   // File Upload State
   const [uploadFileName, setUploadFileName] = useState<string | null>(null);
+  const [aiNarrative, setAiNarrative] = useState<{ title: string; narrative: string; keyTakeaway: string } | null>(null);
+  const [isAiLoading, setIsAiLoading] = useState<boolean>(false);
+
+  const handleAiInterpret = async () => {
+    setIsAiLoading(true);
+    try {
+      const activeDataset = activeChartTab === 'revenue_expense' ? monthlyFinancials :
+                           activeChartTab === 'cashflow' ? cashflowVelocity :
+                           activeChartTab === 'forecast' ? forecastTrajectory :
+                           activeChartTab === 'category' ? categoryBreakdown :
+                           activeChartTab === 'department' ? departmentSpending : riskRadarData;
+
+      const res = await fetch('/api/graphs/ai-interpret', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chartType: activeChartTab,
+          dataset: activeDataset
+        })
+      });
+      const data = await res.json();
+      if (data.status === 'success') {
+        setAiNarrative({
+          title: data.title || 'AI Financial Synthesis',
+          narrative: data.narrative,
+          keyTakeaway: data.keyTakeaway
+        });
+      }
+    } catch (err) {
+      console.error('Failed to fetch AI chart interpretation:', err);
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
 
   // Dynamic Chart Dataset State (Initialized with realistic baseline, updated on input)
   const [monthlyFinancials, setMonthlyFinancials] = useState([
@@ -498,6 +533,20 @@ export const DynamicGraphEngine: React.FC<DynamicGraphEngineProps> = ({ onTransa
               >
                 <Download className="w-4 h-4" />
               </button>
+
+              <button
+                onClick={handleAiInterpret}
+                disabled={isAiLoading}
+                title="AI Narrative Analysis (NVIDIA NIM)"
+                className="px-3 py-2 rounded-xl bg-[#6D45CF] hover:bg-[#5B37B5] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5"
+              >
+                {isAiLoading ? (
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                ) : (
+                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                )}
+                <span>{isAiLoading ? 'Analyzing...' : 'AI Chart Insights'}</span>
+              </button>
             </div>
           </div>
 
@@ -518,6 +567,25 @@ export const DynamicGraphEngine: React.FC<DynamicGraphEngineProps> = ({ onTransa
                   Real-time recalculated from authenticated general ledger records.
                 </p>
               </div>
+
+              {/* AI Real-Time Insights Banner */}
+              {aiNarrative && (
+                <div className="w-full mt-4 p-4 rounded-2xl bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200 text-left animate-fade-in">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <Sparkles className="w-4 h-4 text-[#6D45CF]" />
+                    <h4 className="text-xs font-extrabold uppercase tracking-wide text-[#6D45CF]">
+                      {aiNarrative.title} (NVIDIA NIM / openai/gpt-oss-20b)
+                    </h4>
+                  </div>
+                  <p className="text-xs text-[#292936] leading-relaxed font-medium mb-2">
+                    {aiNarrative.narrative}
+                  </p>
+                  <div className="text-[11px] font-bold text-emerald-800 bg-emerald-100/70 px-3 py-1.5 rounded-xl border border-emerald-200/80 inline-flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Executive Takeaway: {aiNarrative.keyTakeaway}</span>
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-center gap-3">
                 <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-50 text-[#16A879] border border-emerald-200">

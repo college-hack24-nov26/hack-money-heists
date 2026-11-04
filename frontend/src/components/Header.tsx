@@ -33,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
   onLogout
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [hasUnreadAlerts, setHasUnreadAlerts] = useState(false);
 
   const displayName = user?.name || "Vikramaditya S.";
   const displayRole = user?.role || "Super Admin";
@@ -112,18 +113,29 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Notifications */}
         <div className="relative">
           <button
-            onClick={() => setShowNotifications(!showNotifications)}
+            onClick={() => {
+              setShowNotifications(!showNotifications);
+              setHasUnreadAlerts(false);
+            }}
             className="relative p-2 rounded-xl bg-[#F7F7FA] border border-[#E5E5EB] text-black hover:bg-[#ECECF1] transition-colors cursor-pointer"
+            title="Financial Alerts"
           >
             <Bell className="w-4 h-4" />
-            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500" />
+            {hasUnreadAlerts && (
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+            )}
           </button>
 
           {showNotifications && (
             <div className="absolute right-0 mt-2 w-80 rounded-2xl bg-white border border-[#E5E5EB] p-4 shadow-xl z-50 animate-fade-in text-black">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E5EB]">
                 <span className="text-xs font-bold text-black">Financial Alerts</span>
-                <span className="text-[10px] font-bold text-[#6D45CF]">3 Active</span>
+                <button
+                  onClick={() => setHasUnreadAlerts(false)}
+                  className="text-[10px] font-bold text-[#6D45CF] hover:underline cursor-pointer"
+                >
+                  {hasUnreadAlerts ? 'Mark as Read' : 'All Clear'}
+                </button>
               </div>
               <div className="divide-y divide-[#F0F0F5] mt-2">
                 {notifications.map((n) => (

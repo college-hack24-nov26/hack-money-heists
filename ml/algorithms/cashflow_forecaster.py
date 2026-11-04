@@ -180,31 +180,31 @@ class CashFlowEnsembleForecaster:
             lower_bound = round(running_balance - uncertainty_band)
             upper_bound = round(running_balance + uncertainty_band)
 
-            is_deficit = running_balance < safety_threshold
+            is_deficit = bool(running_balance < safety_threshold)
             if is_deficit:
                 deficit_days.append({
                     "date": dt.strftime("%Y-%m-%d"),
-                    "day_offset": day,
-                    "projected_balance": round(running_balance),
-                    "shortfall": round(safety_threshold - running_balance)
+                    "day_offset": int(day),
+                    "projected_balance": round(float(running_balance)),
+                    "shortfall": round(float(safety_threshold - running_balance))
                 })
 
             records.append({
                 "date": dt.strftime("%Y-%m-%d"),
-                "predicted_inflow": inflow,
-                "predicted_outflow": outflow,
-                "predicted_net": daily_net,
-                "projected_balance": round(running_balance),
-                "balance_lower_bound": lower_bound,
-                "balance_upper_bound": upper_bound,
+                "predicted_inflow": int(inflow),
+                "predicted_outflow": int(outflow),
+                "predicted_net": int(daily_net),
+                "projected_balance": round(float(running_balance)),
+                "balance_lower_bound": int(lower_bound),
+                "balance_upper_bound": int(upper_bound),
                 "confidence_level": "95%",
-                "is_deficit": is_deficit,
+                "is_deficit": bool(is_deficit),
                 "type": "forecast"
             })
 
         # Runway & Alerts
         net_burn = max(0.0, (base_daily_opex - base_daily_rev))
-        runway_days = round(current_balance / (net_burn + 1e-5)) if net_burn > 0 else 999
+        runway_days = round(float(current_balance) / (net_burn + 1e-5)) if net_burn > 0 else 999
 
         alerts = []
         if deficit_days:
@@ -223,21 +223,21 @@ class CashFlowEnsembleForecaster:
 
         return {
             "status": "success",
-            "horizon_days": horizon_days,
-            "current_balance": current_balance,
-            "projected_ending_cash": records[-1]["projected_balance"] if records else current_balance,
+            "horizon_days": int(horizon_days),
+            "current_balance": float(current_balance),
+            "projected_ending_cash": float(records[-1]["projected_balance"]) if records else float(current_balance),
             "confidence_interval_95": {
-                "lower_bound": records[-1]["balance_lower_bound"] if records else current_balance,
-                "upper_bound": records[-1]["balance_upper_bound"] if records else current_balance
+                "lower_bound": float(records[-1]["balance_lower_bound"]) if records else float(current_balance),
+                "upper_bound": float(records[-1]["balance_upper_bound"]) if records else float(current_balance)
             },
-            "safety_threshold": safety_threshold,
-            "runway_days": runway_days,
-            "is_cash_flow_positive": net_burn == 0,
-            "daily_burn_rate": round(net_burn),
+            "safety_threshold": float(safety_threshold),
+            "runway_days": int(runway_days),
+            "is_cash_flow_positive": bool(net_burn == 0),
+            "daily_burn_rate": round(float(net_burn)),
             "forecast": records,
             "deficit_occurrences": deficit_days,
             "alerts": alerts,
-            "ensemble_weights": self.model_weights,
+            "ensemble_weights": {k: float(v) for k, v in self.model_weights.items()},
             "algorithms_used": ["ARIMA(1,1,1)", "Prophet" if PROPHET_AVAILABLE else "ETS", "XGBoost Regressor", "Exponential Smoothing"]
         }
 

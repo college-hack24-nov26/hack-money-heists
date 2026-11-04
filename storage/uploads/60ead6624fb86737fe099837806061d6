@@ -1,0 +1,5 @@
+Date,Vendor,Amount,Category,Reference
+2026-10-01,Cloud Hosting AWS,45000,Infrastructure,INV-AWS-01
+2026-10-02,Cloud Hosting AWS,45000,Infrastructure,INV-AWS-01
+2026-10-05,Slack Technologies,28000,Subscriptions,INV-SLK-99
+2026-10-15,Logistics India,60000,Logistics,INV-LOG-11

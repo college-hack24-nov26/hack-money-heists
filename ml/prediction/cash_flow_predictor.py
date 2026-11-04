@@ -47,12 +47,34 @@ class CashFlowPredictorService:
         if self.artifacts is None:
             self.load_model()
 
+        if hasattr(self.artifacts, "fit_and_forecast"):
+            try:
+                from ml.preprocessing.cash_flow_preprocessing import CashFlowPreprocessor
+                prep = CashFlowPreprocessor()
+                df = prep.preprocess_daily_cashflow()
+                series = df["net_cash_flow"] if df is not None and not df.empty else pd.Series([25000.0 for _ in range(30)])
+            except Exception:
+                series = pd.Series([25000.0 for _ in range(30)])
+            
+            base_bal = current_balance if current_balance is not None else 1850000.0
+            overrides = scenario_overrides or {}
+            if "opening_balance" in overrides:
+                base_bal = float(overrides["opening_balance"])
+            horizon = min(max(int(horizon_days), 7), 90)
+            return self.artifacts.fit_and_forecast(
+                historical_net_series=series,
+                horizon_days=horizon,
+                current_balance=base_bal,
+                safety_threshold=safety_threshold,
+                scenario_overrides=overrides
+            )
+
         overrides = scenario_overrides or {}
         horizon = min(max(int(horizon_days), 7), 90)
 
         # Baseline Parameters
         base_bal = current_balance if current_balance is not None else (
-            self.artifacts.get("last_closing_balance", 1850000.0) if self.artifacts else 1850000.0
+            self.artifacts.get("last_closing_balance", 1850000.0) if isinstance(self.artifacts, dict) else 1850000.0
         )
         if "opening_balance" in overrides:
             base_bal = float(overrides["opening_balance"])
@@ -79,10 +101,10 @@ class CashFlowPredictorService:
         xgb_preds = np.zeros(horizon)
         ets_preds = np.zeros(horizon)
 
-        weights = self.artifacts.get("optimal_weights", {"arima": 0.25, "prophet": 0.25, "xgboost": 0.25, "ets": 0.25}) if self.artifacts else {"arima": 0.25, "xgboost": 0.50, "ets": 0.25}
+        weights = self.artifacts.get("optimal_weights", {"arima": 0.25, "prophet": 0.25, "xgboost": 0.25, "ets": 0.25}) if isinstance(self.artifacts, dict) else {"arima": 0.25, "xgboost": 0.50, "ets": 0.25}
 
         # 1. ARIMA Step
-        if self.artifacts and self.artifacts.get("arima_model") is not None:
+        if isinstance(self.artifacts, dict) and self.artifacts.get("arima_model") is not None:
             try:
                 arima_preds = self.artifacts["arima_model"].forecast(steps=horizon)
             except Exception:
@@ -91,7 +113,7 @@ class CashFlowPredictorService:
             arima_preds = np.full(horizon, daily_base_rev - daily_base_opex)
 
         # 2. Prophet Step
-        if self.artifacts and self.artifacts.get("prophet_model") is not None:
+        if isinstance(self.artifacts, dict) and self.artifacts.get("prophet_model") is not None:
             try:
                 future_df = self.artifacts["prophet_model"].make_future_dataframe(periods=horizon, freq="D")
                 p_forecast = self.artifacts["prophet_model"].predict(future_df)
@@ -102,7 +124,7 @@ class CashFlowPredictorService:
             prophet_preds = np.full(horizon, daily_base_rev - daily_base_opex)
 
         # 3. XGBoost Step
-        if self.artifacts and self.artifacts.get("xgb_model") is not None:
+        if isinstance(self.artifacts, dict) and self.artifacts.get("xgb_model") is not None:
             try:
                 last_hist = self.artifacts.get("historical_daily_df")
                 feat_cols = self.artifacts.get("feature_columns", [])
@@ -121,7 +143,7 @@ class CashFlowPredictorService:
             xgb_preds = np.full(horizon, daily_base_rev - daily_base_opex)
 
         # 4. ETS Step
-        if self.artifacts and self.artifacts.get("ets_model") is not None:
+        if isinstance(self.artifacts, dict) and self.artifacts.get("ets_model") is not None:
             try:
                 ets_preds = self.artifacts["ets_model"].forecast(steps=horizon)
             except Exception:

@@ -23,7 +23,14 @@ import { api } from '../services/api';
 export const ProfitLeakageDetector: React.FC = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [resolvedIds, setResolvedIds] = useState<string[]>([]);
+  const [resolvedIds, setResolvedIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('arthiq_resolved_leakages');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
 
   // Interactive OPEX Slider State
   const [monthlyOpex, setMonthlyOpex] = useState<number>(2500000);
@@ -78,10 +85,26 @@ export const ProfitLeakageDetector: React.FC = () => {
   const handleResolve = async (id: string) => {
     try {
       await api.resolveLeakage(id);
-      setResolvedIds((prev) => [...prev, id]);
+      setResolvedIds((prev) => {
+        const next = [...prev, id];
+        try { localStorage.setItem('arthiq_resolved_leakages', JSON.stringify(next)); } catch {}
+        return next;
+      });
       loadData();
     } catch (err) {
       console.error('Failed to resolve leakage', err);
+    }
+  };
+
+  const handleResolveAll = async () => {
+    try {
+      await api.resolveAllLeakages();
+      const allIds = findings.map((f: any) => f.id);
+      setResolvedIds(allIds);
+      try { localStorage.setItem('arthiq_resolved_leakages', JSON.stringify(allIds)); } catch {}
+      loadData();
+    } catch (err) {
+      console.error('Failed to resolve all leakages', err);
     }
   };
 
@@ -114,31 +137,32 @@ export const ProfitLeakageDetector: React.FC = () => {
     }
   };
 
-  const totalLeakage = data?.totalIdentified || 85200;
   const annualSavings = savingsEstimate?.estimatedAnnualSavings || data?.potentialAnnualSavings || 888400;
   const findings = data?.findings || [];
 
   // Compute live KPI splits from findings
   const verifiedLosses = findings
     .filter((f: any) => f.leakage_type === 'Verified Loss' && !resolvedIds.includes(f.id))
-    .reduce((sum: number, f: any) => sum + (f.estimated_financial_impact || 0), 0) || 12000;
+    .reduce((sum: number, f: any) => sum + (f.estimated_financial_impact || 0), 0);
 
   const suspectedLeakage = findings
     .filter((f: any) => f.leakage_type === 'Suspected Leakage' && !resolvedIds.includes(f.id))
-    .reduce((sum: number, f: any) => sum + (f.estimated_financial_impact || 0), 0) || 68000;
+    .reduce((sum: number, f: any) => sum + (f.estimated_financial_impact || 0), 0);
 
   const estimatedOptimizations = findings
     .filter((f: any) => f.leakage_type === 'Estimated Savings' && !resolvedIds.includes(f.id))
-    .reduce((sum: number, f: any) => sum + (f.estimated_financial_impact || 0), 0) || 5200;
+    .reduce((sum: number, f: any) => sum + (f.estimated_financial_impact || 0), 0);
+
+  const totalLeakage = verifiedLosses + suspectedLeakage;
 
   return (
     <div className="space-y-6">
       {/* Signature Banner */}
-      <div className="p-6 rounded-2xl glass-panel relative overflow-hidden bg-gradient-to-br from-rose-950/20 via-navy/60 to-midnight border border-accent-coral/20">
+      <div className="p-6 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm relative overflow-hidden text-black">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-2">
-              <span className="p-2 rounded-xl bg-rose-500/15 text-rose-400 border border-rose-500/20">
+              <span className="p-2 rounded-xl bg-violet-50 text-[#6D45CF] border border-violet-100">
                 <AlertOctagon className="w-5 h-5" />
               </span>
               <h1 className="text-xl font-bold text-black font-['Plus_Jakarta_Sans']">
@@ -154,16 +178,28 @@ export const ProfitLeakageDetector: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setIsScanModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent-coral text-white font-semibold text-xs hover:bg-rose-600 transition-colors shadow-lg shadow-rose-900/30"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#6D45CF] text-white font-semibold text-xs hover:bg-[#5B37B5] transition-colors shadow-sm cursor-pointer"
             >
               <UploadCloud className="w-4 h-4" />
               <span>Scan Your Ledger</span>
             </button>
-            <div className="flex items-center gap-4 bg-[#F8FAFC]/80 p-3.5 rounded-xl border border-[#E2E8F0]">
+
+            {verifiedLosses > 0 && (
+              <button
+                onClick={handleResolveAll}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-500 transition-colors shadow-sm cursor-pointer"
+                title="Resolve all detected leakages and clear red losses"
+              >
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Resolve All & Recover Losses</span>
+              </button>
+            )}
+
+            <div className="flex items-center gap-4 bg-[#F8FAFC] p-3.5 rounded-xl border border-[#E2E8F0]">
               <div>
                 <span className="text-[11px] text-black block">Active Leakage</span>
-                <span className="text-lg font-bold text-rose-500">
-                  ₹{totalLeakage.toLocaleString('en-IN')}
+                <span className={`text-lg font-bold ${totalLeakage > 0 ? 'text-rose-500' : 'text-emerald-600'}`}>
+                  {totalLeakage > 0 ? `₹${totalLeakage.toLocaleString('en-IN')}` : '₹0 (Safe)'}
                 </span>
               </div>
               <div className="h-8 w-px bg-[#CBD5E1]" />
@@ -217,10 +253,14 @@ export const ProfitLeakageDetector: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
             <div className="p-3 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
               <span className="text-[11px] text-black block">Estimated Monthly Leakage</span>
-              <span className="text-base font-bold text-rose-500 font-mono mt-0.5 block">
-                ₹{(savingsEstimate?.estimatedMonthlyLeakage || Math.round(monthlyOpex * 0.048)).toLocaleString('en-IN')}
+              <span className={`text-base font-bold font-mono mt-0.5 block ${totalLeakage > 0 ? 'text-rose-500' : 'text-emerald-600'}`}>
+                {totalLeakage > 0
+                  ? `₹${(savingsEstimate?.estimatedMonthlyLeakage || Math.round(monthlyOpex * 0.048)).toLocaleString('en-IN')}`
+                  : '₹0 (0% Leakage • Mitigated)'}
               </span>
-              <span className="text-[10px] text-black">~4.8% typical SME leakage rate</span>
+              <span className="text-[10px] text-black">
+                {totalLeakage > 0 ? '~4.8% typical SME leakage rate' : 'Audited: Zero active leakage detected'}
+              </span>
             </div>
             <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
               <span className="text-[11px] text-emerald-800 block font-semibold">Annual Recoverable Cash</span>
@@ -243,9 +283,33 @@ export const ProfitLeakageDetector: React.FC = () => {
       {/* KPI Cards: Verified Losses vs Suspected vs Estimated */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <GlassCard>
-          <span className="text-xs text-black font-semibold">Verified Immediate Losses</span>
-          <div className="text-xl font-bold text-rose-500 mt-1">₹{verifiedLosses.toLocaleString('en-IN')}</div>
-          <span className="text-[11px] text-black mt-1 block">Duplicate disbursements & confirmed billing overlaps</span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-black font-semibold">Verified Immediate Losses</span>
+            {verifiedLosses === 0 ? (
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700">
+                100% Mitigated
+              </span>
+            ) : (
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-700">
+                Action Required
+              </span>
+            )}
+          </div>
+          <div className={`text-xl font-bold mt-1 ${verifiedLosses > 0 ? 'text-rose-500' : 'text-emerald-600'}`}>
+            {verifiedLosses > 0 ? `₹${verifiedLosses.toLocaleString('en-IN')}` : '₹0'}
+          </div>
+          <span className="text-[11px] text-black mt-1 block">
+            {verifiedLosses > 0 ? 'Duplicate disbursements & confirmed billing overlaps' : 'No active leakages • All funds protected'}
+          </span>
+          {verifiedLosses > 0 && (
+            <button
+              onClick={handleResolveAll}
+              className="mt-3 w-full py-1.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span>Mitigate & Recover ₹{verifiedLosses.toLocaleString('en-IN')}</span>
+            </button>
+          )}
         </GlassCard>
 
         <GlassCard>

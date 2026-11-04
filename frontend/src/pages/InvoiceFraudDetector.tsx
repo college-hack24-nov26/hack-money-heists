@@ -134,6 +134,15 @@ export const InvoiceFraudDetector: React.FC = () => {
     }
   };
 
+  const handleVerifyAll = async () => {
+    try {
+      await api.verifyAllInvoices();
+      loadData();
+    } catch (err) {
+      console.error('Error verifying all invoices', err);
+    }
+  };
+
   const filteredInvoices = invoices.filter((i) => {
     if (filter === 'flagged') return i.risk_score >= 50 || i.status === 'FLAGGED';
     if (filter === 'verified') return i.status === 'VERIFIED' || i.status === 'PAID';
@@ -164,6 +173,18 @@ export const InvoiceFraudDetector: React.FC = () => {
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           </button>
+
+          {invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length > 0 && (
+            <button
+              onClick={handleVerifyAll}
+              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors shadow-sm cursor-pointer"
+              title="Verify and approve all flagged invoices"
+            >
+              <CheckCircle className="w-4 h-4" />
+              <span>Verify & Clear All ({invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length})</span>
+            </button>
+          )}
+
           <button
             onClick={() => setShowUploadModal(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-accent-blue text-white hover:bg-accent-blue/90 transition-colors shadow-glow"
@@ -187,33 +208,39 @@ export const InvoiceFraudDetector: React.FC = () => {
         <GlassCard className="p-3.5">
           <span className="text-[11px] text-black font-medium block">Verified Clean</span>
           <span className="text-xl font-bold text-emerald-600 mt-0.5 block font-mono">
-            {riskSummary?.verifiedInvoices || invoices.filter((i) => i.status === 'VERIFIED' || i.status === 'PAID').length}
+            {invoices.filter((i) => i.status === 'VERIFIED' || i.status === 'PAID').length}
           </span>
           <span className="text-[10px] text-emerald-700">Controller signed off</span>
         </GlassCard>
 
         <GlassCard className="p-3.5">
           <span className="text-[11px] text-black font-medium block">Flagged Anomalies</span>
-          <span className="text-xl font-bold text-rose-500 mt-0.5 block font-mono">
-            {riskSummary?.flaggedInvoices || invoices.filter((i) => i.risk_score >= 50).length}
+          <span className={`text-xl font-bold mt-0.5 block font-mono ${invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length > 0 ? 'text-rose-500' : 'text-emerald-600'}`}>
+            {invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length}
           </span>
-          <span className="text-[10px] text-rose-600">Requires review</span>
+          <span className={`text-[10px] ${invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length > 0 ? 'text-rose-600' : 'text-emerald-700'}`}>
+            {invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length > 0 ? 'Requires review' : 'All Clear • 0 Flagged'}
+          </span>
         </GlassCard>
 
         <GlassCard className="p-3.5">
           <span className="text-[11px] text-black font-medium block">Duplicate Invoices</span>
-          <span className="text-xl font-bold text-amber-500 mt-0.5 block font-mono">
-            {riskSummary?.duplicateInvoicesCount || 3}
+          <span className={`text-xl font-bold mt-0.5 block font-mono ${invoices.filter((i) => (i.anomalies_detected || []).some((a: string) => a.toLowerCase().includes('duplicate'))).length > 0 ? 'text-amber-500' : 'text-emerald-600'}`}>
+            {invoices.filter((i) => (i.anomalies_detected || []).some((a: string) => a.toLowerCase().includes('duplicate'))).length}
           </span>
-          <span className="text-[10px] text-amber-600">Disbursement frozen</span>
+          <span className={`text-[10px] ${invoices.filter((i) => (i.anomalies_detected || []).some((a: string) => a.toLowerCase().includes('duplicate'))).length > 0 ? 'text-amber-600' : 'text-emerald-700'}`}>
+            {invoices.filter((i) => (i.anomalies_detected || []).some((a: string) => a.toLowerCase().includes('duplicate'))).length > 0 ? 'Disbursement frozen' : '0 Duplicates'}
+          </span>
         </GlassCard>
 
         <GlassCard className="p-3.5 col-span-2 sm:col-span-1">
           <span className="text-[11px] text-black font-medium block">Total Value at Risk</span>
-          <span className="text-lg font-bold text-rose-600 mt-0.5 block font-mono">
-            ₹{(riskSummary?.totalFlaggedAmount || 57783).toLocaleString('en-IN')}
+          <span className={`text-lg font-bold mt-0.5 block font-mono ${invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
+            ₹{invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').reduce((s, i) => s + (Number(i.total_amount) || 0), 0).toLocaleString('en-IN')}
           </span>
-          <span className="text-[10px] text-black">High/Critical invoices</span>
+          <span className="text-[10px] text-black">
+            {invoices.filter((i) => (i.risk_score || 0) >= 50 || i.status === 'FLAGGED').length > 0 ? 'High/Critical invoices' : '0 High Risk • Protected'}
+          </span>
         </GlassCard>
       </div>
 

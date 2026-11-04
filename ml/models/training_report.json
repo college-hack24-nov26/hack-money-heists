@@ -1,5 +1,5 @@
 {
-  "pipeline_execution_timestamp": "2026-11-04T04:52:53.214333",
+  "pipeline_execution_timestamp": "2026-11-04T07:00:46.833764",
   "platform_version": "1.0.0-enterprise",
   "modules": {
     "expense_analyzer": {
@@ -115,9 +115,9 @@
         "K-Means Clustering (k=3)",
         "Ridge Price Pattern Regression"
       ],
-      "silhouette_score": 0.359,
+      "silhouette_score": 0.3,
       "vendors_analyzed": 24,
-      "savings_opportunity": 15021.67,
+      "savings_opportunity": 227.77,
       "artifact_path": "models\\procurement\\procurement_optimizer.pkl"
     },
     "analytics": {
