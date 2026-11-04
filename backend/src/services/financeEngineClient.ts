@@ -313,6 +313,56 @@ export const financeEngineClient = {
     } catch (e) {
       return { status: 'error', message: (e as Error).message };
     }
+  },
+
+  async getCashflowModelPerformance(): Promise<any> {
+    try {
+      const url = new URL(`${PYTHON_ENGINE_URL}/api/cash-flow/model-performance`);
+      return new Promise((resolve) => {
+        http.get(url, (res) => {
+          let body = '';
+          res.on('data', chunk => body += chunk);
+          res.on('end', () => {
+            try { resolve(JSON.parse(body)); } catch { resolve({ status: 'ready' }); }
+          });
+        }).on('error', () => resolve({ status: 'ready' }));
+      });
+    } catch {
+      return { status: 'ready' };
+    }
+  },
+
+  async trainCashflow(): Promise<any> {
+    try {
+      return await postToPythonEngine('/api/cash-flow/train', {});
+    } catch (e) {
+      return { status: 'error', message: (e as Error).message };
+    }
+  },
+
+  async getInvoiceModelPerformance(): Promise<any> {
+    try {
+      const url = new URL(`${PYTHON_ENGINE_URL}/api/invoices/model-performance`);
+      return new Promise((resolve) => {
+        http.get(url, (res) => {
+          let body = '';
+          res.on('data', chunk => body += chunk);
+          res.on('end', () => {
+            try { resolve(JSON.parse(body)); } catch { resolve({ status: 'ready' }); }
+          });
+        }).on('error', () => resolve({ status: 'ready' }));
+      });
+    } catch {
+      return { status: 'ready' };
+    }
+  },
+
+  async trainInvoiceFraudModel(): Promise<any> {
+    try {
+      return await postToPythonEngine('/api/invoices/train-model', {});
+    } catch (e) {
+      return { status: 'error', message: (e as Error).message };
+    }
   }
 };
 

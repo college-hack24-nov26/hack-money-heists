@@ -310,6 +310,60 @@ async function runSuite() {
     recordResult('Autonomous Financial Assistant RAG & Tool Dispatcher', false, e.message);
   }
 
+  // --- 9. High-Precision Cash Flow & Invoice Forensics Model Evaluation ---
+  console.log('\n--- 9. High-Precision Cash Flow & Invoice Forensics Subsystems ---');
+
+  try {
+    const res = await makeRequest(`${BACKEND_BASE}/api/cash-flow/model-performance`);
+    const data = JSON.parse(res.body);
+    const ok = data.weights && data.weights.arima !== undefined && data.weights.xgboost !== undefined;
+    recordResult('Cash Flow Ensemble Out-of-Sample Performance', ok, `Weights: ARIMA=${data.weights?.arima}, ETS=${data.weights?.ets}, XGB=${data.weights?.xgboost}`);
+  } catch (e) {
+    recordResult('Cash Flow Ensemble Out-of-Sample Performance', false, e.message);
+  }
+
+  try {
+    const res = await makeRequest(`${BACKEND_BASE}/api/invoices/model-performance`);
+    const data = JSON.parse(res.body);
+    const ok = data.metrics && data.metrics.pr_auc !== undefined && data.optimal_threshold !== undefined;
+    recordResult('Invoice Fraud Precision-Recall Benchmark & Threshold Tuning', ok, `PR-AUC: ${data.metrics?.pr_auc}, Optimal Th: ${data.optimal_threshold}`);
+  } catch (e) {
+    recordResult('Invoice Fraud Precision-Recall Benchmark & Threshold Tuning', false, e.message);
+  }
+
+  try {
+    const res = await makeRequest(
+      `${BACKEND_BASE}/api/invoices/detect-duplicates`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' } },
+      JSON.stringify({
+        invoices: [
+          { invoice_number: 'INV-DUP-999', vendor_name: 'SysMatrix', total_amount: 15000 },
+          { invoice_number: 'INV-DUP-999', vendor_name: 'SysMatrix', total_amount: 15000 },
+          { invoice_number: 'INV-CLEAN-101', vendor_name: 'Apex Logistics', total_amount: 8500 }
+        ]
+      })
+    );
+    const data = JSON.parse(res.body);
+    const ok = data.duplicate_count === 2;
+    recordResult('Deterministic Duplicate Invoice Collision Detector', ok, `Found ${data.duplicate_count} duplicated items`);
+  } catch (e) {
+    recordResult('Deterministic Duplicate Invoice Collision Detector', false, e.message);
+  }
+
+  try {
+    const res = await makeRequest(
+      `${BACKEND_BASE}/api/cash-flow/forecast`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' } },
+      JSON.stringify({ horizon_days: 90, safety_threshold: 500000 })
+    );
+    const data = JSON.parse(res.body);
+    const firstDay = data.forecast?.[0];
+    const ok = data.forecast?.length === 90 && firstDay?.balance_lower_bound !== undefined && firstDay?.balance_upper_bound !== undefined;
+    recordResult('90-Day Cash Flow Forecast with 95% Empirical Bounds', ok, `90 Days Generated, Bounds: [₹${firstDay?.balance_lower_bound}, ₹${firstDay?.balance_upper_bound}]`);
+  } catch (e) {
+    recordResult('90-Day Cash Flow Forecast with 95% Empirical Bounds', false, e.message);
+  }
+
   // SUMMARY
   console.log('\n=============================================================');
   console.log(` TEST SUMMARY: ${passedTests} / ${totalTests} PASSED (${((passedTests/totalTests)*100).toFixed(1)}%)`);

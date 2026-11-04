@@ -328,5 +328,65 @@ exports.financeEngineClient = {
         catch (e) {
             return { status: 'error', message: e.message };
         }
+    },
+    async getCashflowModelPerformance() {
+        try {
+            const url = new URL(`${PYTHON_ENGINE_URL}/api/cash-flow/model-performance`);
+            return new Promise((resolve) => {
+                http_1.default.get(url, (res) => {
+                    let body = '';
+                    res.on('data', chunk => body += chunk);
+                    res.on('end', () => {
+                        try {
+                            resolve(JSON.parse(body));
+                        }
+                        catch {
+                            resolve({ status: 'ready' });
+                        }
+                    });
+                }).on('error', () => resolve({ status: 'ready' }));
+            });
+        }
+        catch {
+            return { status: 'ready' };
+        }
+    },
+    async trainCashflow() {
+        try {
+            return await postToPythonEngine('/api/cash-flow/train', {});
+        }
+        catch (e) {
+            return { status: 'error', message: e.message };
+        }
+    },
+    async getInvoiceModelPerformance() {
+        try {
+            const url = new URL(`${PYTHON_ENGINE_URL}/api/invoices/model-performance`);
+            return new Promise((resolve) => {
+                http_1.default.get(url, (res) => {
+                    let body = '';
+                    res.on('data', chunk => body += chunk);
+                    res.on('end', () => {
+                        try {
+                            resolve(JSON.parse(body));
+                        }
+                        catch {
+                            resolve({ status: 'ready' });
+                        }
+                    });
+                }).on('error', () => resolve({ status: 'ready' }));
+            });
+        }
+        catch {
+            return { status: 'ready' };
+        }
+    },
+    async trainInvoiceFraudModel() {
+        try {
+            return await postToPythonEngine('/api/invoices/train-model', {});
+        }
+        catch (e) {
+            return { status: 'error', message: e.message };
+        }
     }
 };

@@ -1,10 +1,12 @@
 """
 ARTHIQ Unified ML Inference Service
 Loads serialized model artifacts and serves real-time predictions for all 8 platform modules.
+Integrates high-precision Cash Flow Predictor and Invoice Fraud Forensics services.
 """
 
 import os
 import sys
+import json
 import joblib
 from pathlib import Path
 from typing import Dict, Any, List
@@ -15,11 +17,15 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from ml.config.settings import MODEL_DIRS, MODELS_ROOT
 from ml.prediction.assistant_rag import FinancialAssistantRAG
+from ml.prediction.cash_flow_predictor import cash_flow_predictor
+from ml.prediction.invoice_fraud_predictor import invoice_fraud_predictor
 
 class MLInferenceService:
     def __init__(self):
         self.models = {}
         self.rag_assistant = FinancialAssistantRAG()
+        self.cash_flow_predictor = cash_flow_predictor
+        self.invoice_fraud_predictor = invoice_fraud_predictor
         self.load_all_models()
 
     def load_all_models(self):
@@ -43,6 +49,10 @@ class MLInferenceService:
             else:
                 print(f"[!] Model artifact not found at {p}")
 
+        # Reload predictors
+        self.cash_flow_predictor.load_model()
+        self.invoice_fraud_predictor.load_model()
+
     def analyze_expenses(self, expenses: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         if "expense_analyzer" in self.models:
             return self.models["expense_analyzer"].predict_anomalies(expenses)
@@ -55,26 +65,21 @@ class MLInferenceService:
         history: List[Dict[str, Any]] = None,
         statutory_valid: bool = True
     ) -> Dict[str, Any]:
-        if "invoice_fraud" in self.models:
-            return self.models["invoice_fraud"].predict_invoice_risk(invoice, history, statutory_valid)
-        from ml.algorithms.invoice_fraud import InvoiceFraudForensics
-        return InvoiceFraudForensics().predict_invoice_risk(invoice, history, statutory_valid)
+        return self.invoice_fraud_predictor.predict_invoice_risk(invoice, history)
 
     def forecast_cashflow(
         self,
-        historical_series,
+        historical_series=None,
         horizon_days: int = 30,
         current_balance: float = 1850000.0,
         safety_threshold: float = 500000.0,
         scenario_overrides: Dict[str, Any] = None
     ) -> Dict[str, Any]:
-        if "cash_flow" in self.models:
-            return self.models["cash_flow"].fit_and_forecast(
-                historical_series, horizon_days, current_balance, safety_threshold, scenario_overrides
-            )
-        from ml.algorithms.cashflow_forecaster import CashFlowEnsembleForecaster
-        return CashFlowEnsembleForecaster().fit_and_forecast(
-            historical_series, horizon_days, current_balance, safety_threshold, scenario_overrides
+        return self.cash_flow_predictor.forecast_cash_flow(
+            horizon_days=horizon_days,
+            current_balance=current_balance,
+            safety_threshold=safety_threshold,
+            scenario_overrides=scenario_overrides
         )
 
     def detect_profit_leakage(
@@ -113,7 +118,6 @@ class MLInferenceService:
     def get_models_status(self) -> Dict[str, Any]:
         report_file = MODELS_ROOT / "training_report.json"
         if report_file.exists():
-            import json
             with open(report_file, "r", encoding="utf-8") as f:
                 return json.load(f)
         return {
@@ -123,4 +127,3 @@ class MLInferenceService:
 
 # Global Singleton Service
 ml_service = MLInferenceService()
-

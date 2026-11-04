@@ -6,6 +6,8 @@ from pathlib import Path
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import io
+import pandas as pd
+import numpy as np
 
 # Ensure project root is in sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -14,8 +16,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from ml.prediction.inference_service import ml_service
 from ml.pipelines.training_pipeline import run_full_training_pipeline
+from ml.training.cash_flow_training import train_cash_flow_models
+from ml.training.invoice_fraud_training import train_invoice_fraud_models
+from ml.preprocessing.cash_flow_preprocessing import CashFlowPreprocessor
+from ml.preprocessing.invoice_preprocessing import verify_statutory_gstin, InvoicePreprocessor
 from ml.monitoring.model_monitor import monitor
-from ml.config.settings import MODELS_ROOT
+from ml.config.settings import MODELS_ROOT, MODEL_DIRS, DATASETS
 
 # Legacy internal handlers for backward compatibility
 from forecasting.cashflow_model import forecast_cashflow
@@ -74,7 +80,7 @@ def get_model_versions():
         "platform_version": "1.0.0-enterprise",
         "algorithms": {
             "expense_analyzer": "v1.2 (IForest + LOF)",
-            "invoice_fraud": "v2.0 (XGBoost 3.4.1 + RF + IForest)",
+            "invoice_fraud": "v2.0 (XGBoost 3.4.1 + Calibrated RF + IForest)",
             "cash_flow": "v2.1 (ARIMA + Prophet 1.5.0 + XGBoost + ETS)",
             "profit_leakage": "v1.4 (10 Configurable Rules + IForest)",
             "financial_risk": "v1.1 (Logistic Regression + Risk Radar)",
@@ -99,6 +105,212 @@ def trigger_training():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 # -------------------------------------------------------------
+# Engine 1: Advanced SME Cash Flow Prediction APIs
+# -------------------------------------------------------------
+@app.route('/api/cash-flow/forecast', methods=['POST'])
+@app.route('/api/ml/cash-flow/forecast', methods=['POST'])
+@app.route('/internal/analyze/cashflow', methods=['POST'])
+def handle_cashflow_forecast():
+    t0 = time.time()
+    data = request.get_json(force=True) or {}
+    horizon_days = int(data.get("horizon_days", 30))
+    current_balance = float(data.get("current_balance") or data.get("opening_balance") or 1850000.0)
+    safety_threshold = float(data.get("safety_threshold", 500000.0))
+    history = data.get("history", [])
+
+    result = ml_service.forecast_cashflow(
+        horizon_days=horizon_days,
+        current_balance=current_balance,
+        safety_threshold=safety_threshold,
+        scenario_overrides=data
+    )
+    duration = (time.time() - t0) * 1000
+    monitor.log_inference("cash_flow", len(history) or horizon_days, duration, {"horizon_days": horizon_days})
+    return jsonify(result)
+
+@app.route('/api/cash-flow/train', methods=['POST'])
+def handle_cashflow_train():
+    try:
+        artifacts = train_cash_flow_models()
+        ml_service.cash_flow_predictor.load_model()
+        return jsonify({
+            "status": "success",
+            "message": "SME Cash Flow multi-model ensemble retrained successfully",
+            "records_trained": len(artifacts.get("historical_daily_df", [])),
+            "optimal_weights": artifacts.get("optimal_weights", {}),
+            "validation_metrics": artifacts.get("validation_metrics", {})
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route('/api/cash-flow/history', methods=['GET'])
+def handle_cashflow_history():
+    try:
+        preprocessor = CashFlowPreprocessor()
+        daily = preprocessor.load_and_aggregate_daily(initial_opening_cash=1850000.0)
+        records = daily.tail(90).to_dict(orient="records")
+        for r in records:
+            r["date"] = r["date"].strftime("%Y-%m-%d")
+        return jsonify({
+            "status": "success",
+            "total_days": len(records),
+            "history": records
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route('/api/cash-flow/summary', methods=['GET'])
+def handle_cashflow_summary():
+    try:
+        preprocessor = CashFlowPreprocessor()
+        daily = preprocessor.load_and_aggregate_daily(initial_opening_cash=1850000.0)
+        current_bal = float(daily["closing_balance"].iloc[-1])
+        recent_30 = daily.tail(30)
+        inflow_30 = float(recent_30["total_inflow"].sum())
+        outflow_30 = float(recent_30["total_outflow"].sum())
+        net_30 = inflow_30 - outflow_30
+        avg_burn = float(recent_30[recent_30["net_cash_flow"] < 0]["net_cash_flow"].abs().mean() or 0.0)
+
+        runway_months = round(current_bal / (avg_burn * 30.0), 1) if avg_burn > 100.0 else 99.0
+
+        return jsonify({
+            "status": "success",
+            "opening_balance": 1850000.0,
+            "current_balance": round(current_bal, 2),
+            "safety_floor": 500000.0,
+            "safety_buffer_available": max(0.0, round(current_bal - 500000.0, 2)),
+            "monthly_inflow": round(inflow_30, 2),
+            "monthly_outflow": round(outflow_30, 2),
+            "monthly_net": round(net_30, 2),
+            "average_daily_burn": round(avg_burn, 2),
+            "cash_runway_months": runway_months,
+            "health_status": "Healthy Liquidity Buffer" if current_bal > 500000.0 else "Liquidity Alert"
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route('/api/cash-flow/alerts', methods=['GET'])
+def handle_cashflow_alerts():
+    forecast_res = ml_service.forecast_cashflow(horizon_days=30)
+    return jsonify({
+        "status": "success",
+        "risk_category": forecast_res.get("risk_assessment", {}).get("category", "Low Risk"),
+        "risk_reason": forecast_res.get("risk_assessment", {}).get("reason", ""),
+        "alerts": forecast_res.get("alerts", []),
+        "runway_months": forecast_res.get("runway_months", 99.0)
+    })
+
+@app.route('/api/cash-flow/model-performance', methods=['GET'])
+def handle_cashflow_model_performance():
+    metrics_path = MODEL_DIRS["cash_flow"] / "cashflow_metrics.json"
+    if metrics_path.exists():
+        with open(metrics_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return jsonify(data)
+    return jsonify({"status": "warning", "message": "Model performance metrics not generated yet"})
+
+@app.route('/api/cash-flow/evaluate', methods=['POST'])
+def handle_cashflow_evaluate():
+    data = request.get_json(force=True) or {}
+    series = data.get("series", [])
+    if len(series) < 7:
+        return jsonify({"error": "Insufficient test series: Minimum 7 daily records required for backtesting"}), 400
+    from ml.evaluation.cash_flow_evaluation import compute_cashflow_metrics
+    actuals = np.array([float(s.get("actual") or s.get("net_flow") or 0.0) for s in series])
+    preds = np.array([float(s.get("predicted") or 0.0) for s in series])
+    metrics = compute_cashflow_metrics(actuals, preds)
+    return jsonify({"status": "success", "metrics": metrics})
+
+# -------------------------------------------------------------
+# Engine 2: Intelligent Invoice Fraud Forensics APIs
+# -------------------------------------------------------------
+@app.route('/api/invoices/analyze', methods=['POST'])
+@app.route('/api/ml/invoices/predict', methods=['POST'])
+@app.route('/internal/analyze/invoice', methods=['POST'])
+def handle_invoice_prediction():
+    t0 = time.time()
+    data = request.get_json(force=True) or {}
+    invoice = data.get("invoice") or data
+    history = data.get("historical_invoices", [])
+
+    result = ml_service.predict_invoice_fraud(invoice, history)
+    duration = (time.time() - t0) * 1000
+
+    monitor.log_inference("invoice_fraud", 1, duration, {"risk_score": result.get("risk_score", 0)})
+    return jsonify({
+        "status": "success",
+        **result
+    })
+
+@app.route('/api/invoices/validate-gstin', methods=['POST'])
+def handle_validate_gstin():
+    data = request.get_json(force=True) or {}
+    gstin = data.get("gstin", "")
+    is_valid, reason, breakdown = verify_statutory_gstin(gstin)
+    return jsonify({
+        "status": "success",
+        "gstin": gstin,
+        "is_valid": is_valid,
+        "reason": reason,
+        "breakdown": breakdown
+    })
+
+@app.route('/api/invoices/detect-duplicates', methods=['POST'])
+def handle_detect_duplicates():
+    data = request.get_json(force=True) or {}
+    invoices_list = data.get("invoices", [])
+    preprocessor = InvoicePreprocessor()
+    df = pd.DataFrame(invoices_list)
+    if df.empty:
+        return jsonify({"status": "success", "duplicate_count": 0, "duplicates": []})
+
+    processed_df = preprocessor.load_and_standardize_invoices(df)
+    dup_df = preprocessor.detect_deterministic_duplicates(processed_df)
+    duplicates = dup_df[(dup_df["is_duplicate_number"] == 1) | (dup_df["is_duplicate_amount"] == 1)].to_dict(orient="records")
+
+    return jsonify({
+        "status": "success",
+        "duplicate_count": len(duplicates),
+        "duplicates": duplicates
+    })
+
+@app.route('/api/invoices/train-model', methods=['POST'])
+def handle_invoices_train():
+    try:
+        artifacts = train_invoice_fraud_models()
+        ml_service.invoice_fraud_predictor.load_model()
+        return jsonify({
+            "status": "success",
+            "message": "Invoice Fraud classification models retrained successfully",
+            "optimal_threshold": artifacts.get("optimal_threshold"),
+            "validation_metrics": artifacts.get("validation_metrics", {}),
+            "top_features": list(artifacts.get("feature_importance", {}).items())[:5]
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route('/api/invoices/model-performance', methods=['GET'])
+def handle_invoices_model_performance():
+    metrics_path = MODEL_DIRS["invoice_fraud"] / "invoice_fraud_metrics.json"
+    if metrics_path.exists():
+        with open(metrics_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return jsonify(data)
+    return jsonify({"status": "warning", "message": "Invoice model performance metrics not generated yet"})
+
+@app.route('/api/invoices/evaluate', methods=['POST'])
+def handle_invoices_evaluate():
+    data = request.get_json(force=True) or {}
+    records = data.get("invoices", [])
+    if len(records) < 5:
+        return jsonify({"error": "Minimum 5 labeled invoice records required for evaluation"}), 400
+    from ml.evaluation.invoice_fraud_evaluation import evaluate_fraud_classifier
+    y_true = np.array([int(r.get("is_fraud", 0)) for r in records])
+    y_prob = np.array([float(r.get("predicted_prob", 0.2)) for r in records])
+    metrics = evaluate_fraud_classifier(y_true, y_prob)
+    return jsonify({"status": "success", "metrics": metrics})
+
+# -------------------------------------------------------------
 # Module 1: Smart Expense Analyzer (IForest + LOF)
 # -------------------------------------------------------------
 @app.route('/api/ml/expenses/analyze', methods=['POST'])
@@ -107,68 +319,19 @@ def handle_expenses_analysis():
     t0 = time.time()
     data = request.get_json(force=True) or {}
     expenses_list = data.get("expenses", [])
-    
-    # Run multi-algorithm ensemble (Isolation Forest + LOF)
+
     findings = ml_service.analyze_expenses(expenses_list)
     duration = (time.time() - t0) * 1000
-    
+
     outliers = [f for f in findings if f.get("is_outlier")]
     monitor.log_inference("expense_analyzer", len(expenses_list), duration, {"outliers_found": len(outliers)})
-    
+
     return jsonify({
         "status": "success",
         "total_analyzed": len(expenses_list),
         "anomalies_detected": len(outliers),
         "results": findings
     })
-
-# -------------------------------------------------------------
-# Module 2: Invoice Fraud Forensics (RF + XGBoost + IForest)
-# -------------------------------------------------------------
-@app.route('/api/ml/invoices/predict', methods=['POST'])
-@app.route('/internal/analyze/invoice', methods=['POST'])
-def handle_invoice_prediction():
-    t0 = time.time()
-    data = request.get_json(force=True) or {}
-    invoice = data.get("invoice", {})
-    history = data.get("historical_invoices", [])
-    gstin_valid = data.get("statutory_gstin_valid", True)
-    
-    result = ml_service.predict_invoice_fraud(invoice, history, gstin_valid)
-    duration = (time.time() - t0) * 1000
-    
-    monitor.log_inference("invoice_fraud", 1, duration, {"risk_score": result["risk_score"]})
-    return jsonify({
-        "status": "success",
-        **result
-    })
-
-# -------------------------------------------------------------
-# Module 3: SME Cash Flow Forecasting (ARIMA + Prophet + XGB + ETS)
-# -------------------------------------------------------------
-@app.route('/api/ml/cash-flow/forecast', methods=['POST'])
-@app.route('/internal/analyze/cashflow', methods=['POST'])
-def handle_cashflow_forecast():
-    t0 = time.time()
-    data = request.get_json(force=True) or {}
-    history = data.get("history", [])
-    current_balance = float(data.get("current_balance", 1850000.0))
-    horizon_days = int(data.get("horizon_days", 30))
-    safety_threshold = float(data.get("safety_threshold", 500000.0))
-    
-    import pandas as pd
-    series = pd.Series([float(h.get("net_flow") or h.get("Net_Cash_Flow") or 25000.0) for h in history]) if history else pd.Series()
-    
-    result = ml_service.forecast_cashflow(
-        historical_series=series,
-        horizon_days=horizon_days,
-        current_balance=current_balance,
-        safety_threshold=safety_threshold,
-        scenario_overrides=data
-    )
-    duration = (time.time() - t0) * 1000
-    monitor.log_inference("cash_flow", len(history), duration, {"horizon_days": horizon_days})
-    return jsonify(result)
 
 # -------------------------------------------------------------
 # Module 4: Profit Leakage Detector (10 Rules + IForest)
@@ -180,7 +343,7 @@ def handle_profit_leakage_scan():
     data = request.get_json(force=True) or {}
     transactions = data.get("transactions") or data.get("expenses") or []
     monthly_opex = float(data.get("monthly_opex", 2500000.0))
-    
+
     result = ml_service.detect_profit_leakage(transactions, monthly_opex=monthly_opex)
     duration = (time.time() - t0) * 1000
     monitor.log_inference("profit_leakage", len(transactions), duration, {"findings": result.get("anomalies_count", 0)})
@@ -195,7 +358,7 @@ def handle_financial_risk_assessment():
     t0 = time.time()
     data = request.get_json(force=True) or {}
     metrics = data.get("financial_data") or data.get("metrics") or {}
-    
+
     result = ml_service.assess_financial_risk(metrics)
     duration = (time.time() - t0) * 1000
     monitor.log_inference("financial_risk", 1, duration, {"health_score": result.get("financial_health_score")})
@@ -209,7 +372,7 @@ def handle_procurement_optimization():
     t0 = time.time()
     data = request.get_json(force=True) or {}
     vendors = data.get("vendors", [])
-    
+
     result = ml_service.optimize_procurement(vendors)
     duration = (time.time() - t0) * 1000
     monitor.log_inference("procurement", len(vendors), duration, {"clusters": result.get("clusters_count")})
@@ -224,7 +387,7 @@ def handle_analytics_prediction():
     t0 = time.time()
     data = request.get_json(force=True) or {}
     financial_data = data.get("financial_data") or data.get("summary") or {}
-    
+
     from ml.algorithms.analytics_engine import FinancialAnalyticsEngine
     ratios = FinancialAnalyticsEngine.calculate_ten_financial_ratios(financial_data)
     duration = (time.time() - t0) * 1000
@@ -244,7 +407,7 @@ def handle_assistant_query():
     data = request.get_json(force=True) or {}
     query = data.get("query") or data.get("message") or "Provide financial health summary"
     context = data.get("context", {})
-    
+
     result = ml_service.query_assistant(query, context)
     duration = (time.time() - t0) * 1000
     monitor.log_inference("assistant", 1, duration, {"tool_called": result.get("tool_invoked")})

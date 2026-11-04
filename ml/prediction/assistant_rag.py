@@ -19,6 +19,7 @@ import json
 from typing import Dict, Any, List, Optional
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
 class FinancialAssistantRAG:
     def __init__(self, data_context: Dict[str, Any] = None):
@@ -153,7 +154,7 @@ class FinancialAssistantRAG:
         tool_res = None
 
         # Autonomous Tool Calling Intent Router
-        if any(w in q for w in ["leakage", "losing money", "bleed", "waste", "recover"]):
+        if any(w in q for w in ["leakage", "losing", "bleed", "waste", "recover", "drain", "unnecessary"]):
             invoked_tool = "scan_profit_leakage"
         elif any(w in q for w in ["fraud", "suspicious invoice", "fake", "gstin"]):
             invoked_tool = "analyze_invoice"
@@ -179,7 +180,7 @@ class FinancialAssistantRAG:
 
         # Generate Grounded Analytical Response
         reply_lines = []
-        reply_lines.append(f"### 🏢 ARTHIQ Financial Intelligence Analyst")
+        reply_lines.append("### ARTHIQ Financial Intelligence Analyst")
         
         if invoked_tool and tool_res:
             reply_lines.append(f"**Autonomous Tool Invocation:** `{invoked_tool}()`")
@@ -193,13 +194,13 @@ class FinancialAssistantRAG:
 
         # Actionable CFO Insights
         if "leakage" in q or "losing" in q:
-            reply_lines.append("💡 **Actionable CFO Recommendation:** Issue debit memo for ₹12,000 duplicate disbursement on PO-2024 and consolidate communication seat licenses across Slack and Teams to reclaim ₹22,000/yr in recurring EBITDA.")
+            reply_lines.append("**Actionable CFO Recommendation:** Issue debit memo for ₹12,000 duplicate disbursement on PO-2024 and consolidate communication seat licenses across Slack and Teams to reclaim ₹22,000/yr in recurring EBITDA.")
         elif "cash" in q:
-            reply_lines.append("💡 **Actionable CFO Recommendation:** Current ₹18.5L liquid buffer exceeds your ₹5.0L statutory reserve floor. Cash runway is projected at 14.2 months with no deficit occurrences.")
+            reply_lines.append("**Actionable CFO Recommendation:** Current ₹18.5L liquid buffer exceeds your ₹5.0L statutory reserve floor. Cash runway is projected at 14.2 months with no deficit occurrences.")
         elif "invoice" in q or "fraud" in q:
-            reply_lines.append("💡 **Actionable CFO Recommendation:** Keep payment freezes active on the 9 flagged invoices until vendors submit revised tax declarations matching GSTR-2B.")
+            reply_lines.append("**Actionable CFO Recommendation:** Keep payment freezes active on the 9 flagged invoices until vendors submit revised tax declarations matching GSTR-2B.")
         else:
-            reply_lines.append("💡 **Actionable CFO Recommendation:** Core financial ratios remain within optimal CA benchmarks. Maintain strict 30-day trade credit monitoring on overdue debtors.")
+            reply_lines.append("**Actionable CFO Recommendation:** Core financial ratios remain within optimal CA benchmarks. Maintain strict 30-day trade credit monitoring on overdue debtors.")
 
         return {
             "status": "success",

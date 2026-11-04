@@ -1,0 +1,59 @@
+{
+  "status": "TRAINED_AND_DEPLOYED",
+  "timestamp": "2026-11-04T05:33:06.163968",
+  "records_trained": 63,
+  "optimal_threshold": 0.16,
+  "metrics": {
+    "threshold": 0.16,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "pr_auc": 1.0,
+    "roc_auc": 1.0,
+    "brier_score": 0.0135,
+    "confusion_matrix": {
+      "true_negatives": 14,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_positives": 2
+    },
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.0
+  },
+  "feature_importance": {
+    "amount_inr": 0.0747,
+    "tax_inr": 0.0727,
+    "tax_ratio": 0.0139,
+    "gstin_valid": 0.0,
+    "term_days": 0.0054,
+    "vendor_freq": 0.1049,
+    "amount_zscore": 0.0543,
+    "is_duplicate_number": 0.6289,
+    "is_duplicate_amount": 0.0228,
+    "tax_discrepancy": 0.0,
+    "is_round_amount": 0.0,
+    "payment_delay_days": 0.0223
+  },
+  "top_features": [
+    [
+      "is_duplicate_number",
+      0.6289
+    ],
+    [
+      "vendor_freq",
+      0.1049
+    ],
+    [
+      "amount_inr",
+      0.0747
+    ],
+    [
+      "tax_inr",
+      0.0727
+    ],
+    [
+      "amount_zscore",
+      0.0543
+    ]
+  ]
+}
